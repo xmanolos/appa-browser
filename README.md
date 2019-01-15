@@ -1,2 +1,2 @@
 # db-browser
-Ferramenta de administração e desenvolvimento para os mais populares bancos de dados.
+DBBrowser is an open source administration and development tool for the most popular databases. The project was written in PHP with the Laravel framework.
