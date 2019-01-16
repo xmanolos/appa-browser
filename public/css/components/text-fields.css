@@ -1,0 +1,45 @@
+.tfd.panel-field {
+	display: flex;
+	align-items: center;
+	margin-top: 15px;
+	margin-left: 6px;
+	margin-right: 6px;
+	margin-bottom: 15px;
+	position: relative;
+}
+
+.tfd.panel-field span {
+	transition: var(--time-effect) ease;
+	bottom: 0;
+	position: absolute;
+	opacity: 0.5;
+	margin: 10px 8px;
+	padding: 0 3px;
+}
+
+.tfd.panel-field input {
+	outline: none;
+	width: 100%;
+	background-color: transparent;
+	border: 0.5px solid silver;
+	border-radius: 4px;
+	padding: 10px 10px;
+	font-size: var(--size-text-input);
+	/**font-family: var(--main-font-famiy);*/
+	z-index: 1;
+}
+
+.tfd.panel-field input:focus,
+.tfd.panel-field input:not(:placeholder-shown) {
+	border-color: var(--color-border-text-field);
+}
+
+.tfd.panel-field input:focus + span,
+.tfd.panel-field input:not(:placeholder-shown) + span {
+	opacity: 1;
+	color: var(--color-border-text-field);
+	font-size: 12px;
+	margin-bottom: 35px;
+	background-color: var(--color-background-light);
+	z-index: 2;
+}
