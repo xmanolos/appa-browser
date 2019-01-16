@@ -32,5 +32,7 @@
             <span>powered by manolos<span>
         </div>
         @show
+
+        @yield('custom-js')
     </body>
 </html>
