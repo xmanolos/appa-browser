@@ -2,21 +2,21 @@
 
 namespace App\Business\Databases;
 
-use App\Business\Interfaces\IConnection;
+use App\Business\Interfaces\IDatabase;
 
-class PostgreSQLDatabase implements IConnection
+class PostgreSQLDatabase implements IDatabase
 {
-    public function getConnectionIdentifier()
+    public function getDatabaseIdentifier()
     {
         return 'pgsql';
     }
 
-    public function getConnectionDrive()
+    public function getDatabaseDrive()
     {
 
     }
 
-    public function getConnectionInstance($connectionData)
+    public function getDatabaseInstance($connectionData)
     {
         
     }

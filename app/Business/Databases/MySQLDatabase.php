@@ -2,16 +2,16 @@
 
 namespace App\Business\Databases;
 
-use App\Business\Interfaces\IConnection;
+use App\Business\Interfaces\IDatabase;
 
-class MySQLDatabase implements IConnection
+class MySQLDatabase implements IDatabase
 {
-    public function getConnectionIdentifier()
+    public function getDatabaseIdentifier()
     {
         return 'mysql';
     }
 
-    public function getConnectionDrive()
+    public function getDatabaseDrive()
     {
 
     }
