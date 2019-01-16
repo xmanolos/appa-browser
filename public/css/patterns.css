@@ -1,0 +1,20 @@
+@font-face {
+  font-family: 'Nunito', sans-serif;
+  src: url(https://fonts.googleapis.com/css?family=Nunito:200,600);
+}
+
+:root {
+    --color-background-light: #fcfcfc;
+    --color-background-dark: #2f3640;
+    --color-background-panels: #dcdde1;
+    --color-border-text-field: #273c75;
+    --color-text-dark: #283b48;
+    --color-text-light: #dcdde1;
+
+
+    /**  Timers   **/
+    --time-effect: 300ms;
+
+    /**  Sizes    **/
+    --size-text-input: 18px;
+}
