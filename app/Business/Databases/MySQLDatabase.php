@@ -13,11 +13,25 @@ class MySQLDatabase implements IDatabase
 
     public function getDatabaseDrive()
     {
-
+        
     }
 
-    public function getConnectionInstance($connectionData)
+    public function getDatabaseInstance($connectionData)
     {
-        
+        $config = Config::get('database');
+        $databases = $config['connections'];
+
+        if (!isset($databases['ec'])) {
+            $connection = array();
+            $connection['driver'] = $connectionData->$driver;
+            $connection['host'] = $connectionData->$host;
+            $connection['port'] = $connectionData->$port;
+            $connection['username'] = $connectionData->$login;
+            $connection['password'] = $connectionData->$password;  
+
+            Config::set('database.connections.' . 'ec', $connection);
+        }
+
+        return DB::Connection('ec');
     }
 }

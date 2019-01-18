@@ -14,3 +14,5 @@
 Route::get('/', function () {
     return view('home');
 });
+
+Route::any('/dump', ['as' => 'xmp', 'uses' => 'ConnectionController@testConnectionMethod']);
