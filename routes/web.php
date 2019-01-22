@@ -1,4 +1,7 @@
 <?php
+use Illuminate\Http\Request;
+
+use App\Http\Controllers\TestConnectionController;
 
 /*
 |--------------------------------------------------------------------------
@@ -15,4 +18,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::any('/dump', ['as' => 'xmp', 'uses' => 'ConnectionController@testConnectionMethod']);
+Route::any('/api/test-connection', ['as' => 'xmp', 'uses' => 'ConnectionController@testConnectionMethod']);
