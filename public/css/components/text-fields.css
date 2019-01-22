@@ -1,10 +1,10 @@
 .tfd.panel-field {
 	display: flex;
 	align-items: center;
+	/*margin-right: 6px;
 	margin-top: 15px;
-	margin-left: 6px;
-	margin-right: 6px;
 	margin-bottom: 15px;
+	margin-left: 6px;*/
 	position: relative;
 }
 

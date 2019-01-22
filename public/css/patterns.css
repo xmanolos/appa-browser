@@ -4,16 +4,24 @@
 }
 
 :root {
-    --color-background-light: #fcfcfc;
+    --color-background-light: #fdfdfd;
     --color-background-dark: #2f3640;
     --color-background-panels: #dcdde1;
-    --color-border-text-field: #273c75;
+    --color-border-text-field: #487eb0;
+    --color-button-green: #4cd137;
+    --color-button-green-dark: #44bd32;
+    --color-button-red: #e84118;
+    --color-button-red-dark: #c23616;
+    --color-button-blue: #487eb0;
+    --color-button-blue-dark: #40739e;
+    --color-button-gray: #dcdde1;
     --color-text-dark: #283b48;
     --color-text-light: #dcdde1;
 
 
     /**  Timers   **/
     --time-effect: 300ms;
+    --time-effect-hover-button: 500ms;
 
     /**  Sizes    **/
     --size-text-input: 18px;

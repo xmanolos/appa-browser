@@ -39,4 +39,52 @@ body .footer {
 
 .row {
     display: flex;
+    flex-wrap: wrap;
+    padding: 15px 0;
+    width: 100%;
+    align-items: center;
+}
+.row.right {
+    justify-content: flex-end;
+}
+.row .col {
+    padding: 0 15px;
+    box-sizing: border-box;
+}
+
+.panel {
+    border-radius: 5px;
+    padding: 15px;
+    box-sizing: border-box;
+    box-shadow: 0px 1px 6px -1px var(--color-background-dark)
+}
+
+input.button {
+    color: white;
+    border: 0;
+    background-color: var(--color-button-blue);
+    padding: 8px 15px;
+    border-radius: 4px;
+    font-size: 1em;
+    cursor: pointer;
+    transition: var(--time-effect-hover-button) ease;
+}
+input.button:hover {
+    background-color: var(--color-button-blue-dark);
+}
+input.button.green {
+    background-color: var(--color-button-green);
+}
+input.button.green:hover {
+    background-color: var(--color-button-green-dark);
+}
+input.button.red {
+    background-color: var(--color-button-red);
+}
+input.button.red:hover {
+    background-color: var(--color-button-red-dark);
+}
+input.button[disabled] {
+    cursor: auto;
+    background-color: var(--color-button-gray);
 }
