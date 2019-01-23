@@ -18,4 +18,4 @@ Route::get('/', function () {
     return view('home');
 });
 
-Route::any('/api/test-connection', ['as' => 'xmp', 'uses' => 'ConnectionController@testConnectionMethod']);
+Route::get('/api/test-connection', ['as' => 'xmp', 'uses' => 'ConnectionController@testConnectionMethod']);
