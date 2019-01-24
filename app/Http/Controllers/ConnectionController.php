@@ -21,15 +21,8 @@ class ConnectionController extends Controller
         */
 
         try {
-            $connectionData = new ConnectionData(
-                $request->input('driver'),
-                $request->input('hostname'),
-                $request->input('port'),
-                $request->input('username'),
-                $request->input('password'),
-                $request->input('database')
-            );
-
+            $connectionData = ConnectionData::fromRequest($request);
+            
             $connection = new Connection();
             $connection->create($connectionData);
 
