@@ -43,10 +43,10 @@
         </div>
         <div class="row right">
             <div class="col">
-                <input id="btn-test" type="button" value="Test connection" class="button" />
+                <input id="btn-test-conn" type="button" value="Test connection" class="button" />
             </div>
             <div class="col">
-                <input type="submit" value="Connect" class="button green" />
+                <input id="btn-sub-form" type="submit" value="Connect" class="button green" />
             </div>
         </div>
     </form>

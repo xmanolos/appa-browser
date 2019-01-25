@@ -85,6 +85,6 @@ input.button.red:hover {
     background-color: var(--color-button-red-dark);
 }
 input.button[disabled] {
-    cursor: auto;
-    background-color: var(--color-button-gray);
+    cursor: auto !important;
+    background-color: var(--color-button-gray) !important;
 }

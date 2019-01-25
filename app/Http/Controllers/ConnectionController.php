@@ -9,6 +9,9 @@ use Illuminate\Http\Request;
 
 class ConnectionController extends Controller
 {
+    //TODO: Implements translations
+    private $successConnMsg = "connection successful";
+
     public function testConnectionMethod(Request $request)
     {
         /* test mysql database:
@@ -22,15 +25,14 @@ class ConnectionController extends Controller
 
         try {
             $connectionData = ConnectionData::fromRequest($request);
-            
+
             $connection = new Connection();
             $connection->create($connectionData);
 
             $connection = $connection->getInstance();
             $connection->getPdo();
 
-            //TODO: Implements translations
-            return ResultMessageBuilder::buildSuccessMessage("connection successful");
+            return ResultMessageBuilder::buildSuccessMessage($this->successConnMsg);
         } catch (\Exception $e) {
             return ResultMessageBuilder::buildErrorMessage( $e->getMessage() );
         }
