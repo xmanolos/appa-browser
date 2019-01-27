@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business\Connection;
-use App\Business\ConnectionData;
+use App\Business\ConnectionDataBuilder;
 use App\Business\ResultMessageBuilder;
 use Illuminate\Http\Request;
 
@@ -14,17 +14,10 @@ class ConnectionController extends Controller
 
     public function testConnectionMethod(Request $request)
     {
-        /* test mysql database:
-            Driver('mysql');
-            Host('db4free.net');
-            Port('3306');
-            Username('rootdb8');
-            Password('12345678');
-            Database('dbbrowser2');
-        */
+        /* Chama o método fillConnectionData no console pra preencher os campos. */
 
         try {
-            $connectionData = ConnectionData::fromRequest($request);
+            $connectionData = ConnectionDataBuilder::fromRequest($request);
 
             $connection = new Connection();
             $connection->create($connectionData);

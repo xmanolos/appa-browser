@@ -55,5 +55,6 @@
 @stop
 
 @section('custom-js')
-<script type="text/jscript" src="{{asset('js/test-connection.js')}}" ></script>
+    <script type="text/jscript" src="{{asset('js/custom/test.js')}}"></script>
+    <script type="text/jscript" src="{{asset('js/test-connection.js')}}"></script>
 @stop
