@@ -45,15 +45,18 @@ class DatabaseDataBuilder
     {
         $columns = array();
         $sqlColumns = $connection->getSchemaBuilder()->getColumnListing($table);
-                
+
         foreach ($sqlColumns as $sqlColumn) 
         {
+            $columnDataType = $connection->getSchemaBuilder()->getColumnType($table, $sqlColumn);
+
             $column = new StructureColumn();
             $column->setName($sqlColumn);
+            $column->setDataType($columnDataType);
 
             array_push($columns, $column);    
         }
-
+        
         return $columns;
     }
 }
