@@ -15,9 +15,4 @@ class PostgreSQLDatabase implements IDatabase
     {
 
     }
-
-    public function getDatabaseInstance($connectionData)
-    {
-        
-    }
 }
