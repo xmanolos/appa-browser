@@ -12,9 +12,11 @@
         <div class="row">
             <div class="col tfd panel-field">
                 <select name="driver">
-                    <option value="">Select db type</option>
-                    <option value="mysql">MySQL</option>
-                    <option value="postgres">PostgreSQL</option>
+                    <option selected disaled hidden value=""></option>
+                    
+                    @foreach($availableDatabases as $key => $value)
+                        <option value="{{ $key }}">{{ $value }}</option>
+                    @endforeach
                 </select>
             </div>
             <div class="col tfd panel-field">

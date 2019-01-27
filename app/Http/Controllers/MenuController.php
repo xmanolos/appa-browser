@@ -12,7 +12,7 @@ class MenuController extends Controller
     {
         $connection = Connection::getInstance($request);
         $databaseData = DatabaseDataBuilder::fromConnection($connection);
-        dd('xmp');
+        
         return \view('menu')->with('databaseData', $databaseData);
     }
 }

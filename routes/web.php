@@ -14,10 +14,7 @@ use App\Http\Controllers\TestConnectionController;
 |
 */
 
-Route::get('/', function () {
-    return view('home');
-});
-
+Route::get('/', ['as' => 'views.home', 'uses' => 'HomeController@index']);
 Route::get('/menu', ['as' => 'views.menu', 'uses' => 'MenuController@index']);
 
 Route::get('/api/test-connection', ['as' => 'connection.test', 'uses' => 'ConnectionController@testConnection']);
