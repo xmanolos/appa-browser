@@ -1,8 +1,9 @@
 @extends('master')
 
 @section('title', 'Connect')
+
 @section('custom-styles')
-<link rel="stylesheet" type="text/css" href="{{asset('css/home.css')}}">
+    <link rel="stylesheet" type="text/css" href="{{asset('css/home.css')}}">
 @stop
 
 @section('content')
@@ -46,7 +47,7 @@
                 <input id="btn-test-conn" type="button" value="Test connection" class="button" />
             </div>
             <div class="col">
-                <input id="btn-sub-form" type="submit" value="Connect" class="button green" />
+                <input id="btn-connect" type="submit" value="Connect" class="button green" />
             </div>
         </div>
     </form>
@@ -56,5 +57,5 @@
 
 @section('custom-js')
     <script type="text/jscript" src="{{asset('js/custom/test.js')}}"></script>
-    <script type="text/jscript" src="{{asset('js/test-connection.js')}}"></script>
+    <script type="text/jscript" src="{{asset('js/views/home.js')}}"></script>
 @stop

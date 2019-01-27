@@ -2,54 +2,30 @@
 
 namespace App\Business;
 
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class Connection
 {
-    protected $identifier;
-    protected $connection;
-
-    protected $connections;
-
-    function __construct() {
-        $this->identifier = 'custom-connection';
-        $this->connections = Config::get('database')['connections'];
-    }
-
-    public function create($connectionData)
+    public static function getInstance(Request $request)
     {
-        $alreadyExists = $this->alreadyExists();
-        
-        if (!$alreadyExists) {
-            $connection = $this->getConnection($connectionData);
+        $connection = Connection::getConnection($request);
+        Config::set('database.connections.' . 'custom-connection', $connection);
 
-            Config::set('database.connections.' . $this->identifier, $connection);
-        }
-        
-        $this->connection = DB::Connection($this->identifier);
+        return DB::connection('custom-connection');
     }
 
-    private function alreadyExists()
-    {
-        return isset($this->connections[$this->identifier]);
-    }
-
-    private function getConnection($connectionData)
+    private static function getConnection(Request $request)
     {
         $connection = array();
-        $connection['driver'] = $connectionData->getDriver();
-        $connection['host'] = $connectionData->getHost();
-        $connection['port'] = $connectionData->getPort();
-        $connection['username'] = $connectionData->getUsername();
-        $connection['password'] = $connectionData->getPassword();  
-        $connection['database'] = $connectionData->getDatabase();  
+        $connection['driver'] = $request->session()->get('driver');
+        $connection['host'] = $request->session()->get('hostname');
+        $connection['port'] = $request->session()->get('port');
+        $connection['username'] = $request->session()->get('username');
+        $connection['password'] = $request->session()->get('password');
+        $connection['database'] = $request->session()->get('database');
 
         return $connection;
-    }
-
-    public function getInstance()
-    {
-        return $this->connection;
     }
 }

@@ -7,7 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class ConnectionDataBuilder
 {
-    public static function fromRequest($request) {
+    public static function fromRequest($request) 
+    {
         $requestDriver = $request->input('driver');
         $requestHostname = $request->input('hostname');
         $requestPort = $request->input('port');

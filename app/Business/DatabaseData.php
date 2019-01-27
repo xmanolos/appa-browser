@@ -4,21 +4,9 @@ namespace App\Business;
 
 class DatabaseData
 {
-    protected $schemas;
+    protected $tables;
     
-    public function getSchemas() { return $this->schemas; }
+    public function getTables() { return $this->tables; }
 
-    public function setSchemas($schemas) { $this->schemas = $schemas; return $this;  }
-
-    public static function fromConnection($connection) {
-        $connectionData = new ConnectionData();
-        $connectionData->setDriver($requestDriver);
-        $connectionData->setHost($requestHostname);
-        $connectionData->setPort($requestPort);
-        $connectionData->setUsername($requestUsername);
-        $connectionData->setPassword($requestPassword);
-        $connectionData->setDatabase($requestDatabase);
-        
-        return $connectionData;
-    }
+    public function setTables($tables) { $this->tables = $tables; return $this; }
 }
