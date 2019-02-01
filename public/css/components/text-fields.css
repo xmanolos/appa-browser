@@ -17,7 +17,8 @@
 	padding: 0 3px;
 }
 
-.tfd.panel-field input {
+.tfd.panel-field input,
+.tfd.panel-field select {
 	outline: none;
 	width: 100%;
 	background-color: transparent;
@@ -29,13 +30,32 @@
 	z-index: 1;
 }
 
+.tfd.panel-field select {
+	-webkit-appearance: none;  /* Remove estilo padrão do Chrome */
+	-moz-appearance: none; /* Remove estilo padrão do FireFox */
+	appearance: none;
+	/*background-image: url(https://cdn.iconscout.com/icon/free/png-256/down-arrow-16-460295.png);*/
+	background-image: url(../../images/arrow-down-silver.png);
+    background-position: 98% center;
+    background-size: 30px;
+    background-repeat: no-repeat;
+}
+
 .tfd.panel-field input:focus,
-.tfd.panel-field input:not(:placeholder-shown) {
+.tfd.panel-field select:focus,
+.tfd.panel-field input:not(:placeholder-shown),
+.tfd.panel-field select:not(:invalid) {
 	border-color: var(--color-border-text-field);
+}
+.tfd.panel-field input:focus,
+.tfd.panel-field select:focus {
+	box-shadow: 0 0 5px -1px var(--color-border-text-field);
 }
 
 .tfd.panel-field input:focus + span,
-.tfd.panel-field input:not(:placeholder-shown) + span {
+.tfd.panel-field select:focus + span,
+.tfd.panel-field input:not(:placeholder-shown) + span,
+.tfd.panel-field select:not(:invalid) + span {
 	opacity: 1;
 	color: var(--color-border-text-field);
 	font-size: 12px;

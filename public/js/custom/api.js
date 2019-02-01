@@ -11,20 +11,33 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
         contentType: 'application/json',
         data : dataSend,
         beforeSend: function() {
-            console.log('start loading');
-            //TODO: Start loading
+            startLoading();
+
             if(customBeforeSendCallback)
                 customBeforeSendCallback();
         },
-        success : successCallback,
+        success : function(resultData) {
+            stopLoading();
+            setTimeout(
+                function(){
+                    if(successCallback)
+                        successCallback(resultData);
+                },
+                500
+            );
+        },
         error: function(errorObj, textStatus, errorThrown) {
-            let statusCode = errorObj.status
-            let message = textStatus + ' ' + statusCode + ' - ' + errorThrown;
-            errorDialog( message );
-            console.log(jqXHR);
+            stopLoading();
+            setTimeout(
+                function(){
+                    let statusCode = errorObj.status
+                    let message = textStatus + ' ' + statusCode + ' - ' + errorThrown;
+                    errorDialog( message );
+                },
+                500
+            );
         },
         complete: function() {
-            console.log('request end');
             if(customCompleteCallback)
                 customCompleteCallback();
         }

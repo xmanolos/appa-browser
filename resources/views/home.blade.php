@@ -10,16 +10,16 @@
 <div class="panel center-center panel-connection">
     <form id="form">
         <div class="row">
-            <div class="col tfd panel-field">
-                <select name="driver">
+            <div class="col tfd panel-field" style="width: 50%;">
+                <select name="driver" required="true">
                     <option selected disaled hidden value=""></option>
-                    
                     @foreach($availableDatabases as $key => $value)
                         <option value="{{ $key }}">{{ $value }}</option>
                     @endforeach
                 </select>
+                <span>Driver</span>
             </div>
-            <div class="col tfd panel-field">
+            <div class="col tfd panel-field" style="width: 50%;">
                 <input name="database" type="text" placeholder=" "/>
                 <span>Database</span>
             </div>
@@ -46,10 +46,10 @@
         </div>
         <div class="row right">
             <div class="col">
-                <input id="btn-test-conn" type="button" value="Test connection" class="button" />
+                <input id="btn-test-conn" type="button" value="Test connection" class="button d-inLoading" />
             </div>
             <div class="col">
-                <input id="btn-connect" type="submit" value="Connect" class="button green" />
+                <input id="btn-connect" type="submit" value="Connect" class="button green d-inLoading" />
             </div>
         </div>
     </form>

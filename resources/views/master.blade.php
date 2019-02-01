@@ -12,7 +12,7 @@
 
         <!-- jQuery -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
-        
+
         <!-- jQuery Mask Plugin (By Igor Escobar) -->
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.15/dist/jquery.mask.min.js"></script>
 
@@ -23,7 +23,8 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('css/patterns.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/master.css') }}">
         <link rel="stylesheet" type="text/css" href="{{ asset('css/components/text-fields.css') }}">
-        
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/components/custom-loading.css') }}">
+
         @yield('custom-styles')
     </head>
     <body>
@@ -40,6 +41,7 @@
         </div>
         @show
 
+        <script src="{{ asset('js/custom/custom-loading.js') }}"></script>
         @yield('custom-js')
     </body>
 </html>
