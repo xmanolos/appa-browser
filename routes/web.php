@@ -14,8 +14,9 @@ use App\Http\Controllers\TestConnectionController;
 |
 */
 
+// TODO: Fix not connection to use.
 Route::get('/', ['as' => 'views.home', 'uses' => 'HomeController@index']);
-Route::get('/menu', ['as' => 'views.menu', 'uses' => 'MenuController@index']);
+Route::get('/connect', ['as' => 'views.connect', 'uses' => 'ConnectController@index']);
 
 Route::get('/api/test-connection', ['as' => 'connection.test', 'uses' => 'ConnectionController@testConnection']);
 Route::get('/api/connect', ['as' => 'connection.connect', 'uses' => 'ConnectionController@connect']);

@@ -1,34 +1,14 @@
-$('#btn-test-conn').on('click', function() {
-
+function getConnectionData() {
     let successCallback = function(jsonReturn) {
-        if(jsonReturn.status === 'success')
-            successDialog(jsonReturn.msg);
-        else
-            errorDialog(jsonReturn.msg);
+        console.log(jsonReturn);
     };
 
-    ajaxRequestToApi(
-        'test-connection',
-        $('#form').serialize(),
-        successCallback
-    );
-});
+    ajaxRequestToApi('database-data/get', null, successCallback);
+}
 
-$("#form").submit( function(e) {
-    let urlAction = $(this).attr('action');
-    e.preventDefault();
+$(document).ready(function() {
+    let connectionData = getConnectionData();
 
-    let successCallback = function(jsonReturn) {
-        if(jsonReturn.status === 'success')
-            window.location.href = urlAction;
-        else
-            errorDialog(jsonReturn.msg);
-    };
-
-    //TODO: Implement function ajaxRequestToApi without stop loading in success
-    ajaxRequestToApi(
-        'connect',
-        $('#form').serialize(),
-        successCallback
-    );
+    console.log('--CONNECTION DATA');
+    console.log(connectionData);
 });
