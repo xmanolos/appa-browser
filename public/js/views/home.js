@@ -14,12 +14,18 @@ $('#btn-test-conn').on('click', function() {
     );
 });
 
-$('#btn-connect').on('click', function() {
+$("#form").submit( function(e) {
+    let urlAction = $(this).attr('action');
+    e.preventDefault();
 
     let successCallback = function(jsonReturn) {
-        location.href = window.location.href = '/menu'; // TODO: Fix!
+        if(jsonReturn.status === 'success')
+            window.location.href = urlAction;
+        else
+            errorDialog(jsonReturn.msg);
     };
 
+    //TODO: Implement function ajaxRequestToApi without stop loading in success
     ajaxRequestToApi(
         'connect',
         $('#form').serialize(),
