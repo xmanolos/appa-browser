@@ -1,13 +1,6 @@
-function getApiRoute(target) {
-    var apiUrl = location.origin + '/api/';
-    var apiRoute = apiUrl + target;
-
-    return apiRoute;
-}
-
 function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback){
     $.ajax({
-        url: getApiRoute(apiTarget),
+        url: route(apiTarget),
         contentType: 'application/json',
         data : dataSend,
         dataType: 'json',

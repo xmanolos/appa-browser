@@ -1,5 +1,4 @@
 $('#btn-test-conn').on('click', function() {
-
     let successCallback = function(jsonReturn) {
         if(jsonReturn.status === 'success')
             successDialog(jsonReturn.msg);
@@ -7,11 +6,15 @@ $('#btn-test-conn').on('click', function() {
             errorDialog(jsonReturn.msg);
     };
 
-    ajaxRequestToApi(
-        'test-connection',
-        $('#form').serialize(),
-        successCallback
-    );
+    if (formIsValid()) {
+        ajaxRequestToApi(
+            'api.connection.test',
+            $('#form').serialize(),
+            successCallback
+        );
+    } else {
+        $("form")[0].reportValidity()
+    }
 });
 
 $("#form").submit( function(e) {
@@ -27,8 +30,12 @@ $("#form").submit( function(e) {
 
     //TODO: Implement function ajaxRequestToApi without stop loading in success
     ajaxRequestToApi(
-        'connect',
+        'api.connection.connect',
         $('#form').serialize(),
         successCallback
     );
 });
+
+function formIsValid() {
+    return $("form")[0].checkValidity();
+}

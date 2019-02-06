@@ -7,7 +7,7 @@ function getConnectionData() {
         buildTree(jsonReturn);
     };
 
-    ajaxRequestToApi('database-data/get', null, successCallback);
+    ajaxRequestToApi('api.database-data.get', null, successCallback);
 }
 
 function buildTree(data) {
