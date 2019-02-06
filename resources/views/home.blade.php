@@ -8,7 +8,7 @@
 
 @section('content')
 <div class="panel center-center panel-connection">
-    <form id="form">
+    <form id="form" action="{{route('views.menu')}}">
         <div class="row">
             <div class="col tfd panel-field" style="width: 50%;">
                 <select name="driver" required="true">
@@ -20,27 +20,27 @@
                 <span>Driver</span>
             </div>
             <div class="col tfd panel-field" style="width: 50%;">
-                <input name="database" type="text" placeholder=" "/>
+                <input name="database" type="text" placeholder=" " required="true"/>
                 <span>Database</span>
             </div>
         </div>
         <div class="row">
             <div class="col tfd panel-field" style="width: 70%;">
-                <input name="hostname" type="text" placeholder=" "/>
+                <input name="hostname" type="text" placeholder=" " required="true"/>
                 <span>Host</span>
             </div>
             <div class="col tfd panel-field" style="width: 30%;">
-                <input name="port" type="text" placeholder=" "/>
+                <input name="port" type="text" placeholder=" " required="true"/>
                 <span>Port</span>
             </div>
         </div>
         <div class="row">
-            <div class="col tfd panel-field">
-                <input name="username" type="text" placeholder=" "/>
+            <div class="col tfd panel-field" style="width: 50%;">
+                <input name="username" type="text" placeholder=" " required="true"/>
                 <span>Username</span>
             </div>
-            <div class="col tfd panel-field">
-                <input name="password" type="password" placeholder=" "/>
+            <div class="col tfd panel-field" style="width: 50%;">
+                <input name="password" type="password" placeholder=" " required="true"/>
                 <span>Password</span>
             </div>
         </div>
