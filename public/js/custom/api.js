@@ -1,5 +1,5 @@
 function getApiRoute(target) {
-    var apiUrl = location.origin + '/api/';
+    var apiUrl = location.origin + '/api/'; // TODO: Use Laravel "route()". See: https://laravel-news.com/ziggy-named-laravel-routes-javascript
     var apiRoute = apiUrl + target;
 
     return apiRoute;
