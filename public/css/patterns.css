@@ -21,6 +21,7 @@
 
     /**  Timers   **/
     --time-effect: 300ms;
+    --time-effect-scroll: 300ms;
     --time-effect-hover-button: 500ms;
 
     /**  Sizes    **/
