@@ -3,6 +3,7 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
         url: route(apiTarget),
         contentType: 'application/json',
         data : dataSend,
+        dataType: 'json',
         beforeSend: function() {
             startLoading();
 

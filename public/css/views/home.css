@@ -1,0 +1,46 @@
+.full-panel  {
+    display: flex;
+    width: 100%;
+    height: 100%;
+}
+
+.panel-tree {
+    display: flex;
+    flex-direction: column;
+    padding-top: 5px;
+    height: 100%;
+    width: 20%;
+    box-shadow: 0px 0px 6px -1px var(--color-background-dark);
+}
+
+.panel-tree .tree-part {
+    width: 100%;
+    height: 100%;
+    overflow-x: hidden;
+    overflow-y: auto;
+}
+
+
+
+
+
+/*     Scrollbar change    */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background-color: var(--color-button-gray);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--color-button-blue);
+    border-radius: 10px;
+    transition: var(--time-effect-scroll) ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    transition: var(--time-effect-scroll) ease;
+    background: var(--color-button-blue-dark);
+}

@@ -3,7 +3,7 @@
 @section('title', 'Connect')
 
 @section('custom-styles')
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/connect.css') }}">
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/views/connect.css') }}">
 @stop
 
 @section('content')
