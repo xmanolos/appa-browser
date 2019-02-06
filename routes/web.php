@@ -18,7 +18,7 @@ use App\Http\Controllers\TestConnectionController;
 Route::get('/', ['as' => 'views.home', 'uses' => 'HomeController@index']);
 Route::get('/connect', ['as' => 'views.connect', 'uses' => 'ConnectController@index']);
 
-Route::get('/api/test-connection', ['as' => 'connection.test', 'uses' => 'ConnectionController@testConnection']);
-Route::get('/api/connect', ['as' => 'connection.connect', 'uses' => 'ConnectionController@connect']);
+Route::get('/api/test-connection', ['as' => 'api.connection.test', 'uses' => 'ConnectionController@testConnection']);
+Route::get('/api/connect', ['as' => 'api.connection.connect', 'uses' => 'ConnectionController@connect']);
 
-Route::get('/api/database-data/get', ['as' => 'database-data.get', 'uses' => 'DatabaseDataController@get']);
+Route::get('/api/database-data/get', ['as' => 'api.database-data.get', 'uses' => 'DatabaseDataController@get']);
