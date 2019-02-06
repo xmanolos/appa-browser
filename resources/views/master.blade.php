@@ -22,6 +22,8 @@
         @yield('custom-styles')
     </head>
     <body>
+        @routes
+    
         @section('sidebar')
         @show
 
@@ -45,9 +47,9 @@
         <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.15/dist/jquery.mask.min.js"></script>
 
         <!-- Custom (Made by Us)-->
-        <script src="{{ asset('js/custom/api.js') }}"></script>
-        <script src="{{ asset('js/custom/swal.js') }}"></script>
-        <script src="{{ asset('js/custom/custom-loading.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/custom/api.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/custom/swal.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('js/custom/custom-loading.js') }}"></script>
 
         @yield('custom-js')
     </body>

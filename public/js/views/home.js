@@ -3,7 +3,7 @@ function getConnectionData() {
         console.log(jsonReturn);
     };
 
-    ajaxRequestToApi('database-data/get', null, successCallback);
+    ajaxRequestToApi('api.database-data.get', null, successCallback);
 }
 
 $(document).ready(function() {

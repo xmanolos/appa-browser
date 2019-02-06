@@ -8,7 +8,7 @@ $('#btn-test-conn').on('click', function() {
 
     if (formIsValid()) {
         ajaxRequestToApi(
-            'test-connection',
+            'api.connection.test',
             $('#form').serialize(),
             successCallback
         );
@@ -30,7 +30,7 @@ $("#form").submit( function(e) {
 
     //TODO: Implement function ajaxRequestToApi without stop loading in success
     ajaxRequestToApi(
-        'connect',
+        'api.connection.connect',
         $('#form').serialize(),
         successCallback
     );
