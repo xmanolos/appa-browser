@@ -1,5 +1,4 @@
 $('#btn-test-conn').on('click', function() {
-
     let successCallback = function(jsonReturn) {
         if(jsonReturn.status === 'success')
             successDialog(jsonReturn.msg);
@@ -7,11 +6,15 @@ $('#btn-test-conn').on('click', function() {
             errorDialog(jsonReturn.msg);
     };
 
-    ajaxRequestToApi(
-        'test-connection',
-        $('#form').serialize(),
-        successCallback
-    );
+    if (formIsValid()) {
+        ajaxRequestToApi(
+            'test-connection',
+            $('#form').serialize(),
+            successCallback
+        );
+    } else {
+        $("form")[0].reportValidity()
+    }
 });
 
 $("#form").submit( function(e) {
@@ -32,3 +35,7 @@ $("#form").submit( function(e) {
         successCallback
     );
 });
+
+function formIsValid() {
+    return $("form")[0].checkValidity();
+}
