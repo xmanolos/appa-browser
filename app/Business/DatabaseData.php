@@ -4,7 +4,7 @@ namespace App\Business;
 
 class DatabaseData
 {
-    protected $tables;
+    public $tables;
     
     public function getTables() { return $this->tables; }
 

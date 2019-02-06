@@ -4,8 +4,8 @@ namespace App\Business\DatabaseStructure;
 
 class StructureTable
 {
-    protected $name;
-    protected $columns;
+    public $name;
+    public $columns;
 
     public function getName() { return $this->name; }
     public function getColumns() { return $this->columns; }

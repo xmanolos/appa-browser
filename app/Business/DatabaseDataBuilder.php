@@ -12,10 +12,10 @@ class DatabaseDataBuilder
     public static function fromConnection($connection) 
     {
         $databaseTables = DatabaseDataBuilder::getTablesFromConnection($connection);
-
+        
         $databaseData = new DatabaseData();
         $databaseData->setTables($databaseTables);
-
+        
         return $databaseData;
     }
 

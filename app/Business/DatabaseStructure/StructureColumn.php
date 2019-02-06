@@ -4,8 +4,8 @@ namespace App\Business\DatabaseStructure;
 
 class StructureColumn
 {
-    protected $name;
-    protected $dataType;
+    public $name;
+    public $dataType;
 
     public function getName() { return $this->name; }
     public function getDataType() { return $this->dataType; }

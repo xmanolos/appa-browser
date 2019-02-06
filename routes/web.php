@@ -19,3 +19,5 @@ Route::get('/menu', ['as' => 'views.menu', 'uses' => 'MenuController@index']);
 
 Route::get('/api/test-connection', ['as' => 'connection.test', 'uses' => 'ConnectionController@testConnection']);
 Route::get('/api/connect', ['as' => 'connection.connect', 'uses' => 'ConnectionController@connect']);
+
+Route::get('/api/database-data/get', ['as' => 'database-data.get', 'uses' => 'DatabaseDataController@get']);
