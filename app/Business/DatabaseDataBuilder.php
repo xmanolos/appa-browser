@@ -3,6 +3,7 @@
 namespace App\Business;
 
 use App\Business\DatabaseStructure\StructureColumn;
+use App\Business\DatabaseStructure\StructureSchema;
 use App\Business\DatabaseStructure\StructureTable;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -11,6 +12,9 @@ class DatabaseDataBuilder
 {
     public static function fromConnection($connection) 
     {
+        $databaseSchemas = DatabaseDataBuilder::getSchemasFromConnection($connection);
+        
+        
         $databaseTables = DatabaseDataBuilder::getTablesFromConnection($connection);
         
         $databaseData = new DatabaseData();
@@ -19,16 +23,41 @@ class DatabaseDataBuilder
         return $databaseData;
     }
 
-    private static function getTablesFromConnection($connection)
+    private static function getSchemasFromConnection($connection)
+    {
+        $schemas = array();
+        $sqlSchemas = $connection->select('SELECT SCHEMA_NAME AS SchemaName FROM information_schema.SCHEMATA;');
+        
+        foreach ($sqlSchemas as $sqlSchema) 
+        {
+            foreach ($sqlSchema as $key => $value)
+            {
+                $tables = DatabaseDataBuilder::getTablesFromConnection($connection, $value);
+                
+                $schema = new StructureSchema();
+                $schema->setName($value);
+                $schema->setTables($tables);
+
+                array_push($schemas, $schema);
+            }
+        }
+        
+        return $schemas;
+    }
+
+    private static function getTablesFromConnection($connection, $schema)
     {
         $tables = array();
-        $sqlTables = $connection->select('SHOW TABLES');
+        $sqlTables = $connection->select("SELECT TABLE_NAME AS TableName FROM information_schema.TABLES WHERE TABLE_SCHEMA = '$schema';");
         
         foreach ($sqlTables as $sqlTable) 
         {
             foreach ($sqlTable as $key => $value)
             {
                 $columns = DatabaseDataBuilder::getTableColumnsFromConnection($connection, $value);
+                
+                if (count($columns) < 1)
+                    continue;
 
                 $table = new StructureTable();
                 $table->setName($value);

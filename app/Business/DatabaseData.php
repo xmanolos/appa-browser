@@ -4,9 +4,9 @@ namespace App\Business;
 
 class DatabaseData
 {
-    public $tables;
+    public $schemas;
     
-    public function getTables() { return $this->tables; }
+    public function getSchemas() { return $this->schemas; }
 
-    public function setTables($tables) { $this->tables = $tables; return $this; }
+    public function setSchemas($schemas) { $this->schemas = $schemas; return $this; }
 }

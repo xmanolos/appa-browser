@@ -20,7 +20,7 @@
                 <span>Driver</span>
             </div>
             <div class="col tfd panel-field" style="width: 50%;">
-                <input name="database" type="text" placeholder=" " required="true"/>
+                <input name="database" type="text" placeholder=" " />
                 <span>Database</span>
             </div>
         </div>
