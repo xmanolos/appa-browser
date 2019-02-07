@@ -4,6 +4,7 @@ $(document).ready(function() {
 
 function getConnectionData() {
     let successCallback = function(jsonReturn) {
+        console.log(jsonReturn);
         buildTree(jsonReturn);
     };
 
@@ -11,16 +12,18 @@ function getConnectionData() {
 }
 
 function buildTree(data) {
-    $.each(data.tables, function(idxTable, table) {
-        console.log(table.columns);
+    $.each(data.schemas, function(idxSchema, schema) {
+        //addSchema(schema);
 
-        addTable(idxTable, table.name);
-        if(table.columns) {
-            $.each(table.columns, function(idxColumn, column){
-                console.log(idxColumn + ' - ' + column.name);
-                addColumn(idxTable, idxColumn, column.name);
-            });
-        }
+        $.each(schema.tables, function(idxTable, table) {
+            addTable(idxTable, table.name);
+
+            if(table.columns) {
+                $.each(table.columns, function(idxColumn, column) {
+                    addColumn(idxTable, idxColumn, column.name);
+                });
+            }
+        });
     });
 }
 
