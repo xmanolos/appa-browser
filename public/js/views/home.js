@@ -13,7 +13,7 @@ function getConnectionData() {
 
 function buildTree(data) {
     $.each(data.schemas, function(idxSchema, schema) {
-        //addSchema(schema);
+        addSchema(schema.name);
 
         $.each(schema.tables, function(idxTable, table) {
             addTable(idxTable, table.name);
@@ -25,6 +25,10 @@ function buildTree(data) {
             }
         });
     });
+}
+
+function addSchema(schemaName) {
+    $('#schemas').append('<option value="' + schemaName + '">' + schemaName + '</option>');
 }
 
 function addTable(tableId, tableName){

@@ -11,12 +11,7 @@
         <div class="panel-tree">
             <div class="schema-part row">
                 <div class="col tfd panel-field" style="width: 100%;">
-                    <select name="schemas" required="true">
-                        <option selected disaled hidden value=""></option>
-                        <option value="1">schema 01</option>
-                        <option value="2">schema 02</option>
-                        <option value="3">schema 03</option>
-                    </select>
+                    <select id="schemas" name="schemas" required="true"></select>
                     <span>Schemas</span>
                 </div>
             </div>
