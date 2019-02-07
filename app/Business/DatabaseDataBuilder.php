@@ -14,11 +14,8 @@ class DatabaseDataBuilder
     {
         $databaseSchemas = DatabaseDataBuilder::getSchemasFromConnection($connection);
         
-        
-        $databaseTables = DatabaseDataBuilder::getTablesFromConnection($connection);
-        
         $databaseData = new DatabaseData();
-        $databaseData->setTables($databaseTables);
+        $databaseData->setSchemas($databaseSchemas);
         
         return $databaseData;
     }
