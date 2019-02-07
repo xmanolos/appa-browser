@@ -1,29 +1,44 @@
+var databaseData = null;
+
 $(document).ready(function() {
-    let connectionData = getConnectionData();
+    databaseData = loadDatabaseData();
+    
+    $('#schemas').on('change', function() {
+        buildTree(this.value);
+    });
 });
 
-function getConnectionData() {
+function loadDatabaseData() {
     let successCallback = function(jsonReturn) {
-        console.log(jsonReturn);
-        buildTree(jsonReturn);
+        databaseData = jsonReturn;
+
+        showSchemas();
     };
 
     ajaxRequestToApi('api.database-data.get', null, successCallback);
 }
 
-function buildTree(data) {
-    $.each(data.schemas, function(idxSchema, schema) {
+function showSchemas() {
+    $.each(databaseData.schemas, function(idxSchema, schema) {
         addSchema(schema.name);
+    });
+}
 
-        $.each(schema.tables, function(idxTable, table) {
-            addTable(idxTable, table.name);
-
-            if(table.columns) {
-                $.each(table.columns, function(idxColumn, column) {
-                    addColumn(idxTable, idxColumn, column.name);
-                });
-            }
-        });
+function buildTree(schemaName) {
+    $('#tables-tree').html('');
+    
+    $.each(databaseData.schemas, function(idxSchema, schema) {
+        if (schema.name == schemaName) {
+            $.each(schema.tables, function(idxTable, table) {
+                addTable(idxTable, table.name);
+    
+                if(table.columns) {
+                    $.each(table.columns, function(idxColumn, column) {
+                        addColumn(idxTable, idxColumn, column.name);
+                    });
+                }
+            });
+        }
     });
 }
 
