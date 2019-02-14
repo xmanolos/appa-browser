@@ -4,6 +4,7 @@
 
 @section('custom-styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/views/home.css') }}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 @stop
 
 @section('content')
@@ -17,7 +18,7 @@
             </div>
             <div class="filter-part row">
                 <div class="col tfd panel-field" style="width: 100%;">
-                    <input name="search" type="text" placeholder=" " required="true"/>
+                    <input id="search" name="search" type="text" placeholder=" " required="true"/>
                     <span>Search</span>
                 </div>
             </div>
@@ -36,4 +37,5 @@
 
 @section('custom-js')
     <script type="text/jscript" src="{{ asset('js/views/home.js') }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
 @stop
