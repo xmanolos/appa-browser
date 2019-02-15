@@ -28,6 +28,8 @@
 	font-size: var(--size-text-input);
 	/**font-family: var(--main-font-famiy);*/
 	z-index: 1;
+	min-width: 130px;
+    box-sizing: border-box;
 }
 
 .tfd.panel-field select {
@@ -39,6 +41,7 @@
     background-position: 98% center;
     background-size: 30px;
     background-repeat: no-repeat;
+	padding-right: 30px;
 }
 
 .tfd.panel-field input:focus,

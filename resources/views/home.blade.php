@@ -4,7 +4,7 @@
 
 @section('custom-styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/views/home.css') }}">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
 @stop
 
 @section('content')
@@ -30,12 +30,19 @@
                 <div class="views-tree"></div>
             </div>
         </div>
-        <div class="panel-show">
+        <div class="panel-fill">
+            <div class="panel-query">
+                <textarea class="text-query sql"></textarea>
+            </div>
+            <div class="panel-show-result">
+                <textarea id="teste123"></textarea>
+            </div>
         </div>
     </div>
 @stop
 
 @section('custom-js')
-    <script type="text/jscript" src="{{ asset('js/views/home.js') }}"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script type="text/javascript" src="{{ asset('js/views/home.js') }}"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
 @stop

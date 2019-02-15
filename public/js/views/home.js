@@ -17,7 +17,13 @@ $(document).ready(function() {
             },
             300
         );
-  });
+    });
+
+
+    let element = document.getElementById('teste123');
+    var editor = ace.edit(element);
+    editor.setTheme("ace/theme/twilight");
+    editor.session.setMode("ace/mode/javascript");
 });
 
 function loadDatabaseData() {
