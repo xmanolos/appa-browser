@@ -18,7 +18,7 @@
             </div>
             <div class="filter-part row">
                 <div class="col tfd panel-field" style="width: 100%;">
-                    <input id="search" name="search" type="text" placeholder=" " required="true"/>
+                    <input id="search" name="search" type="text" placeholder=" " />
                     <span>Search</span>
                 </div>
             </div>
@@ -32,11 +32,31 @@
         </div>
         <div class="panel-fill">
             <div class="panel-query">
-                <textarea class="text-query sql"></textarea>
+                <div class="btn-change-style-query">
+                    <i class="la la-gears"></i>
+                    <div class="style-query-editor">
+                        <div class="col tfd panel-field" style="width: 100%;">
+                            <select id="styleQueryEditor" name="styleQueryEditor" required="true">
+                                <option value="xcode">X-Code</option>
+                                <option value="textmate">Textmate</option>
+                                <option selected value="sqlserver">SQL Server</option>
+                                <option value="eclipse">Eclipse</option>
+                                <option value="github">Github</option>
+                                <option value="terminal">Terminal</option>
+                                <option value="tomorrow">Tomorrow</option>
+                                <option value="tomorrow_night">Tomorrow Night</option>
+                                <option value="vibrant_ink">Vibrant</option>
+                            </select>
+                            <span>Editor style</span>
+                        </div>
+                    </div>
+                </div>
+                <div id="editorTextQuery" class="text-query"></div>
+                <div class="button btn-run-query" title="Run query">
+                    <i class="la la-play"></i>
+                </div>
             </div>
-            <div class="panel-show-result">
-                <textarea id="teste123"></textarea>
-            </div>
+            <div class="panel-show-result"></div>
         </div>
     </div>
 @stop

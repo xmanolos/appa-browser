@@ -9,9 +9,12 @@
 
         <!-- Sweet Alert -->
         <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
-        
+
         <!-- Font Awesome -->
-        <link type="text/css" rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+
+        <!-- icons8 line-awesom -->
+        <link rel="stylesheet" type="text/css" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css">
 
         <!-- Custom (Made by Us)-->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/patterns.css') }}">
@@ -23,7 +26,7 @@
     </head>
     <body>
         @routes
-    
+
         @section('sidebar')
         @show
 

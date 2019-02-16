@@ -59,32 +59,35 @@ body .footer {
     box-shadow: 0px 1px 6px -1px var(--color-background-dark)
 }
 
-input.button {
+.button {
     color: white;
     border: 0;
     background-color: var(--color-button-blue);
-    padding: 8px 15px;
-    border-radius: 4px;
     font-size: 1em;
+    border-radius: 4px;
     cursor: pointer;
     transition: var(--time-effect-hover-button) ease;
 }
-input.button:hover {
+
+input.button {
+    padding: 8px 15px;
+}
+.button:hover {
     background-color: var(--color-button-blue-dark);
 }
-input.button.green {
+.button.green {
     background-color: var(--color-button-green);
 }
-input.button.green:hover {
+.button.green:hover {
     background-color: var(--color-button-green-dark);
 }
-input.button.red {
+.button.red {
     background-color: var(--color-button-red);
 }
-input.button.red:hover {
+.button.red:hover {
     background-color: var(--color-button-red-dark);
 }
-input.button[disabled] {
+.button[disabled] {
     cursor: auto !important;
     background-color: var(--color-button-gray) !important;
 }

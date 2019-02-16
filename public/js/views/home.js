@@ -1,5 +1,6 @@
 var databaseData = null;
 var searchTimer = null;
+var editor = null;
 
 $(document).ready(function() {
     databaseData = loadDatabaseData();
@@ -19,12 +20,29 @@ $(document).ready(function() {
         );
     });
 
+    setHighLightEditor();
+    $('#styleQueryEditor').on('change', changeStyleQueryEditor);
+    $('.btn-change-style-query > i').click(showHideStyleQueryEditor);
 
-    let element = document.getElementById('teste123');
-    var editor = ace.edit(element);
-    editor.setTheme("ace/theme/twilight");
-    editor.session.setMode("ace/mode/javascript");
+    changeStyleQueryEditor();
 });
+
+function setHighLightEditor() {
+    editor = ace.edit('editorTextQuery');
+    editor.setTheme('ace/theme/sqlserver');
+    editor.session.setMode('ace/mode/sql');
+    editor.renderer.setOption('showPrintMargin', false);
+}
+
+function changeStyleQueryEditor(){
+    let itemSelected = $('#styleQueryEditor').val();
+    editor.setTheme('ace/theme/'+itemSelected);
+    $('.style-query-editor').removeClass('show');
+}
+
+function showHideStyleQueryEditor() {
+    $('.style-query-editor').toggleClass('show');
+}
 
 function loadDatabaseData() {
     let successCallback = function(jsonReturn) {
