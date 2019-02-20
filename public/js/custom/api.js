@@ -1,6 +1,12 @@
-function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback){
+function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback) {
+    let url = "";
+    try {
+        url = route(apiTarget);
+    } catch(err) {
+        url = apiTarget;
+    }
     $.ajax({
-        url: route(apiTarget),
+        url: url,
         contentType: 'application/json',
         data : dataSend,
         dataType: 'json',
