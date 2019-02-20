@@ -52,8 +52,13 @@
                     </div>
                 </div>
                 <div id="editorTextQuery" class="text-query"></div>
-                <div class="button btn-run-query" title="Run query">
-                    <i class="la la-play"></i>
+                <div  class="panel-query-buttons">
+                    <div class="button btn-format-query" title="Format query">
+                        <i class="la la-code"></i>
+                    </div>
+                    <div class="button btn-run-query" title="Run query">
+                        <i class="la la-play"></i>
+                    </div>
                 </div>
             </div>
             <div class="panel-show-result"></div>

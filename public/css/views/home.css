@@ -67,10 +67,13 @@
     flex-grow: 4;
 }
 
-.btn-run-query {
+.panel-query-buttons {
     position: absolute;
     right: 15px;
     bottom: 15px;
+    display: flex;
+}
+.btn-run-query, .btn-format-query {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -79,6 +82,9 @@
     height: 50px;
     border-radius: 50%;
     box-shadow: 0 2px 10px -2px rgba(0, 0, 0, 0.7);
+}
+.btn-format-query {
+    margin-right: 15px;
 }
 
 .btn-change-style-query {

@@ -9,6 +9,8 @@ $(document).ready(function() {
         buildTree(this.value);
     });
 
+    $('.btn-format-query').click(formatQuery);
+
     $('#search').keyup(function () {
         if(searchTimer) { clearTimeout(searchTimer); }
         searchTimer = setTimeout(
@@ -88,7 +90,7 @@ function addSchema(schemaName) {
 
 function addTable(tableId, tableName){
     $('#tables-tree').append(
-        '<li data-jstree=\'{"icon":"fas fa-th"}\'>' + tableName +
+        '<li data-jstree=\'{"icon":"la la-table"}\'>' + tableName +
         '   <ul id="table-' + tableId + '"></ul>' +
         '</li>'
     );
@@ -96,6 +98,29 @@ function addTable(tableId, tableName){
 
 function addColumn(tableId, columnId, columnName) {
     $('#tables-tree #table-' + tableId).append(
-        '<li id="column-' + tableId + '-' + columnId + '" data-jstree=\'{"icon":"fas fa-chevron-right"}\'>' + columnName + '</li>'
+        '<li id="column-' + tableId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + columnName + '</li>'
+    );
+}
+
+function formatQuery() {
+    if(editor == null) {
+        return;
+    }
+
+    let onSuccess = function(response){
+        if(response != null)
+            editor.setValue(response.result);
+    }
+
+
+    ajaxRequestToApi(
+        'https://sqlformat.org/api/v1/format',
+        {
+            sql: editor.getValue(),
+            reindent: 1,
+            indent_width: 4,
+            keyword_case: 'upper'
+        },
+        onSuccess
     );
 }
