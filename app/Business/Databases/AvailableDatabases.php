@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Business;
+namespace App\Business\Databases;
 
 class AvailableDatabases
 {

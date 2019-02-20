@@ -13,7 +13,7 @@ class Connection
         $connection = Connection::getConnection($request);
         Config::set('database.connections.' . 'custom-connection', $connection);
 
-        return DB::connection('custom-connection');
+        return DB::connection('custom-connection'); // TODO: Rename to ClientConnection.
     }
 
     private static function getConnection(Request $request)

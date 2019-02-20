@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Business;
+namespace App\Business\Builders;
 
 class ResultMessageBuilder
 {

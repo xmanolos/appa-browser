@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Business\Connection;
-use App\Business\DatabaseDataBuilder;
+use App\Business\Builders\DatabaseDataBuilder;
 use Illuminate\Http\Request;
 
 class DatabaseDataController extends Controller

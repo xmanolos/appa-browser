@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Business;
+namespace App\Business\Builders;
 
 use App\Business\DatabaseStructure\StructureColumn;
 use App\Business\DatabaseStructure\StructureSchema;
