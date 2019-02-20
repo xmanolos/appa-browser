@@ -15,5 +15,6 @@ use App\Http\Controllers\TestConnectionController;
 */
 
 // TODO: Fix not connection to use.
+// TODO: Fix routes aliases.
 Route::get('/', ['as' => 'views.home', 'uses' => 'HomeController@index']);
 Route::get('/connect', ['as' => 'views.connect', 'uses' => 'ConnectController@index']);

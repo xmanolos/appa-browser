@@ -5,13 +5,16 @@ namespace App\Business;
 use App\Business\DatabaseStructure\StructureColumn;
 use App\Business\DatabaseStructure\StructureSchema;
 use App\Business\DatabaseStructure\StructureTable;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 
 class DatabaseDataBuilder
 {
-    public static function fromConnection($connection) 
+    // TODO: Rename method.
+    public static function fromConnection(Request $request) 
     {
+        $connection = Connection::getInstance($request);
         $databaseSchemas = DatabaseDataBuilder::getSchemasFromConnection($connection);
         
         $databaseData = new DatabaseData();
