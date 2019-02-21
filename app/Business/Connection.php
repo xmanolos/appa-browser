@@ -8,6 +8,14 @@ use Illuminate\Support\Facades\DB;
 
 class Connection
 {
+    public static function isConnected(Request $request)
+    {
+        if ($request->session()->has('connected'))
+            return $request->session()->get('connected');
+
+        return false;
+    }
+
     public static function getInstance(Request $request)
     {
         // TODO: Already exists?

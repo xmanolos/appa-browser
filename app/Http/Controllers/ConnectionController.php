@@ -38,6 +38,11 @@ class ConnectionController extends Controller
         if ($request->session()->has('database'))
             $request->session()->forget('database');
 
+        if ($request->session()->has('connected')) {
+            $request->session()->remove('connected');
+            $request->session()->put('connected', false);
+        }
+
         Connection::dropInstance();
 
         return \redirect(route('views.home'));
@@ -54,8 +59,9 @@ class ConnectionController extends Controller
             $request->session()->put('hostname', $connectionData->getHost());
             $request->session()->put('port', $connectionData->getPort());
             $request->session()->put('username', $connectionData->getUsername());
-            $request->session()->put('password', $connectionData->getPassword());  
-            $request->session()->put('database', $connectionData->getDatabase());  
+            $request->session()->put('password', $connectionData->getPassword());
+            $request->session()->put('database', $connectionData->getDatabase());
+            $request->session()->put('connected', true);
 
             $connection = Connection::getInstance($request);
             $connection->getPdo();

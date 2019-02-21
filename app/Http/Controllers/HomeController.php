@@ -2,10 +2,16 @@
 
 namespace App\Http\Controllers;
 
+use App\Business\Connection;
+use Illuminate\Http\Request;
+
 class HomeController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {   
-        return \view('home');
+    	if (Connection::isConnected($request)) 
+        	return \view('home');
+
+        return redirect(route('views.connect'));
     }
 }
