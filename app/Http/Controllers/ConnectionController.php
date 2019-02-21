@@ -40,7 +40,7 @@ class ConnectionController extends Controller
 
         Connection::dropInstance();
 
-        return \view('home');
+        return \redirect(route('views.home'));
     }
 
     public function testConnection(Request $request)
