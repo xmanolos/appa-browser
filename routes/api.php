@@ -13,9 +13,3 @@ use Illuminate\Http\Request;
 |
 */
 
-// Connection Routes.
-Route::get('connect', ['as' => 'api.connection.connect', 'uses' => 'ConnectionController@connect']);
-Route::get('test-connection', ['as' => 'api.connection.test', 'uses' => 'ConnectionController@testConnection']);
-
-// Database Data Management Routes.
-Route::get('database-data/get', ['as' => 'api.database-data.get', 'uses' => 'DatabaseDataController@get']);
