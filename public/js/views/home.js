@@ -72,7 +72,7 @@ function buildTree(schemaName) {
 
                 if(table.columns) {
                     $.each(table.columns, function(idxColumn, column) {
-                        addColumn(idxTable, idxColumn, column.name);
+                        addColumn(idxTable, idxColumn, column);
                     });
                 }
             });
@@ -96,9 +96,9 @@ function addTable(tableId, tableName){
     );
 }
 
-function addColumn(tableId, columnId, columnName) {
+function addColumn(tableId, columnId, column) {
     $('#tables-tree #table-' + tableId).append(
-        '<li id="column-' + tableId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + columnName + '</li>'
+        '<li id="column-' + tableId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + column.name + ' (' + column.dataType + ')' + '</li>' // TODO: Refactor!
     );
 }
 
