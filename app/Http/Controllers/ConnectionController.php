@@ -19,32 +19,8 @@ class ConnectionController extends Controller
 
     public function disconnect(Request $request)
     {
-        // TODO: "SessionManager".
-        if ($request->session()->has('driver'))
-            $request->session()->forget('driver');
-
-        if ($request->session()->has('hostname'))
-            $request->session()->forget('hostname');
-
-        if ($request->session()->has('port'))
-            $request->session()->forget('port');
-
-        if ($request->session()->has('username'))
-            $request->session()->forget('username');
-
-        if ($request->session()->has('password'))
-            $request->session()->forget('password');
-
-        if ($request->session()->has('database'))
-            $request->session()->forget('database');
-
-        if ($request->session()->has('connected')) {
-            $request->session()->remove('connected');
-            $request->session()->put('connected', false);
-        }
-
-        Connection::dropInstance();
-
+        Connection::disconnect($request);
+        
         return \redirect(route('views.home'));
     }
 

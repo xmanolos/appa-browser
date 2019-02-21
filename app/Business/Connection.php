@@ -2,6 +2,7 @@
 
 namespace App\Business;
 
+use App\Business\ClientSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
@@ -25,8 +26,10 @@ class Connection
         return DB::connection('custom-connection'); // TODO: Rename to ClientConnection.
     }
 
-    public static function dropInstance()
+    public static function disconnect(Request $request)
     {
+        ClientSession::forgetConnection($request);
+        
         DB::purge('custom-connection');
     }
 
