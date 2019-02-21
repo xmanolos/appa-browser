@@ -17,8 +17,36 @@ class ConnectionController extends Controller
         return $this->testConnection($request);
     }
 
+    public function disconnect(Request $request)
+    {
+        // TODO: "SessionManager".
+        if ($request->session()->has('driver'))
+            $request->session()->forget('driver');
+
+        if ($request->session()->has('hostname'))
+            $request->session()->forget('hostname');
+
+        if ($request->session()->has('port'))
+            $request->session()->forget('port');
+
+        if ($request->session()->has('username'))
+            $request->session()->forget('username');
+
+        if ($request->session()->has('password'))
+            $request->session()->forget('password');
+
+        if ($request->session()->has('database'))
+            $request->session()->forget('database');
+
+        Connection::dropInstance();
+
+        return \view('home');
+    }
+
     public function testConnection(Request $request)
     {
+        // TODO: Try move to Business Class!
+        // TODO: Create Consts to Session Keys.
         try {
             $connectionData = ConnectionDataBuilder::fromRequest($request);
 

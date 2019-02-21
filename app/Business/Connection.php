@@ -10,10 +10,16 @@ class Connection
 {
     public static function getInstance(Request $request)
     {
+        // TODO: Already exists?
         $connection = Connection::getConnection($request);
         Config::set('database.connections.' . 'custom-connection', $connection);
 
         return DB::connection('custom-connection'); // TODO: Rename to ClientConnection.
+    }
+
+    public static function dropInstance()
+    {
+        DB::purge('custom-connection');
     }
 
     private static function getConnection(Request $request)

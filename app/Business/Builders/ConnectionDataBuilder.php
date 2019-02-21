@@ -2,6 +2,7 @@
 
 namespace App\Business\Builders;
 
+use App\Business\ConnectionData;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 

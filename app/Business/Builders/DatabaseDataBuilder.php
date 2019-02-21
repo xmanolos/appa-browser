@@ -2,6 +2,8 @@
 
 namespace App\Business\Builders;
 
+use App\Business\Connection;
+use App\Business\DatabaseData;
 use App\Business\DatabaseStructure\StructureColumn;
 use App\Business\DatabaseStructure\StructureSchema;
 use App\Business\DatabaseStructure\StructureTable;
