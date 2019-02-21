@@ -13,11 +13,11 @@ $('#btn-test-conn').on('click', function() {
             successCallback
         );
     } else {
-        $("form")[0].reportValidity()
+        $('form')[0].reportValidity()
     }
 });
 
-$("#form").submit( function(e) {
+$('#form').submit( function(e) {
     let urlAction = $(this).attr('action');
     e.preventDefault();
 
@@ -37,5 +37,5 @@ $("#form").submit( function(e) {
 });
 
 function formIsValid() {
-    return $("form")[0].checkValidity();
+    return $('form')[0].checkValidity();
 }
