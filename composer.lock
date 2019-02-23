@@ -4,8 +4,8 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "hash": "a6d2faa0e15dc547a4a9f83bee57ca48",
-    "content-hash": "d29570188ba8ca7d68d9ff21cab08021",
+    "hash": "a31519c089e51a8fe0c91b9bc7d862fa",
+    "content-hash": "6c45b6fec5876faa0eb20bca41cfa2ec",
     "packages": [
         {
             "name": "dnoegel/php-xdg-base-dir",
@@ -871,16 +871,16 @@
         },
         {
             "name": "laravel/framework",
-            "version": "v5.7.20",
+            "version": "v5.7.27",
             "source": {
                 "type": "git",
                 "url": "https://github.com/laravel/framework.git",
-                "reference": "10cd20294b5668f90ba91996236834e71f7ff670"
+                "reference": "688fbfa889d43f392825b381ad3981847120fdfa"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/laravel/framework/zipball/10cd20294b5668f90ba91996236834e71f7ff670",
-                "reference": "10cd20294b5668f90ba91996236834e71f7ff670",
+                "url": "https://api.github.com/repos/laravel/framework/zipball/688fbfa889d43f392825b381ad3981847120fdfa",
+                "reference": "688fbfa889d43f392825b381ad3981847120fdfa",
                 "shasum": ""
             },
             "require": {
@@ -1013,7 +1013,7 @@
                 "framework",
                 "laravel"
             ],
-            "time": "2019-01-08 14:39:11"
+            "time": "2019-02-19 14:37:47"
         },
         {
             "name": "laravel/nexmo-notification-channel",

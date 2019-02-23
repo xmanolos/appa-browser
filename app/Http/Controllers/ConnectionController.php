@@ -14,33 +14,28 @@ class ConnectionController extends Controller
 
     public function connect(Request $request)
     {
+        try {
+            Connection::connect($request);
+
+            return ResultMessageBuilder::buildSuccessMessage($this->successConnMsg);
+        } catch (\Exception $e) {
+            return ResultMessageBuilder::buildErrorMessage( $e->getMessage() );
+        }
+
         return $this->testConnection($request);
     }
 
     public function disconnect(Request $request)
     {
         Connection::disconnect($request);
-        
+
         return \redirect(route('views.home'));
     }
 
     public function testConnection(Request $request)
     {
-        // TODO: Try move to Business Class!
-        // TODO: Create Consts to Session Keys.
         try {
-            $connectionData = ConnectionDataBuilder::fromRequest($request);
-
-            $request->session()->put('driver', $connectionData->getDriver());
-            $request->session()->put('hostname', $connectionData->getHost());
-            $request->session()->put('port', $connectionData->getPort());
-            $request->session()->put('username', $connectionData->getUsername());
-            $request->session()->put('password', $connectionData->getPassword());
-            $request->session()->put('database', $connectionData->getDatabase());
-            $request->session()->put('connected', true);
-
-            $connection = Connection::getInstance($request);
-            $connection->getPdo();
+            Connection::test($request);
 
             return ResultMessageBuilder::buildSuccessMessage($this->successConnMsg);
         } catch (\Exception $e) {
