@@ -57,8 +57,10 @@ function loadDatabaseData() {
 }
 
 function showSchemas() {
+    addSchemaPlaceholder();
+
     $.each(databaseData.schemas, function(idxSchema, schema) {
-        addSchema(schema.name);
+        addSchema(schema);
     });
 }
 
@@ -80,12 +82,20 @@ function buildTree(schemaName) {
     });
 
     $('.panel-tables-tree').jstree({
-        "plugins" : [ "wholerow", "search" ]
+        'plugins' : [ 'wholerow', 'search' ]
     });
 }
 
-function addSchema(schemaName) {
-    $('#schemas').append('<option value="' + schemaName + '">' + schemaName + '</option>');
+function addSchema(schema) {
+    if (schema.available) {
+        $('#schemas').append('<option value="' + schema.name + '">' + schema.name + '</option>');
+    } else {
+        $('#schemas').append('<option disabled value="' + schema.name + '">' + schema.name + '</option>');
+    }
+}
+
+function addSchemaPlaceholder() {
+    $('#schemas').append('<option disabled selected hidden></option>');
 }
 
 function addTable(tableId, tableName){

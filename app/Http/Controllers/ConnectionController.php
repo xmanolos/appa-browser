@@ -15,6 +15,7 @@ class ConnectionController extends Controller
     public function connect(Request $request)
     {
         try {
+            Connection::test($request);
             Connection::connect($request);
 
             return ResultMessageBuilder::buildSuccessMessage($this->successConnMsg);
