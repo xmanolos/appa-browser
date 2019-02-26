@@ -1,15 +1,21 @@
-function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback) {
+function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback, requestType = 'GET') {
     let url = "";
+    
     try {
         url = route(apiTarget);
     } catch(err) {
         url = apiTarget;
     }
+
     $.ajax({
+        type: requestType,
         url: url,
         contentType: 'application/json',
         data : dataSend,
         dataType: 'json',
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        },
         beforeSend: function() {
             startLoading();
 
@@ -18,6 +24,7 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
         },
         success : function(resultData) {
             stopLoading();
+            
             setTimeout(
                 function(){
                     if(successCallback)
@@ -28,6 +35,7 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
         },
         error: function(errorObj, textStatus, errorThrown) {
             stopLoading();
+            
             setTimeout(
                 function(){
                     let statusCode = errorObj.status
@@ -37,9 +45,9 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
                 500
             );
         },
-        complete: function() {
+        complete: function(resultData) {
             if(customCompleteCallback)
-                customCompleteCallback();
+                customCompleteCallback(resultData);
         }
     });
 }
