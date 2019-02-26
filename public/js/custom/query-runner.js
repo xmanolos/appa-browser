@@ -19,13 +19,13 @@ function runQuery(query) {
 		let queryState = queryRunResult.state;
 
 		if (queryState == 'success') {
-			successDialog('Query executed successfully!');
+			successDialog(queryRunResult.message);
 		} 
 
 		if (queryState == 'error') {
 			let queryException = queryRunResult.exception;
 
-			errorDialog(queryException, 'Failed to execute query!', 700);
+			errorDialog(queryException, queryRunResult.message, 700);
 		}
 	});
 }

@@ -4,17 +4,17 @@ namespace App\Business\Query;
 
 class QueryResponse
 {
-    public static function success()
+    public static function getSuccess($message = 'Query executed successfully!')
     {
-    	$responseArray = ['state' => 'success'];
+    	$responseArray = ['state' => 'success', 'message' => $message];
 
     	return \json_encode($responseArray);
     }
 
-    public static function error(\Exception $exception)
+    public static function getError(\Exception $exception, $message = 'Failed to execute query!')
     {
     	$exceptionMessage = $exception->getMessage();
-    	$responseArray = ['state' => 'error', 'exception' => $exceptionMessage];
+    	$responseArray = ['state' => 'error', 'message' => $message, 'exception' => $exceptionMessage];
 
     	return \json_encode($responseArray);
     }
