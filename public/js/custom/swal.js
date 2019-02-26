@@ -12,11 +12,11 @@ function successDialog(successMessage = 'Yeah!') {
     });
 }
 
-function errorDialog(errorMessage = 'Sorry, something went wrong!', errorTitle = 'Ops...') {
+function errorDialog(errorMessage = 'Sorry, something went wrong!', errorTitle = 'Ops...', windowSize = 500) {
     swal({
         type: 'error',
         title: errorTitle,
         html: errorMessage,
-        width: 500,
+        width: windowSize,
     });
 }
