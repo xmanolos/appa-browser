@@ -5,6 +5,10 @@ var editor = null;
 $(document).ready(function() {
     databaseData = loadDatabaseData();
 
+    $('#run-query').on('click', function() {
+        callRunQuery();
+    });
+
     $('#schemas').on('change', function() {
         buildTree(this.value);
     });
@@ -28,6 +32,16 @@ $(document).ready(function() {
 
     changeStyleQueryEditor();
 });
+
+function callRunQuery() {
+    if (!editor || !editor.getValue()) {
+        return;
+    }
+
+    let queryText = editor.getValue();
+
+    runQuery(queryText);
+}
 
 function setHighLightEditor() {
     editor = ace.edit('editorTextQuery');

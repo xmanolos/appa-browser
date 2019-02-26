@@ -27,4 +27,7 @@ Route::prefix('api')->group(function ()
 
 	// Database Data Management Routes.
 	Route::get('database-data/get', ['as' => 'api.database-data.get', 'uses' => 'DatabaseDataController@get']);
+
+	// Query Execution.
+	Route::post('query/run', ['as' => 'api.query.run', 'uses' => 'QueryController@run']);
 });

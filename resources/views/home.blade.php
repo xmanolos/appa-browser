@@ -52,14 +52,17 @@
                     </div>
                 </div>
                 <div id="editorTextQuery" class="text-query"></div>
+                
+                <!-- Actions -->
                 <div  class="panel-query-buttons">
                     <div class="button btn-format-query" title="Format query">
                         <i class="la la-code"></i>
                     </div>
-                    <div class="button btn-run-query" title="Run query">
+                    <div id="run-query" class="button btn-run-query" title="Run query">
                         <i class="la la-play"></i>
                     </div>
                 </div>
+
             </div>
             <div class="panel-show-result"></div>
         </div>
@@ -68,6 +71,8 @@
 
 @section('custom-js')
     <script type="text/javascript" src="{{ asset('js/views/home.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
+
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
 @stop
