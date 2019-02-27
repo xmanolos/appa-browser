@@ -1,5 +1,5 @@
 {
-    "private": true,
+    "private": false,
     "scripts": {
         "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --hide-modules --config=node_modules/laravel-mix/setup/webpack.config.js",
@@ -13,7 +13,7 @@
         "axios": "^0.18",
         "bootstrap": "^4.0.0",
         "cross-env": "^5.1",
-        "jquery": "^3.2",
+        "jquery": "^3.3.1",
         "laravel-mix": "^4.0.7",
         "lodash": "^4.17.5",
         "popper.js": "^1.12",
@@ -21,5 +21,21 @@
         "sass": "^1.15.2",
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17"
+    },
+    "name": "db-browser",
+    "version": "0.0.0",
+    "description": "Administration and development tool for the most popular databases.",
+    "main": "index.js",
+    "repository": "http://github.com/xdanif/db-browser.git",
+    "author": "Daniel Freitas <daniel1208x@gmail.com>",
+    "license": "MIT",
+    "dependencies": {
+        "ace-builds": "^1.4.3",
+        "font-awesome": "^4.7.0",
+        "jquery-mask-plugin": "^1.14.15",
+        "jsgrid": "^1.5.3",
+        "jstree": "^3.3.7",
+        "line-awesome": "^1.0.2",
+        "sweetalert2": "^8.2.6"
     }
 }

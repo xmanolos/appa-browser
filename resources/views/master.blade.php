@@ -9,13 +9,13 @@
         <title>DB Browser - @yield('title')</title>
 
         <!-- SweetAlert2 (By SweetAlert2) -->
-        <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('packages/sweetalert2/dist/sweetalert2.min.css') }}" />
 
         <!-- Font Awesome (By FortAwesome) -->
-        <link rel="stylesheet" type="text/css" href="https://use.fontawesome.com/releases/v5.7.1/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+        <link rel="stylesheet" type="text/css" href="{{ asset('packages/font-awesome/css/font-awesome.min.css') }}" />
 
         <!-- Icons8 Line-Awesome (By Icons8) -->
-        <link rel="stylesheet" type="text/css" href="https://maxcdn.icons8.com/fonts/line-awesome/1.1/css/line-awesome.min.css">
+        <link rel="stylesheet" type="text/css" href="{{ asset('packages/line-awesome/css/line-awesome.min.css') }}" />
 
         <!-- Custom (Made by Us) -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/patterns.css') }}">
@@ -41,14 +41,14 @@
             </div>
         @show
 
-        <!-- SweetAlert2 (By SweetAlert2) -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/sweetalert2@7.33.1/dist/sweetalert2.all.min.js"></script>
-
         <!-- jQuery (By jQuery) -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+        <script type="text/javascript" src="{{ asset('packages/jquery/dist/jquery.min.js') }}"></script>
 
         <!-- jQuery Mask Plugin (By Igor Escobar) -->
-        <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/jquery-mask-plugin@1.14.15/dist/jquery.mask.min.js"></script>
+        <script type="text/javascript" src="{{ asset('packages/jquery-mask-plugin/dist/jquery.mask.min.js') }}"></script>
+
+        <!-- SweetAlert2 (By SweetAlert2) -->
+        <script type="text/javascript" src="{{ asset('packages/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
         <!-- Custom (Made by Us) -->
         <script type="text/javascript" src="{{ asset('js/custom/api.js') }}"></script>

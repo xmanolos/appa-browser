@@ -60,8 +60,8 @@
 
 @section('custom-js')
     <!-- View JS -->
-    <script type="text/jscript" src="{{asset('js/views/connect.js')}}"></script>
+    <script type="text/jscript" src="{{ asset('js/views/connect.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
-    <script type="text/jscript" src="{{asset('js/custom/test.js')}}"></script>
+    <script type="text/jscript" src="{{ asset('js/custom/test.js') }}"></script>
 @stop
