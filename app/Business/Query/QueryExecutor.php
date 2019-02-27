@@ -2,31 +2,41 @@
 
 namespace App\Business\Query;
 
-use App\Business\Query\Executor\SelectExecutor;
-use App\Business\Query\Executor\InsertExecutor;
-use App\Business\Query\Executor\UpdateExecutor;
 use App\Business\Query\Executor\DeleteExecutor;
+use App\Business\Query\Executor\InsertExecutor;
+use App\Business\Query\Executor\SelectExecutor;
+use App\Business\Query\Executor\UpdateExecutor;
+use Illuminate\Http\Request;
 
 class QueryExecutor
 {
-    public static function get($query)
+    public static function get(Request $request, $query)
     {
-        if (SelectExecutor::queryMatch($query)) {
-            return new SelectExecutor;
+        $selectExecutor = new SelectExecutor($request, $query);
+        
+        if ($selectExecutor->queryMatch()) {
+            return $selectExecutor;
         }
 
-        if (InsertExecutor::queryMatch($query)) {
-            return new InsertExecutor;
+        $insertExecutor = new InsertExecutor($request, $query);
+
+        if ($insertExecutor->queryMatch()) {
+            return $insertExecutor;
         }
 
-        if (UpdateExecutor::queryMatch($query)) {
-            return new UpdateExecutor;
+        $updateExecutor = new UpdateExecutor($request, $query);
+
+        if ($updateExecutor->queryMatch()) {
+            return $updateExecutor;
         }
 
-        if (DeleteExecutor::queryMatch($query)) {
-            return new DeleteExecutor;
+        $deleteExecutor = new DeleteExecutor($request, $query);
+
+        if ($deleteExecutor->queryMatch()) {
+            return $deleteExecutor;
         }
 
+        // TODO: Null? Any!
         return null;
     }
 }

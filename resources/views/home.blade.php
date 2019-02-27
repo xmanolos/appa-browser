@@ -3,9 +3,13 @@
 @section('title', 'Home')
 
 @section('custom-styles')
+    <!-- View CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/views/home.css') }}">
 
+    <!-- JSTree (By Vakata) -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+
+    <!-- JSGrid (By Tabalinas) -->
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
 @stop
@@ -73,11 +77,20 @@
 @stop
 
 @section('custom-js')
+    <!-- View JS -->
     <script type="text/javascript" src="{{ asset('js/views/home.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
 
+    <!-- JSTree (By Vakata) -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
+
+    <!-- JSGrid (By Tabalinas) -->
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
+
+    <!-- Ace (By Ajax.org) -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
+
+    <!-- Custom (Made by Us) -->
+    <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
 @stop

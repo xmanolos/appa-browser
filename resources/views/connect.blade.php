@@ -3,6 +3,7 @@
 @section('title', 'Connect')
 
 @section('custom-styles')
+    <!-- View CSS -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/views/connect.css') }}">
 @stop
 
@@ -58,6 +59,9 @@
 @stop
 
 @section('custom-js')
-    <script type="text/jscript" src="{{asset('js/custom/test.js')}}"></script>
+    <!-- View JS -->
     <script type="text/jscript" src="{{asset('js/views/connect.js')}}"></script>
+
+    <!-- Custom (Made by Us) -->
+    <script type="text/jscript" src="{{asset('js/custom/test.js')}}"></script>
 @stop

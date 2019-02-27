@@ -13,8 +13,8 @@ class QueryRun
     {
         // TODO: Check null query.
 
-        $queryExecutor = QueryExecutor::get($query);
-        $queryExecutor->execute($request, $query);
+        $queryExecutor = QueryExecutor::get($request, $query);
+        $queryExecutor->execute();
 
         return $queryExecutor->getResponse();
     }
