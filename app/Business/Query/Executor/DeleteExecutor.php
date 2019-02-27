@@ -2,41 +2,26 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Connection;
 use App\Business\Interfaces\IQueryExecutor;
+use App\Business\Query\Executor\QueryExecutor;
 use App\Business\Query\QueryResponse;
 
-class DeleteExecutor implements IQueryExecutor
+class DeleteExecutor extends QueryExecutor implements IQueryExecutor
 {
-    protected $response;
+    public $executorIdentifier = 'DELETE';
 
-    public static function queryMatch($query)
-    {
-        $query = trim($query);
-        $queryUpperCase = strtoupper($query);
-
-        return strpos($queryUpperCase, 'DELETE') === 0;
-    }
-    
-    public function execute($request, $query)
+    public function execute()
     {
         try 
         {
-            $connection = Connection::getInstance($request);
-            
-            $result = $connection->delete($query);
+            $result = $this->connection->delete($this->query);
             $resultMessage = 'Query executed successfully! ' . $result . ' affected rows.'; // TODO: Use mix.
 
-            $this->response = QueryResponse::getSuccess('DELETE', $resultMessage);
+            $this->response = QueryResponse::getSuccess($this->executorIdentifier, $resultMessage);
         }
         catch (\Exception $exception)
         {
             $this->response = QueryResponse::getError($exception);
         }
-    }
-
-    public function getResponse()
-    {
-        return $this->response;
     }
 }
