@@ -4,7 +4,10 @@
 
 @section('custom-styles')
     <link rel="stylesheet" type="text/css" href="{{ asset('css/views/home.css') }}">
+
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/themes/default/style.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.css" />
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid-theme.min.css" />
 @stop
 
 @section('content')
@@ -52,7 +55,7 @@
                     </div>
                 </div>
                 <div id="editorTextQuery" class="text-query"></div>
-                
+
                 <!-- Actions -->
                 <div  class="panel-query-buttons">
                     <div class="button btn-format-query" title="Format query">
@@ -75,4 +78,5 @@
 
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jstree/3.2.1/jstree.min.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ace/1.4.2/ace.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jsgrid/1.5.3/jsgrid.min.js"></script>
 @stop
