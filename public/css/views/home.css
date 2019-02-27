@@ -124,6 +124,11 @@
     transition: var(--time-effect-hover-button) ease;
 }
 
+.jsgrid-grid-header, .jsgrid-grid-body {
+    overflow: auto !important;
+    height: auto !important;
+}
+
 /*     Scrollbar change    */
 ::-webkit-scrollbar {
     width: 10px;

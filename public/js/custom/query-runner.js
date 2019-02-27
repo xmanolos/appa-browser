@@ -1,7 +1,10 @@
 // TODO: Convert to Class!
 
 function showSelectResult(idContainer, queryData) {
-    // TODO: Send Data.
+    console.log(idContainer, queryData);
+    let gridBuilder = new GridBuilder(idContainer);
+    gridBuilder.setData(queryData);
+    gridBuilder.build();
 }
 
 function showErrorQueryResult(queryRunResult) {
@@ -12,13 +15,14 @@ function showErrorQueryResult(queryRunResult) {
 }
 
 function showSuccessQueryResult(idContainer, queryRunResult) {
+
     let queryType = queryRunResult.type;
     let queryMessage = queryRunResult.message;
 
     if (queryType == 'SELECT') {
         let queryData = queryRunResult.data;
 
-        showSelectResult(queryData);
+        showSelectResult(idContainer, queryData);
     }
 
     successDialog(queryMessage);
@@ -28,9 +32,9 @@ function showQueryResult(idContainer, queryRunResult) {
     let queryState = queryRunResult.state;
 
     if (queryState == 'success') {
-        showSuccessQueryResult(queryRunResult);
+        showSuccessQueryResult(idContainer, queryRunResult);
     } else if (queryState == 'error') {
-        showErrorQueryResult(queryRunResult);
+        showErrorQueryResult(idContainer, queryRunResult);
     }
 
     // TODO: Unknown.
