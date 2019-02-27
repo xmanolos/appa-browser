@@ -25,9 +25,9 @@ class DeleteExecutor implements IQueryExecutor
             $connection = Connection::getInstance($request);
             
             $result = $connection->delete($query);
-            $resultMessage = $message = 'Query executed successfully! ' . $result . ' affected rows.'; // TODO: Use mix.
+            $resultMessage = 'Query executed successfully! ' . $result . ' affected rows.'; // TODO: Use mix.
 
-            $this->response = QueryResponse::getSuccess($resultMessage);
+            $this->response = QueryResponse::getSuccess('DELETE', $resultMessage);
         }
         catch (\Exception $exception)
         {

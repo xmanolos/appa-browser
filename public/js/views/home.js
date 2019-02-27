@@ -40,7 +40,7 @@ function callRunQuery() {
 
     let queryText = editor.getValue();
 
-    runQuery(queryText);
+    runQuery('panel-show-result', queryText);
 }
 
 function setHighLightEditor() {

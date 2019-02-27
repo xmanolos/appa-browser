@@ -64,7 +64,7 @@
                 </div>
 
             </div>
-            <div class="panel-show-result"></div>
+            <div id="panel-show-result" class="panel-show-result"></div>
         </div>
     </div>
 @stop

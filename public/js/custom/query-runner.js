@@ -1,4 +1,42 @@
-function runQuery(query) {
+// TODO: Convert to Class!
+
+function showSelectResult(idContainer, queryData) {
+    // TODO: Send Data.
+}
+
+function showErrorQueryResult(queryRunResult) {
+    let queryException = queryRunResult.exception;
+    let queryMessage = queryRunResult.message;
+
+    errorDialog(queryException, queryMessage, 700);
+}
+
+function showSuccessQueryResult(idContainer, queryRunResult) {
+    let queryType = queryRunResult.type;
+    let queryMessage = queryRunResult.message;
+
+    if (queryType == 'SELECT') {
+        let queryData = queryRunResult.data;
+
+        showSelectResult(queryData);
+    }
+
+    successDialog(queryMessage);
+}
+
+function showQueryResult(idContainer, queryRunResult) {
+    let queryState = queryRunResult.state;
+
+    if (queryState == 'success') {
+        showSuccessQueryResult(queryRunResult);
+    } else if (queryState == 'error') {
+        showErrorQueryResult(queryRunResult);
+    }
+
+    // TODO: Unknown.
+}
+
+function runQuery(idContainer, query) {
 	// TODO: Fix!
 
     $.ajax({
@@ -9,23 +47,10 @@ function runQuery(query) {
         headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
         beforeSend: function() {
             startLoading();
-        },
-        error: function() {
-            console.log('kkj2');
         }
     }).done(function(queryRunResult) {
     	stopLoading();
 
-		let queryState = queryRunResult.state;
-
-		if (queryState == 'success') {
-			successDialog(queryRunResult.message);
-		} 
-
-		if (queryState == 'error') {
-			let queryException = queryRunResult.exception;
-
-			errorDialog(queryException, queryRunResult.message, 700);
-		}
+        showQueryResult(idContainer, queryRunResult);
 	});
 }

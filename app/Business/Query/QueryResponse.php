@@ -4,9 +4,9 @@ namespace App\Business\Query;
 
 class QueryResponse
 {
-    public static function getSuccess($message = 'Query executed successfully!')
+    public static function getSuccess($queryType, $message = 'Query executed successfully!', $data = null)
     {
-    	$responseArray = ['state' => 'success', 'message' => $message];
+    	$responseArray = ['type' => $queryType, 'state' => 'success', 'message' => $message, 'data' => $data];
 
     	return \json_encode($responseArray);
     }
