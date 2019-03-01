@@ -1,7 +1,7 @@
 # Custom.
 public/packages
-.sublime-workspace
-.sublime-project
+*.sublime-workspace
+*.sublime-project
 
 vendor/
 node_modules/
