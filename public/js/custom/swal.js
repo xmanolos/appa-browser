@@ -5,15 +5,15 @@ function successDialog(successMessage = 'Yeah!') {
         showConfirmButton: false,
         timer: 3000
     });
-
-    toast({
+    
+    toast.fire({
         type: 'success',
         title: successMessage
     });
 }
 
 function errorDialog(errorMessage = 'Sorry, something went wrong!', errorTitle = 'Ops...', windowSize = 500) {
-    swal({
+    swal.fire({
         type: 'error',
         title: errorTitle,
         html: errorMessage,
