@@ -16,7 +16,7 @@ class Connection
         if (ClientSession::isConnected($request))
             return ClientSession::getConnection($request);
 
-        return redirect(route('views.home'));
+        return redirect(route('home'));
     }
 
     public static function connect(Request $request)

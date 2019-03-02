@@ -30,7 +30,7 @@ class ConnectionController extends Controller
     {
         Connection::disconnect($request);
 
-        return \redirect(route('views.home'));
+        return \redirect(route('home'));
     }
 
     public function testConnection(Request $request)

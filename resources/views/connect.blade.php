@@ -9,7 +9,7 @@
 
 @section('content')
 <div class="panel center-center panel-connection">
-    <form id="form" action="{{ route('views.home') }}">
+    <form id="form" action="{{ route('home') }}">
         <div class="row">
             <div class="col tfd panel-field" style="width: 50%;">
                 <select name="driver" required="true">

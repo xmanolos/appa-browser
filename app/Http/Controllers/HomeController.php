@@ -12,6 +12,6 @@ class HomeController extends Controller
     	if (ClientSession::isConnected($request)) 
         	return \view('home');
 
-        return redirect(route('views.connect'));
+        return redirect(route('connect'));
     }
 }
