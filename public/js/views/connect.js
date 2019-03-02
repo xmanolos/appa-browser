@@ -1,41 +1,35 @@
 $('#btn-test-conn').on('click', function() {
-    let successCallback = function(jsonReturn) {
-        if(jsonReturn.status === 'success')
-            successDialog(jsonReturn.msg);
-        else
-            errorDialog(jsonReturn.msg);
-    };
-
-    if (formIsValid()) {
-        ajaxRequestToApi(
-            'api.connection.test',
-            $('#form').serialize(),
-            successCallback
-        );
-    } else {
-        $('form')[0].reportValidity()
+    if (validateForm()) {
+        testConnection();    
     }
 });
 
-$('#form').submit( function(e) {
-    let urlAction = $(this).attr('action');
+$('#form').submit(function(e) {
     e.preventDefault();
 
-    let successCallback = function(jsonReturn) {
-        if(jsonReturn.status === 'success')
-            window.location.href = urlAction;
-        else
-            errorDialog(jsonReturn.msg);
-    };
-
-    //TODO: Implement function ajaxRequestToApi without stop loading in success
-    ajaxRequestToApi(
-        'api.connection.connect',
-        $('#form').serialize(),
-        successCallback
-    );
+   if (validateForm()) {
+        connect();    
+    } 
 });
 
-function formIsValid() {
-    return $('form')[0].checkValidity();
+function testConnection() {
+    let connectionData = $('#form').serialize();
+    
+    new TestConnection(connectionData).now();
+}
+
+function connect() {
+    let connectionData = $('#form').serialize();
+    
+    new Connect(connectionData).now();
+}
+
+function validateForm() {
+    let valid = $('form')[0].checkValidity();
+
+    if (!valid) {
+        $('form')[0].reportValidity();
+    }
+
+    return valid;
 }

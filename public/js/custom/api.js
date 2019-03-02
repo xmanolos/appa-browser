@@ -1,4 +1,4 @@
-function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback, requestType = 'GET') {
+function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSendCallback, customCompleteCallback, requestType = 'GET', bind) {
     let url = "";
     
     try {
@@ -21,18 +21,18 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
 
             if(customBeforeSendCallback)
                 customBeforeSendCallback();
-        },
+        }.bind(bind),
         success : function(resultData) {
             stopLoading();
             
             setTimeout(
                 function(){
                     if(successCallback)
-                        successCallback(resultData);
+                        successCallback(bind, resultData);
                 },
                 500
             );
-        },
+        }.bind(bind),
         error: function(errorObj, textStatus, errorThrown) {
             stopLoading();
             
@@ -44,10 +44,10 @@ function ajaxRequestToApi(apiTarget, dataSend, successCallback, customBeforeSend
                 },
                 500
             );
-        },
+        }.bind(bind),
         complete: function(resultData) {
             if(customCompleteCallback)
-                customCompleteCallback(resultData);
-        }
+                customCompleteCallback(bind, resultData.responseJSON);
+        }.bind(bind)
     });
 }

@@ -63,5 +63,7 @@
     <script type="text/jscript" src="{{ asset('js/views/connect.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
+    <script type="text/jscript" src="{{ asset('js/custom/connect.js') }}"></script>
+    <script type="text/jscript" src="{{ asset('js/custom/test-connection.js') }}"></script>
     <script type="text/jscript" src="{{ asset('js/custom/test.js') }}"></script>
 @stop
