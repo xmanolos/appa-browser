@@ -4,6 +4,10 @@ namespace App\Business;
 
 use App\Business\Builders\ConnectionDataBuilder;
 use App\Business\ClientSession;
+use App\Business\ConnectionConfig;
+use App\Business\Connection\Connect;
+use App\Business\Connection\Disconnect;
+use App\Business\Connection\TestConnection;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Config;
@@ -13,54 +17,43 @@ class Connection
 {
     public static function getInstance(Request $request)
     {
-        if (ClientSession::isConnected($request))
-            return ClientSession::getConnection($request);
+        $clientSession = new ClientSession();
+        $clientSession->setRequest($request);
 
-        return redirect(route('home'));
+        if ($clientSession->isConnected())
+            return $clientSession->getConnection();
+
+        return Connection::disonnect($request);
     }
 
     public static function connect(Request $request)
     {
-        $connectionData = ConnectionDataBuilder::fromRequest($request);
-        $connectionConfig = Connection::getConnectionConfig($connectionData);
+        $connectionConfig = new ConnectionConfig();
+        $connectionConfig->fromRequestInput($request);
 
-        $capsule = new Capsule;
-        $capsule->addConnection($connectionConfig, 'client-connection');
-        $capsule->bootEloquent();
-        $capsule->setAsGlobal();
+        $connect = new Connect();
+        $connect->setConnectionConfig($connectionConfig);
+        $connect->execute();
 
-        ClientSession::storeConnection($request, $connectionData);
-
-        return $capsule->getConnection('client-connection');
+        $clientSession = new ClientSession();
+        $clientSession->setRequest($request);
+        $clientSession->storeConnection($connectionConfig);
     }
 
     public static function test(Request $request)
     {
-        $connectionData = ConnectionDataBuilder::fromRequest($request);
-        $connectionConfig = Connection::getConnectionConfig($connectionData);
+        $connectionConfig = new ConnectionConfig();
+        $connectionConfig->fromRequestInput($request);
 
-        $capsule = new Capsule;
-        $capsule->addConnection($connectionConfig, 'client-connection-test');
-        
-        $capsule->getConnection('client-connection-test')->getPdo();
-    }    
+        $testConnection = new TestConnection();
+        $testConnection->setConnectionConfig($connectionConfig);
+        $testConnection->execute();
+    }
 
     public static function disconnect(Request $request)
     {
-        ClientSession::forgetConnection($request);
-
-        DB::purge('custom-connection');
-    }
-
-    private static function getConnectionConfig($connectionData)
-    {
-        return [
-            'driver'    => $connectionData->getDriver(),
-            'host'      => $connectionData->getHost(),
-            'port'      => $connectionData->getPort(),
-            'database'  => $connectionData->getDatabase(),
-            'username'  => $connectionData->getUsername(),
-            'password'  => $connectionData->getPassword()
-        ];
+        $disonnect = new Disconnect();
+        $disonnect->setRequest($request);
+        $disonnect->execute();
     }
 }

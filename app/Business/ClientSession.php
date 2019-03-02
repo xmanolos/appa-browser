@@ -3,56 +3,51 @@
 namespace App\Business;
 
 use App\Business\ConnectionData;
+use App\Business\Connection\Connect;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Http\Request;
 
 class ClientSession
 {
-    public static function isConnected(Request $request)
+    protected $request;
+
+    public function setRequest(Request $request)  { $this->request = $request; }
+
+    public function isConnected()
     {
-        $session = $request->session();
+        $session = $this->request->session();
 
         return SessionValues::get($session, 'connected', false);        
     }
 
-    public static function getConnection(Request $request)
+    public function getConnection()
     {
-        // TODO: Replicated code. See Connection.php
-        $session = $request->session();
+        $connectionConfig = new ConnectionConfig();
+        $connectionConfig->fromRequestSession($this->request);
 
-        $connectionConfig = [
-            'driver'    => SessionValues::get($session, 'driver'),
-            'host'      => SessionValues::get($session, 'hostname'),
-            'port'      => SessionValues::get($session, 'port'),
-            'database'  => SessionValues::get($session, 'database'),
-            'username'  => SessionValues::get($session, 'username'),
-            'password'  => SessionValues::get($session, 'password')
-        ];
+        $connect = new Connect();
+        $connect->setConnectionConfig($connectionConfig);
+        $connect->execute();
 
-        $capsule = new Capsule;
-        $capsule->addConnection($connectionConfig, 'client-connection');
-        $capsule->bootEloquent();
-        $capsule->setAsGlobal();
-
-        return $capsule->getConnection('client-connection');
+        return $connect->getConnection();
     }
 
-    public static function storeConnection(Request $request, ConnectionData $connectionData)
+    public function storeConnection(ConnectionConfig $connectionConfig)
     {
-        $session = $request->session();
+        $session = $this->request->session();
      
-        SessionValues::set($session, 'driver', $connectionData->getDriver());
-        SessionValues::set($session, 'hostname', $connectionData->getHost());
-        SessionValues::set($session, 'port', $connectionData->getPort());
-        SessionValues::set($session, 'username', $connectionData->getUsername());
-        SessionValues::set($session, 'password', $connectionData->getPassword());
-        SessionValues::set($session, 'database', $connectionData->getDatabase());
+        SessionValues::set($session, 'driver', $connectionConfig->getDriver());
+        SessionValues::set($session, 'hostname', $connectionConfig->getHostname());
+        SessionValues::set($session, 'port', $connectionConfig->getPort());
+        SessionValues::set($session, 'username', $connectionConfig->getUsername());
+        SessionValues::set($session, 'password', $connectionConfig->getPassword());
+        SessionValues::set($session, 'database', $connectionConfig->getDatabase());
         SessionValues::set($session, 'connected', true);
     }
 
-    public static function forgetConnection(Request $request)
+    public function forgetConnection(Request $request)
     {
-        $session = $request->session();
+        $session = $this->request->session();
 
         SessionValues::forgetByKeys($session, ['driver', 'hostname', 'port', 'username', 'password', 'database']);
         SessionValues::set($session, 'connected', false);
