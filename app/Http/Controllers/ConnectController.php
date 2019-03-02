@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\Databases\AvailableDatabases;
+use App\Business\AvailableDatabases;
 
 class ConnectController extends Controller
 {
