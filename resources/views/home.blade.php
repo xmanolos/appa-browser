@@ -31,10 +31,11 @@
             </div>
             <div class="tree-part">
                 <div class="panel-tables-tree">
-                    <ul id="tables-tree">
-                    </ul>
+                    <ul id="tables-tree"></ul>
                 </div>
-                <div class="views-tree"></div>
+                <div class="panel-tables-tree">
+                    <ul id="views-tree"></ul>
+                </div>
             </div>
         </div>
         <div class="panel-fill">

@@ -88,7 +88,17 @@ function buildTree(schemaName) {
 
                 if(table.columns) {
                     $.each(table.columns, function(idxColumn, column) {
-                        addColumn(idxTable, idxColumn, column);
+                        addTableColumn(idxTable, idxColumn, column);
+                    });
+                }
+            });
+
+            $.each(schema.views, function(idxView, view) {
+                addView(idxView, view.name);
+
+                if(view.columns) {
+                    $.each(view.columns, function(idxColumn, column) {
+                        addViewColumn(idxView, idxColumn, column);
                     });
                 }
             });
@@ -120,9 +130,23 @@ function addTable(tableId, tableName){
     );
 }
 
-function addColumn(tableId, columnId, column) {
+function addView(viewId, viewName){
+    $('#views-tree').append(
+        '<li data-jstree=\'{"icon":"la la-table"}\'>' + viewName +
+        '   <ul id="view-' + viewId + '"></ul>' +
+        '</li>'
+    );
+}
+
+function addTableColumn(tableId, columnId, column) {
     $('#tables-tree #table-' + tableId).append(
         '<li id="column-' + tableId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + column.name + ' (' + column.dataType + ')' + '</li>' // TODO: Refactor!
+    );
+}
+
+function addViewColumn(viewId, columnId, column) {
+    $('#views-tree #view-' + viewId).append(
+        '<li id="column-' + viewId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + column.name + ' (' + column.dataType + ')' + '</li>' // TODO: Refactor!
     );
 }
 

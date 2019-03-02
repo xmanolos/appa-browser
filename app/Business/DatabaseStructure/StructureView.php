@@ -2,7 +2,7 @@
 
 namespace App\Business\DatabaseStructure;
 
-class StructureTable
+class StructureView
 {
     public $name;
     public $columns;
