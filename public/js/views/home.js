@@ -1,6 +1,6 @@
 var databaseData = null;
 var searchTimer = null;
-var editor = null;
+var editor = null; 
 
 $(document).ready(function() {
     databaseData = loadDatabaseData();
@@ -40,7 +40,8 @@ function callRunQuery() {
 
     let queryText = editor.getValue();
 
-    runQuery('panel-show-result', queryText);
+    let queryRunner = new QueryRunner(queryText, 'panel-show-result');
+    queryRunner.run();
 }
 
 function setHighLightEditor() {
