@@ -5,7 +5,6 @@ namespace App\Business\Query\Executor;
 use App\Business\Connection;
 use Illuminate\Http\Request;
 
-// TODO: Rename.
 abstract class QueryExecutor
 {
     public $executorIdentifier = 'ANY';

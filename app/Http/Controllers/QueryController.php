@@ -11,6 +11,10 @@ class QueryController extends Controller
     {
     	$query = $request->input('query');
     	
-    	return QueryRun::execute($request, $query);
+    	$queryRun = new QueryRun();
+    	$queryRun->setRequest($request);
+    	$queryRun->setQuery($query);
+    	
+    	return $queryRun->execute();
     }
 }

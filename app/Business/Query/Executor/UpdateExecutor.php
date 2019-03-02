@@ -10,7 +10,7 @@ class UpdateExecutor extends QueryExecutor implements IQueryExecutor
 {
     public $executorIdentifier = 'UPDATE';
 
-    public function execute($request, $query)
+    public function execute()
     {
         try
         {
