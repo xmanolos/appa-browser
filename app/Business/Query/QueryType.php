@@ -18,14 +18,28 @@ class QueryType
 
     public function getExecutor()
     {
-        $selectExecutor = new SelectExecutor($this->request, $this->query);
-        $insertExecutor = new InsertExecutor($this->request, $this->query);
-        $updateExecutor = new UpdateExecutor($this->request, $this->query);
-        $deleteExecutor = new DeleteExecutor($this->request, $this->query);
+        $selectExecutor = new SelectExecutor();
+        $selectExecutor->setRequest($this->request);
+        $selectExecutor->setQuery($this->query);
 
         if ($selectExecutor->queryMatch()) return $selectExecutor;
+         
+        $insertExecutor = new InsertExecutor($this->request, $this->query);
+        $insertExecutor->setRequest($this->request);
+        $insertExecutor->setQuery($this->query);
+
         if ($insertExecutor->queryMatch()) return $insertExecutor; 
+
+        $updateExecutor = new UpdateExecutor($this->request, $this->query);
+        $updateExecutor->setRequest($this->request);
+        $updateExecutor->setQuery($this->query);
+
         if ($updateExecutor->queryMatch()) return $updateExecutor;
+
+        $deleteExecutor = new DeleteExecutor($this->request, $this->query);
+        $deleteExecutor->setRequest($this->request);
+        $deleteExecutor->setQuery($this->query);
+                
         if ($deleteExecutor->queryMatch()) return $deleteExecutor;
 
         // TODO: Null? Any!

@@ -14,7 +14,8 @@ class DeleteExecutor extends QueryExecutor implements IQueryExecutor
     {
         try 
         {
-            $result = $this->connection->delete($this->query);
+            $conenction = $this->getConnection();
+            $result = $connection->delete($this->query);
             $resultMessage = 'Query executed successfully! ' . $result . ' affected rows.'; // TODO: Use mix.
 
             $this->response = QueryResponse::getSuccess($this->executorIdentifier, $resultMessage);

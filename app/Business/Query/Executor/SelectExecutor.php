@@ -14,7 +14,8 @@ class SelectExecutor extends QueryExecutor implements IQueryExecutor
     {
         try 
         {
-            $result = $this->connection->select($this->query);
+            $conenction = $this->getConnection();
+            $result = $conenction->select($this->query);
             $resultMessage = 'Query executed successfully! ' . count($result) . ' finded rows.'; // TODO: Use mix.
 
             $this->response = QueryResponse::getSuccess($this->executorIdentifier, $resultMessage, $result);

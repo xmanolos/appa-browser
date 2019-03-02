@@ -11,13 +11,13 @@ abstract class QueryExecutor
 
     public $request;
     public $query;
-    public $connection;
 
-    public function __construct(Request $request, $query)
+    public function setRequest(Request $request) { $this->request = $request; }
+    public function setQuery($query) { $this->query = $query; }
+
+    public function getConnection() 
     {
-        $this->request = $request;
-        $this->query = trim($query);
-        $this->connection = Connection::getInstance($request);
+        return Connection::getInstance($this->request);
     }
 
     public function queryMatch()
