@@ -2,7 +2,6 @@
 
 namespace App\Business;
 
-use App\Business\ConnectionData;
 use App\Business\Connection\Connect;
 use Illuminate\Database\Capsule\Manager as Capsule;
 use Illuminate\Http\Request;

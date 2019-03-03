@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\Builders\ConnectionDataBuilder;
 use App\Business\Builders\ResultMessageBuilder;
 use App\Business\Connection;
 use App\Business\CustomResponse;

@@ -2,7 +2,6 @@
 
 namespace App\Business;
 
-use App\Business\Builders\ConnectionDataBuilder;
 use App\Business\ClientSession;
 use App\Business\ConnectionConfig;
 use App\Business\Connection\Connect;
