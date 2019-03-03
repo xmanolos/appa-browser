@@ -168,8 +168,16 @@ function formatQuery() {
         errorDialog('Failed to format query! Please, try again...');
     }
 
+    let requestValues = { 
+        sql: editor.getValue(), 
+        reindent: 1, indent_width: 4, 
+        keyword_case: 'upper' 
+    };
+
     let apiRequest = new ApiRequest();
+    apiRequest.setData(requestValues);
     apiRequest.setSuccessCallback(successCallback);
     apiRequest.setErrorCallback(errorCallback);
-    apiRequest.getToUrl('https://sqlformat.org/api/v1/format', { sql: editor.getValue(), reindent: 1, indent_width: 4, keyword_case: 'upper' });
+    apiRequest.disableIncludeToken();
+    apiRequest.getToUrl('https://sqlformat.org/api/v1/format', );
 }
