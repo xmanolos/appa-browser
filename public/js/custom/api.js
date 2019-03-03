@@ -16,6 +16,10 @@ class ApiRequest {
 	setDataType(dataType) { this.dataType = dataType; }
 	setContentType(contentType) { this.contentType = contentType; }	
 
+	disableIncludeToken() {
+		this.includeToken = false;
+	}
+
 	setBeforeSendCallback(beforeSendCallback) { this.beforeSendCallback = beforeSendCallback; }
 	setCompleteCallback(completeCallback) { this.completeCallback = completeCallback; }
 	setSuccessCallback(successCallback) { this.successCallback = successCallback; }
@@ -23,9 +27,9 @@ class ApiRequest {
 
 	getHeaders() {
 		if (this.includeToken) {
-			return "'X-CSRF-TOKEN': $('meta[name=\"csrf-token\"]').attr('content')'";
+			return { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') };
 		} else {
-			return '';
+			return { };
 		}
 	}
 
