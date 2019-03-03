@@ -14,9 +14,9 @@ class InsertExecutor extends QueryExecutor implements IQueryExecutor
     {
         try 
         {
-            $conenction = $this->getConnection();
-            $result = $conenction->insert($this->query);
-            $resultMessage = 'Query executed successfully! ' . $result . ' affected rows.'; // TODO: Use mix.
+            $connection = $this->getConnection();
+            $result = $connection->insert($this->query);
+            $resultMessage = "Query executed successfully! $result affected rows.";
 
             $this->response = QueryResponse::getSuccess($this->executorIdentifier, $resultMessage);
         }

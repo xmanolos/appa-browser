@@ -14,11 +14,11 @@ class UpdateExecutor extends QueryExecutor implements IQueryExecutor
     {
         try
         {
-            $conenction = $this->getConnection();
+            $connection = $this->getConnection();
             $result = $connection->update($this->query);
-            $resultMessage = 'Query executed successfully! ' . $result . ' affected rows.'; // TODO: Use mix.
+            $resultMessage = "Query executed successfully! $result affected rows.";
             
-            $this->response = QueryResponse::getSuccess('UPDATE', $resultMessage);
+            $this->response = QueryResponse::getSuccess($this->executorIdentifier, $resultMessage);
         }
         catch (\Exception $exception)
         {
