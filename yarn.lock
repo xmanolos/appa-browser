@@ -3633,10 +3633,10 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
-line-awesome@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/line-awesome/-/line-awesome-1.0.2.tgz#7f4f954ce7c1ffc8ca0e8aa575768d1f46e429cc"
-  integrity sha512-IDBNPCKlj3Rsvs7+Kt9hyC8q6r8v54LLoUgOkRiNUPWGcVK0gsgHnOaL59YLs2TK6KWFySGMwsC3jRCGI04jNQ==
+line-awesome2@^0.9.0:
+  version "0.9.0"
+  resolved "https://registry.yarnpkg.com/line-awesome2/-/line-awesome2-0.9.0.tgz#f78c0ee70b8c51c530b654d01b104df7b6a03dab"
+  integrity sha512-iN4YCEHOwWCzY1cNsB+n5SkxCM2QFwd6HbQqx+KWoQQUYOJxbz5XW4xO8HItM2pg98vhunWdIlYp5xx/LPxXFQ==
 
 loader-runner@^2.3.0:
   version "2.4.0"

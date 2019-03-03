@@ -15,7 +15,7 @@
         <link rel="stylesheet" type="text/css" href="{{ asset('packages/font-awesome/css/font-awesome.min.css') }}" />
 
         <!-- Icons8 Line-Awesome (By Icons8) -->
-        <link rel="stylesheet" type="text/css" href="{{ asset('packages/line-awesome/css/line-awesome.min.css') }}" />
+        <link rel="stylesheet" type="text/css" href="{{ asset('packages/line-awesome2/dist/css/line-awesome.css') }}" />
 
         <!-- Custom (Made by Us) -->
         <link rel="stylesheet" type="text/css" href="{{ asset('css/patterns.css') }}">
