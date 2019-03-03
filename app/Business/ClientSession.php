@@ -45,7 +45,7 @@ class ClientSession
         SessionValues::set($session, 'connected', true);
     }
 
-    public function forgetConnection(Request $request)
+    public function forgetConnection()
     {
         $session = $this->request->session();
 

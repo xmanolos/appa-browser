@@ -4,6 +4,7 @@ namespace App\Business\Connection;
 
 use App\Business\ClientSession;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class Disconnect
 {
@@ -14,7 +15,7 @@ class Disconnect
     public function execute()
     {
         $clientSession = new ClientSession();
-        $clientSession->setRequest($request);
+        $clientSession->setRequest($this->request);
     	$clientSession->forgetConnection();
 
         DB::purge('custom-connection');
