@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 
 abstract class QueryExecutor
 {
-    public $executorIdentifier = 'ANY';
+    public $executorIdentifier;
 
     public $request;
     public $query;

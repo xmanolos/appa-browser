@@ -2,6 +2,7 @@
 
 namespace App\Business\Query;
 
+use App\Business\Query\Executor\AnyExecutor;
 use App\Business\Query\Executor\DeleteExecutor;
 use App\Business\Query\Executor\InsertExecutor;
 use App\Business\Query\Executor\SelectExecutor;
@@ -24,25 +25,28 @@ class QueryType
 
         if ($selectExecutor->queryMatch()) return $selectExecutor;
          
-        $insertExecutor = new InsertExecutor($this->request, $this->query);
+        $insertExecutor = new InsertExecutor();
         $insertExecutor->setRequest($this->request);
         $insertExecutor->setQuery($this->query);
 
         if ($insertExecutor->queryMatch()) return $insertExecutor; 
 
-        $updateExecutor = new UpdateExecutor($this->request, $this->query);
+        $updateExecutor = new UpdateExecutor();
         $updateExecutor->setRequest($this->request);
         $updateExecutor->setQuery($this->query);
 
         if ($updateExecutor->queryMatch()) return $updateExecutor;
 
-        $deleteExecutor = new DeleteExecutor($this->request, $this->query);
+        $deleteExecutor = new DeleteExecutor();
         $deleteExecutor->setRequest($this->request);
         $deleteExecutor->setQuery($this->query);
                 
         if ($deleteExecutor->queryMatch()) return $deleteExecutor;
 
-        // TODO: Null? Any!
-        return null;
+        $anyExecutor = new AnyExecutor();
+        $anyExecutor->setRequest($this->request);
+        $anyExecutor->setQuery($this->query);
+
+        return $anyExecutor;        
     }
 }
