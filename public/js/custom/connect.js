@@ -4,12 +4,16 @@ class Connect {
     }
 
     now() {
-        ajaxRequestToApi('api.connection.test', this.connectionData, null, null, this.showResult, 'GET', this);
+        let apiRequest = new ApiRequest();
+        apiRequest.setData(this.connectionData);
+        apiRequest.setCompleteCallback(this.showResult);
+        apiRequest.getToRoute('api.connection.test');
     }
 
-    showResult(bind, testResult) {
-        let resultIsOK = testResult.STATUS === 'SUCCESS';
-        let resultMessage = testResult.MESSAGE;
+    showResult(connectResult) {
+        let connectResultJson = connectResult.responseJSON;
+        let resultIsOK = connectResultJson.STATUS === 'SUCCESS';
+        let resultMessage = connectResultJson.MESSAGE;
 
         if (resultIsOK) {
             window.location.href = route('home');

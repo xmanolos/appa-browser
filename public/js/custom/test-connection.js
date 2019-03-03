@@ -4,13 +4,17 @@ class TestConnection {
     }
 
     now() {
-        ajaxRequestToApi('api.connection.connect', this.connectionData, null, null, this.showResult, 'GET', this);
+        let apiRequest = new ApiRequest();
+        apiRequest.setData(this.connectionData);
+        apiRequest.setCompleteCallback(this.showResult);
+        apiRequest.getToRoute('api.connection.connect');
     }
 
-    showResult(bind, testResult) {
-        let resultIsOK = testResult.STATUS === 'SUCCESS';
-        let resultMessage = testResult.MESSAGE;
-        console.log(testResult);
+    showResult(testResult) {
+        let testResultJson = testResult.responseJSON;
+        let resultIsOK = testResultJson.STATUS === 'SUCCESS';
+        let resultMessage = testResultJson.MESSAGE;
+        
         if (resultIsOK) {
             successDialog(resultMessage);
         } else {

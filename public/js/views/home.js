@@ -62,13 +62,15 @@ function showHideStyleQueryEditor() {
 }
 
 function loadDatabaseData() {
-    let successCallback = function(jsonReturn) {
-        databaseData = jsonReturn;
+    let completeCallback = function(getResult) {
+        databaseData = getResult.responseJSON;
 
         showSchemas();
     };
 
-    ajaxRequestToApi('api.database-data.get', null, successCallback);
+    let apiRequest = new ApiRequest();
+    apiRequest.setCompleteCallback(completeCallback);
+    apiRequest.getToRoute('api.database-data.get');
 }
 
 function showSchemas() {
@@ -156,20 +158,18 @@ function formatQuery() {
         return;
     }
 
-    let onSuccess = function(response){
-        if(response != null)
-            editor.setValue(response.result);
+    let successCallback = function(apiResult) {
+        if(response != null) {
+            editor.setValue(apiResult.result);
+        }
     }
 
+    let errorCallback = function(apiResult) {
+        errorDialog('Failed to format query! Please, try again...');
+    }
 
-    ajaxRequestToApi(
-        'https://sqlformat.org/api/v1/format',
-        {
-            sql: editor.getValue(),
-            reindent: 1,
-            indent_width: 4,
-            keyword_case: 'upper'
-        },
-        onSuccess
-    );
+    let apiRequest = new ApiRequest();
+    apiRequest.setSuccessCallback(successCallback);
+    apiRequest.setErrorCallback(errorCallback);
+    apiRequest.getToUrl('https://sqlformat.org/api/v1/format', { sql: editor.getValue(), reindent: 1, indent_width: 4, keyword_case: 'upper' });
 }
