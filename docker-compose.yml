@@ -9,3 +9,12 @@ services:
       - type: bind
         source: ./
         target: /var/www/html
+  dbbrowser-test-pgsql:
+    container_name: dbbrowser-test-pgsql
+    image: postgres
+    ports:
+      - 5432:5432
+    restart: always
+    environment:
+      POSTGRES_PASSWORD: dbbrowser-test
+      POSTGRES_DB: dbbrowser-test-pgsql
