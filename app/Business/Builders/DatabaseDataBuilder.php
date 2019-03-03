@@ -20,7 +20,7 @@ class DatabaseDataBuilder
         $connection = Connection::getInstance($request);
         $databaseSchemas = DatabaseDataBuilder::getSchemasFromConnection($connection);
 
-        usort($databaseSchemas, function($a, $b)  { return $b->getAvaiable(); });
+        usort($databaseSchemas, function($a, $b)  { return $b->getAvailable(); });
 
         $databaseData = new DatabaseData();
         $databaseData->setSchemas($databaseSchemas);

@@ -58,6 +58,16 @@ class StructureSchema
     { 
         return $this->views; 
     }
+
+    /**
+     * Gets the flag if the schema has usable content.
+     *
+     * @return array
+     */
+    public function getAvailable()
+    {
+        return $this->available;
+    }
     
     /**
      * Defines the value of the schema name.
