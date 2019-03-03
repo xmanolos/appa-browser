@@ -18,3 +18,12 @@ services:
     environment:
       POSTGRES_PASSWORD: dbbrowser-test
       POSTGRES_DB: dbbrowser-test-pgsql
+  dbbrowser-test-mysql:
+    container_name: dbbrowser-test-mysql
+    image: mysql
+    ports:
+      - 3306:3306
+    restart: always
+    environment:
+      MYSQL_ROOT_PASSWORD: dbbrowser-test
+      MYSQL_DATABASE: dbbrowser-test-mysql
