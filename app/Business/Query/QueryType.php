@@ -9,14 +9,48 @@ use App\Business\Query\Executor\SelectExecutor;
 use App\Business\Query\Executor\UpdateExecutor;
 use Illuminate\Http\Request;
 
+/**
+ * Gets the executor for a query according to its type.
+ *
+ * @package App\Business\Query
+ */
 class QueryType
 {
-	protected $request;
+    /**
+     * The request that requested the query identification.
+     */
+    protected $request;
+
+    /**
+     * The query that will be identified.
+     */
 	protected $query;
 
-	public function setRequest(Request $request)  { $this->request = $request; }
-	public function setQuery($query) { $this->query = $query; }
+    /**
+     * Defines the value of the request that requested the query identification.
+     *
+     * @param Request $request
+     */
+    public function setRequest(Request $request)
+    {
+        $this->request = $request;
+    }
 
+    /**
+     * Defines the value of the query that will be identified.
+     *
+     * @param string $query
+     */
+    public function setQuery($query)
+    {
+        $this->query = $query;
+    }
+
+    /**
+     * Gets the executor for the query.
+     *
+     * @return AnyExecutor|SelectExecutor|InsertExecutor|UpdateExecutor|DeleteExecutor
+     */
     public function getExecutor()
     {
         $selectExecutor = new SelectExecutor();

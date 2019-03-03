@@ -2,11 +2,16 @@
 
 namespace App\Business\Connection;
 
-use App\Business\CapsuleConnection;
-use App\Business\ConnectionConfig;
-
+/**
+ * Tests the possibility of connecting to a database.
+ *
+ * @package App\Business\Connection
+ */
 class TestConnection extends Connection
 {
+	/**
+	 * Sets the test connection instance.
+	 */
     public function execute()
     {
         $capsuleConnection = $this->getCapsuleConnection();

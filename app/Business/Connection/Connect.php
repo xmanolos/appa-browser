@@ -2,11 +2,16 @@
 
 namespace App\Business\Connection;
 
-use App\Business\CapsuleConnection;
-use App\Business\ConnectionConfig;
-
+/**
+ * Connect to a database.
+ *
+ * @package App\Business\Connection
+ */
 class Connect extends Connection
 {
+	/**
+	 * Sets the connection instance.
+	 */
     public function execute()
     {
         $capsuleConnection = $this->getCapsuleConnection();

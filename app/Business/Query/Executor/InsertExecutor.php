@@ -3,13 +3,23 @@
 namespace App\Business\Query\Executor;
 
 use App\Business\Interfaces\IQueryExecutor;
-use App\Business\Query\Executor\QueryExecutor;
 use App\Business\Query\QueryResponse;
 
+/**
+ * A Executor for insert queries.
+ *
+ * @package App\Business\Query\Executor
+ */
 class InsertExecutor extends QueryExecutor implements IQueryExecutor
 {
-    public $executorIdentifier = 'INSERT';
+    /**
+     * The query type identifier.
+     */
+    protected $identifier = 'INSERT';
 
+    /**
+     * Performs the query and sets the result of execution.
+     */
     public function execute()
     {
         try 
@@ -18,7 +28,7 @@ class InsertExecutor extends QueryExecutor implements IQueryExecutor
             $result = $connection->insert($this->query);
             $resultMessage = "Query executed successfully! $result affected rows.";
 
-            $this->response = QueryResponse::getSuccess($this->executorIdentifier, $resultMessage);
+            $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage);
         }
         catch (\Exception $exception)
         {

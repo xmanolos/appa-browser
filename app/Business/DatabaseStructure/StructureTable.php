@@ -2,14 +2,60 @@
 
 namespace App\Business\DatabaseStructure;
 
+/**
+ * A table of the database.
+ *
+ * @package App\Business\DatabaseStructure
+ */
 class StructureTable
 {
+	/**
+	 * The table name.
+	 */
     public $name;
+
+    /**
+	 * The table columns.
+	 */
     public $columns;
     
-    public function getName() { return $this->name; }
-    public function getColumns() { return $this->columns; }
+    /**
+     * Gets the table name.
+     * 
+     * @return string
+     */
+    public function getName() 
+    { 
+    	return $this->name; 
+    }
 
-    public function setName($name) { $this->name = $name; return $this; }
-    public function setColumns($columns) { $this->columns = $columns; return $this; }
+    /**
+     * Gets the table columns.
+     * 
+     * @return array
+     */
+    public function getColumns() 
+    { 
+    	return $this->columns; 
+    }
+
+    /**
+     * Defines the value of the table name.
+     * 
+     * @param string $name
+     */
+    public function setName($name) 
+    { 
+    	$this->name = $name;
+ 	}
+
+ 	/**
+     * Defines the value of the table columns.
+     * 
+     * @param array $columns
+     */
+    public function setColumns($columns) 
+    { 
+    	$this->columns = $columns;
+   	}
 }
