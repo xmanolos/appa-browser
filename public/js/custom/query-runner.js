@@ -5,44 +5,37 @@ class QueryRunner {
     }
 
     run() {
-        // TODO: Fix.
-        $.ajax({
-            type: 'POST',
-            url: route('api.query.run'),
-            data : { 'query': this.query },
-            dataType: 'JSON',
-            headers: { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') },
-            beforeSend: function() {
-                startLoading();
-            }
-        }).done(function(queryRunResult) {
-            stopLoading();
+        let queryData = { 'query': this.query };
+        let completeCallback = function(runResult, bind) {
+            bind.queryRunResult = runResult.responseJSON;
+            bind.showQueryResult(bind);
+        }
 
-            this.queryRunResult = queryRunResult;
-            this.showQueryResult();
-        }.bind(this));
+        let apiRequest = new ApiRequest(this);
+        apiRequest.setData(queryData);
+        apiRequest.setCompleteCallback(completeCallback);
+        apiRequest.disableContentType();
+        apiRequest.postToRoute('api.query.run');
     }
 
-    showQueryResult() {
-        let queryState = this.queryRunResult.state;
-
+    showQueryResult(bind) {
+        let queryState = bind.queryRunResult.state;
+        
         if (queryState == 'success') {
-            this.showSuccessQueryResult();
+            bind.showSuccessQueryResult(bind);
         } else if (queryState == 'error') {
-            this.showErrorQueryResult();
-        } 
-
-        // TODO: Unknown.
+            bind.showErrorQueryResult(bind);
+        }
     }
 
-    showSuccessQueryResult() {
-        let queryType = this.queryRunResult.type;
-        let queryMessage = this.queryRunResult.message;
+    showSuccessQueryResult(bind) {
+        let queryType = bind.queryRunResult.type;
+        let queryMessage = bind.queryRunResult.message;
 
         if (queryType == 'SELECT') {
-            let queryData = this.queryRunResult.data;
+            let queryData = bind.queryRunResult.data;
 
-            this.loadSelectResult(queryData);
+            bind.loadSelectResult(queryData);
         }
 
         successDialog(queryMessage);

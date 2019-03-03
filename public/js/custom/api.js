@@ -1,13 +1,16 @@
 class ApiRequest {
-	constructor() 
+	constructor(bind) 
 	{
-		this.target = null,
-		this.requestType = 'GET',
-		this.data = null,
-		this.dataType = 'JSON',
-		this.contentType = 'APPLICATION/JSON'
+		this.bind = bind;
+
+		this.target = null;
+		this.requestType = 'GET';
+		this.data = null;
+		this.dataType = 'JSON';
+		this.contentType = 'APPLICATION/JSON';
 
 		this.includeToken = true;
+		this.includeContentType = true;
 	}
 
 	setTarget(target) { this.target = target; }
@@ -20,18 +23,14 @@ class ApiRequest {
 		this.includeToken = false;
 	}
 
+	disableContentType() {
+		this.includeContentType = false;
+	}
+
 	setBeforeSendCallback(beforeSendCallback) { this.beforeSendCallback = beforeSendCallback; }
 	setCompleteCallback(completeCallback) { this.completeCallback = completeCallback; }
 	setSuccessCallback(successCallback) { this.successCallback = successCallback; }
 	setErrorCallback(errorCallback) { this.errorCallback = errorCallback; }
-
-	getHeaders() {
-		if (this.includeToken) {
-			return { 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content') };
-		} else {
-			return { };
-		}
-	}
 
 	postToUrl(url) {
 		this.requestType = 'POST';
@@ -62,37 +61,53 @@ class ApiRequest {
 	}
 
 	send() {
-		$.ajax({
+		let request = this.getRequest();
+
+		if (!this.includeContentType) {
+			delete request.contentType;
+		}
+
+		if (!this.includeToken) {
+			delete request.headers;
+		}		
+
+		$.ajax(request);
+	}
+
+	getRequest() {
+		return {
 			url: this.target,
         	type: this.requestType,
         	data : this.data,
         	dataType: this.dataType, 
         	contentType: this.contentType,
-        	headers: this.getHeaders(),
+        	headers: {
+        		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        	},
         	beforeSend: function() {
             	startLoading();
 
             	if(this.beforeSendCallback) {
-                	this.beforeSendCallback();
+                	this.beforeSendCallback(this.bind);
             	}
         	}.bind(this),
         	complete: function(data) {
         		stopLoading();
-
+    			
             	if(this.completeCallback) {
-                	this.completeCallback(data);
+                	this.completeCallback(data, this.bind);
             	}
         	}.bind(this),
         	success : function(data) {
             	if(this.successCallback) {
-                	this.successCallback(data);
+                	this.successCallback(data, this.bind);
             	}
         	}.bind(this),
         	error: function(data) {
             	if(this.errorCallback) {
-                	this.errorCallback(data);
+                	this.errorCallback(data, this.bind);
             	}
             }.bind(this)
-    	});
+    	};
 	}
 }
