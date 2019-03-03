@@ -34,6 +34,7 @@
 }
 .panel-fill .panel-query {
     overflow-x: hidden;
+    min-height: 150px;
 }
 
 .panel-fill .panel-query,
