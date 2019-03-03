@@ -34,7 +34,7 @@ class ConnectionController extends Controller
     public function disconnect(Request $request)
     {
         Connection::disconnect($request);
-
+        
         return \redirect(route('home'));
     }
 

@@ -16,6 +16,6 @@ class HomeController extends Controller
     	if ($clientSession->isConnected()) 
         	return \view('home');
 
-        return Connection::disconnect($request);
+        return \redirect(route('connect'));
     }
 }
