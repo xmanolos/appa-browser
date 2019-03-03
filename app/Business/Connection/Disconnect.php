@@ -11,7 +11,7 @@ class Disconnect
     protected $request;
 
     public function setRequest(Request $request)  { $this->request = $request; }
-
+    
     public function execute()
     {
         $clientSession = new ClientSession();
