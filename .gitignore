@@ -1,4 +1,5 @@
 # Custom.
+.idea/
 public/packages
 *.sublime-workspace
 *.sublime-project
