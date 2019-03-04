@@ -65,5 +65,24 @@
     <!-- Custom (Made by Us) -->
     <script type="text/jscript" src="{{ asset('js/custom/connect.js') }}"></script>
     <script type="text/jscript" src="{{ asset('js/custom/test-connection.js') }}"></script>
-    <script type="text/jscript" src="{{ asset('js/custom/test.js') }}"></script>
+
+    <script type="text/javascript">
+        function testConnectionPgsql() {
+            $('select[name=driver]').val('pgsql');
+            $('input[name=hostname]').val('{{ env('TEST_PGSQL_HOST') }}');
+            $('input[name=port]').val('{{ env('TEST_PGSQL_PORT') }}');
+            $('input[name=username]').val('{{ env('TEST_PGSQL_USERNAME') }}');
+            $('input[name=password]').val('{{ env('TEST_PGSQL_PASSWORD') }}');
+            $('input[name=database]').val('{{ env('TEST_PGSQL_DATABASE') }}');
+        }
+
+        function testConnectionMysql() {
+            $('select[name=driver]').val('mysql');
+            $('input[name=hostname]').val('{{ env('TEST_MYSQL_HOST') }}');
+            $('input[name=port]').val('{{ env('TEST_MYSQL_PORT') }}');
+            $('input[name=username]').val('{{ env('TEST_MYSQL_USERNAME') }}');
+            $('input[name=password]').val('{{ env('TEST_MYSQL_PASSWORD') }}');
+            $('input[name=database]').val('{{ env('TEST_MYSQL_DATABASE') }}');
+        }
+    </script>
 @stop
