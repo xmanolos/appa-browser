@@ -4,6 +4,7 @@ namespace App\Business\Session;
 
 use App\Business\SessionValues;
 use Illuminate\Http\Request;
+use Illuminate\Session\Store;
 
 /**
  * Manages the data in Session of Schemas.
@@ -48,5 +49,15 @@ class SchemaSession
         $session = $this->request->session();
 
         return SessionValues::get($session, 'selected-schema', '');
+    }
+
+    /**
+     * Forget the value of Selected Schema in Session.
+     *
+     * @param Store $session
+     */
+    public static function forget($session)
+    {
+        SessionValues::forgetByKey($session, 'selected-schema');
     }
 }
