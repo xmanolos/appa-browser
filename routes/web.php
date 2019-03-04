@@ -15,4 +15,8 @@ Route::prefix('api')->group(function ()
 
 	// Query Execution.
 	Route::post('query/run', ['as' => 'api.query.run', 'uses' => 'QueryController@run']);
+
+	// Session.
+    Route::post('session/schema/store', ['as' => 'api.session.schema.store', 'uses' => 'SessionController@storeSchema']);
+    Route::get('session/schema/load', ['as' => 'api.session.schema.load', 'uses' => 'SessionController@loadSchema']);
 });

@@ -2,8 +2,6 @@
 
 namespace App\Business;
 
-use Illuminate\Http\Request;
-
 class SessionValues
 {
     public static function add($session, $key, $value)
