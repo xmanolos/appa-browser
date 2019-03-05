@@ -13,7 +13,7 @@ To build the application, follow the steps below.
 5. Install the [Yarn](https://yarnpkg.com/) dependencies: `yarn install`
 6. Generate an application key with [Artisan](https://laravel.com/docs/master/artisan): `php artisan key:generate`
 
-## Running the code
+### Running the code
 
 To run the development application run it with Docker Compose: `docker-compose up -d`
 
