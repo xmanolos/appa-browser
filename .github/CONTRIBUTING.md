@@ -2,6 +2,12 @@
 
 ## Submission Guidelines
 
+### Submitting an Issue
+
+Before you submit an issue, please search the [issue tracker](https://github.com/xdanif/db-browser/issues), maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
+
+We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs we will systematically ask you to provide a minimal reproduction scenario.
+
 ### Submitting a Pull Request (PR)
 
 Before you submit your Pull Request (PR) consider the following guidelines:
