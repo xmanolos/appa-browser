@@ -1,5 +1,22 @@
 # Contributing to DB Browser
 
+## Getting Started
+
+### Setting up the environment
+
+To build the application, follow the steps below.
+
+1. Clone the repository: `git clone https://github.com/xdanif/db-browser`
+2. Access the clone folder: `cd db-browser`
+3. Duplicate the `.env.example` file by renaming it to `.env` only.
+4. Install the [Composer](https://getcomposer.org/) dependencies: `composer install`
+5. Install the [Yarn](https://yarnpkg.com/) dependencies: `yarn install`
+6. Generate an application key with [Artisan](https://laravel.com/docs/master/artisan): `php artisan key:generate`
+
+### Running the code
+
+To run the development application run it with Docker Compose: `docker-compose up -d`
+
 ## Submission Guidelines
 
 ### Submitting an Issue
