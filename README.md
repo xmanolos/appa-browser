@@ -7,8 +7,9 @@ DB Browser is an open source administration and development tool for the most po
 ## Getting started
 
 ### Installation
-1. Clone the repository: `git clone https://github.com/xdanif/db-browser.git`
-2. Access the clone folder: `cd db-browser`
+1. Download the installation ZIP in the [Releases](https://github.com/xdanif/db-browser/releases/latest).
+2. Unzip the file.
+3. Access the unpack directory.
 3. Bring up the application with Docker Compose: `docker-compose up -d`
 
 ### Usage
