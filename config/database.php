@@ -82,6 +82,23 @@ return [
             'prefix_indexes' => true,
         ],
 
+        'test-pgsql' => [
+            'driver' => 'pgsql',
+            'host' => env('TEST_PGSQL_HOST', 'localhost'),
+            'port' => env('TEST_PGSQL_PORT', '5432'),
+            'username' => env('TEST_PGSQL_USERNAME', 'postgres'),
+            'password' => env('TEST_PGSQL_PASSWORD', 'dbbrowser-test'),
+            'database' => env('TEST_PGSQL_DATABASE', 'dbbrowser-test-pgsql'),
+        ],
+
+        'test-mysql' => [
+            'driver' => 'mysql',
+            'host' => env('TEST_MYSQL_HOST', 'localhost'),
+            'port' => env('TEST_MYSQL_PORT', '3306'),
+            'username' => env('TEST_MYSQL_USERNAME', 'root'),
+            'password' => env('TEST_MYSQL_PASSWORD', 'dbbrowser-test'),
+            'database' => env('TEST_MYSQL_DATABASE', 'dbbrowser-test-mysql'),
+        ],
     ],
 
     /*
