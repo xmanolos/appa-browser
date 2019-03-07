@@ -130,6 +130,40 @@
     height: auto !important;
 }
 
+
+/*     header    */
+.header {
+    display: flex;
+    height: 50px;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: var(--color-background-dark);
+    padding: 0 15px;
+}
+
+.panel-logo {
+    background-color: white;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.panel-db-data {
+    color: var(--color-text-light);
+    font-size: 12px;
+}
+
+.panel-exit a,
+.panel-exit a:visited {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-size: 20px;
+}
+
+
+
 /*     Scrollbar change    */
 ::-webkit-scrollbar {
     width: 10px;
