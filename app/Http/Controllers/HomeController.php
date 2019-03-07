@@ -9,13 +9,18 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
         $clientSession = new ClientSession();
         $clientSession->setRequest($request);
 
-    	if ($clientSession->isConnected()) 
-        	return \view('home');
+    	if ($clientSession->isConnected())
+        	return \view('home', ['textDbData' => $this->buildTextDbData($clientSession)]);
 
         return \redirect(route('connect'));
+    }
+
+    public function buildTextDbData($clientSession) {
+        $connectInfo = $clientSession->getInfo();
+        return $connectInfo['hostname'] . ':' . $connectInfo['port'];
     }
 }
