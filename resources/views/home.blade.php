@@ -12,6 +12,9 @@
     <!-- JSGrid (By Tabalinas) -->
     <link rel="stylesheet" type="text/css" href="{{ asset('packages/jsgrid/dist/jsgrid.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('packages/jsgrid/dist/jsgrid-theme.min.css') }}" />
+
+    <!-- Custom (Made by Us) -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/connection-info.css') }}">
 @stop
 
 @section('content')
@@ -91,6 +94,8 @@
     <script type="text/javascript" src="{{ asset('packages/ace-builds/src-min/ace.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
+    <script type="text/javascript" src="{{ asset('js/custom/connection-info.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/driver-icon.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
 @stop

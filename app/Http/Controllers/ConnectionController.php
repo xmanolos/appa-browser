@@ -56,4 +56,25 @@ class ConnectionController extends Controller
             return $response->getJson();
         }
     }
+
+    public function getInfo(Request $request)
+    {
+        try
+        {
+            $connectionInfo = Connection::getInfo($request);
+
+            $response = new CustomResponse();
+            $response->addSuccessStatus('Connection established successfully!');
+            $response->add('INFO', $connectionInfo);
+
+            return $response->getJson();
+        }
+        catch (\Exception $exception)
+        {
+            $response = new CustomResponse();
+            $response->addErrorStatus($exception->getMessage());
+
+            return $response->getJson();
+        }
+    }
 }
