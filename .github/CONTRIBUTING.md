@@ -15,7 +15,18 @@ To build the application, follow the steps below.
 
 ### Running the code
 
-To run the development application run it with Docker Compose: `docker-compose up -d`
+To run the development application run it with 
+
+If you use [Docker](https://www.docker.com/), do:
+1. Access the clone folder.
+2. Run: `docker-compose up -d`
+
+If you use [Laravel Serving](https://laravel.com/docs/master/installation#installing-laravel), do:
+1. Follow the [installation instructions in Laravel Docs](https://laravel.com/docs/master/installation#installing-laravel).
+
+Note: we use version 5.8.
+
+If you use [Wamp](http://www.wampserver.com/en/), [Xamp](https://www.apachefriends.org/index.html) or any other solution, the most I can offer you is a link to instructions on how to start your first project in Laravel. Use it as a basis to build our application. See: [Laravel Tutorial: Step by Step Guide to Building Your First Laravel Application](https://laravel-news.com/your-first-laravel-application).
 
 ### Obtaining test data
 
