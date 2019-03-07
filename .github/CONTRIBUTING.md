@@ -17,6 +17,23 @@ To build the application, follow the steps below.
 
 To run the development application run it with Docker Compose: `docker-compose up -d`
 
+### Obtaining test data
+
+If you want to have test data to see how the application works without having to worry about the connection, you can do this with the instructions below.
+
+If you use [Docker](https://www.docker.com/), do:
+1. Open your `.env` file.
+2. Set it to point to the test containers (created at the same time as the application containers). The connection information for these is contained in the `docker-compose.yml` file.
+
+Otherwise, do:
+1. Create a [PostgreSQL](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) database (or both).
+2. Open your `.env` file.
+2. Set it to point to the created database.
+
+In either case you can use JavaScript methods to populate the connection data on the Connection Screen. Call via console:
+1. For [PostgreSQL](https://www.postgresql.org/) connection: `testConnectionPgsql();`.
+2. For [MySQL](https://www.mysql.com/) connection: `testConnectionMysql();`.
+
 ## Submission Guidelines
 
 ### Submitting an Issue
