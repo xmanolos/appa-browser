@@ -19,15 +19,7 @@
 
 @section('content')
 
-<div class="header">
-    <div class="panel-logo"></div>
-    <div class="panel-db-data">
-        <label>{{ $textDbData }}</label>
-    </div>
-    <div class="panel-exit">
-        <a href="{{ route('api.connection.disconnect') }}" title="Exit"><i class="la la-close"></i></a>
-    </div>
-</div>
+@extends('layout.home.header')
 
 <div class="full-panel">
     <div class="panel-tree">

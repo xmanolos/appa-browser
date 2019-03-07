@@ -11,11 +11,6 @@ use Illuminate\Support\Facades\DB;
  *
  * @package App\Business\Connection
  */
-
-
-
-
-
 class ConnectionInfo
 {
 	/**
@@ -25,14 +20,14 @@ class ConnectionInfo
 
     /**
      * Defines the value of the request that requested the information.
-     * 
+     *
      * @param Request $request
      */
-    public function setRequest(Request $request) 
-    { 
-    	$this->request = $request; 
+    public function setRequest(Request $request)
+    {
+    	$this->request = $request;
     }
-    
+
     /**
      * Get the info.
      */
@@ -40,7 +35,7 @@ class ConnectionInfo
     {
         $clientSession = new ClientSession();
         $clientSession->setRequest($this->request);
-        
+
         return $clientSession->getInfo();
     }
 }
