@@ -1,7 +1,8 @@
 .full-panel  {
     display: flex;
     width: 100%;
-    height: 100%;
+    height: calc(100% - var(--size-header-height));
+    box-sizing: border-box;
 }
 
 .full-panel .panel-tree {
@@ -134,7 +135,7 @@
 /*     header    */
 .header {
     display: flex;
-    height: 50px;
+    height: var(--size-header-height);
     width: 100%;
     align-items: center;
     justify-content: space-between;
