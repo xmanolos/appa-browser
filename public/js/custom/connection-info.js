@@ -8,13 +8,18 @@ class ConnectionInfo {
 			let response = data.responseJSON;
 
 			if (response.STATUS === 'SUCCESS') {
-				// Driver Icon: new DriverIcon().getUrl(response.INFO.driver);
-				// Host: response.INFO.hostname
-				// Port: response.INFO.port
-				// Username: response.INFO.username
-				// Database: response.INFO.database
+				let connectionInfoValues = [
+					'Host: ' + response.INFO.hostname,
+					'Port:' + response.INFO.port,
+					'Username: ' + response.INFO.username,
+					'Database: ' + response.INFO.database
+				];
 
-				// TODO: Issue #21.
+				$('#' + containerId + ' #label-connection').attr('value', 'Connected on ' + response.INFO.hostname);
+				$('#' + containerId + ' #label-connection').addClass('green');
+				$('#' + containerId + ' #label-connection').on('click', function() {
+					listInfoDialog(connectionInfoValues);listInfoDialog(connectionInfoValues);
+				});
 			} else {
 				errorDialog('Failed to get your connection information.');		
 			}
