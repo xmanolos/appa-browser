@@ -19,7 +19,7 @@ To run the development application run it with
 
 If you use [Docker](https://www.docker.com/), do:
 1. Access the clone folder.
-2. Run: `docker-compose up -d`
+2. Run: `docker-compose -f db-browser.yml up -d`
 
 If you use [Laravel Serving](https://laravel.com/docs/master/installation#installing-laravel), do:
 1. Follow the [installation instructions in Laravel Docs](https://laravel.com/docs/master/installation#installing-laravel).
@@ -33,8 +33,10 @@ If you use [Wamp](http://www.wampserver.com/en/), [Xamp](https://www.apachefrien
 If you want to have test data to see how the application works without having to worry about the connection, you can do this with the instructions below.
 
 If you use [Docker](https://www.docker.com/), do:
-1. Open your `.env` file.
-2. Set it to point to the test containers (created at the same time as the application containers). The connection information for these is contained in the `docker-compose.yml` file.
+1. Access the clone folder.
+2. Run: `docker-compose -f db-browser-test.yml up -d`
+3. Open your `.env` file.
+4. Set it to point to the test containers. The connection information for these is contained in the `docker-compose-test.yml` file.
 
 Otherwise, do:
 1. Create a [PostgreSQL](https://www.postgresql.org/) or [MySQL](https://www.mysql.com/) database (or both).
