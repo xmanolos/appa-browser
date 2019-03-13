@@ -15,6 +15,8 @@
 @stop
 
 @section('content')
+    @include('layout.header')
+
     <div class="full-panel">
         <div class="panel-tree">
             <div class="schema-part row">
@@ -91,6 +93,7 @@
     <script type="text/javascript" src="{{ asset('packages/ace-builds/src-min/ace.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
+    <script type="text/javascript" src="{{ asset('js/custom/driver-icon.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
 @stop

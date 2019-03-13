@@ -18,7 +18,6 @@
     --color-text-dark: #283b48;
     --color-text-light: #dcdde1;
 
-
     /**  Timers   **/
     --time-effect: 300ms;
     --time-effect-scroll: 300ms;
@@ -26,4 +25,5 @@
 
     /**  Sizes    **/
     --size-text-input: 18px;
+    --size-header-height: 50px;
 }
