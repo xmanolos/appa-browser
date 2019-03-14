@@ -5,6 +5,8 @@ var editor = null;
 $(document).ready(function() {
     databaseData = loadDatabaseData();
 
+    showConnectionInfo();
+
     $('#run-query').on('click', function() {
         callRunQuery();
     });
@@ -32,6 +34,10 @@ $(document).ready(function() {
 
     changeStyleQueryEditor();
 });
+
+function showConnectionInfo() {
+    new ConnectionInfo().show('panel-db-data');
+}
 
 function callRunQuery() {
     if (!editor || !editor.getValue()) {
