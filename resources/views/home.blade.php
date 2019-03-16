@@ -30,12 +30,7 @@
                 </div>
             </div>
             <div class="tree-part">
-                <div class="panel-tables-tree">
-                    <ul id="tables-tree"></ul>
-                </div>
-                <div class="panel-tables-tree">
-                    <ul id="views-tree"></ul>
-                </div>
+                @include('database-data')
             </div>
         </div>
         <div class="panel-fill">
