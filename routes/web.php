@@ -9,6 +9,7 @@ Route::prefix('api')->group(function ()
 	Route::get('connect', ['as' => 'api.connection.connect', 'uses' => 'ConnectionController@connect']);
 	Route::get('disconnect', ['as' => 'api.connection.disconnect', 'uses' => 'ConnectionController@disconnect']);
 	Route::get('test-connection', ['as' => 'api.connection.test', 'uses' => 'ConnectionController@testConnection']);
+	Route::get('info-connection', ['as' => 'api.connection.info', 'uses' => 'ConnectionController@getInfo']);
 
 	// Database Data Management Routes.
 	Route::get('database-data/schemas/get', ['as' => 'api.database-data.schemas.get', 'uses' => 'DatabaseDataController@getSchemas']);

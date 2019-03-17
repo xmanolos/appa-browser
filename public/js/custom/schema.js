@@ -26,14 +26,14 @@ function loadSchemas() {
 }
 
 function loadSchemaSelection() {
-    let successCallback = function(data, bind) {
+    let successCallback = function(data) {
         if (!data) {
             return;
         }
 
         setTimeout(function() {
                 $('#schemas').val(data);
-
+          
                 bind.buildTree(data);
             }, 500
         );

@@ -50,12 +50,7 @@ class SchemaSession
 
         return SessionValues::get($session, 'selected-schema', '');
     }
-
-    /**
-     * Forget the value of Selected Schema in Session.
-     *
-     * @param Store $session
-     */
+  
     public static function forget($session)
     {
         SessionValues::forgetByKey($session, 'selected-schema');

@@ -58,11 +58,6 @@ function showHideStyleQueryEditor() {
 
 function addSchema(schema) {
     $('#schemas').append('<option value="' + schema.schemaname + '">' + schema.schemaname + '</option>');
-    /*if (schema.available) {
-        $('#schemas').append('<option value="' + schema.name + '">' + schema.name + '</option>');
-    } else {
-        $('#schemas').append('<option disabled value="' + schema.name + '">' + schema.name + '</option>');
-    }*/
 }
 
 function addSchemaPlaceholder() {

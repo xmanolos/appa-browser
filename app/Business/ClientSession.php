@@ -44,6 +44,20 @@ class ClientSession
         SessionValues::set($session, 'connected', true);
     }
 
+    public function getInfo()
+    {
+        $session = $this->request->session();
+
+        return [
+            'driver' => SessionValues::get($session, 'driver', 'Unknown'),
+            'hostname' => SessionValues::get($session, 'hostname', 'Unknown'),
+            'port' => SessionValues::get($session, 'port', 'Unknown'),
+            'username' => SessionValues::get($session, 'username', 'Unknown'),
+            'password' => SessionValues::get($session, 'password', 'Unknown'),
+            'database' => SessionValues::get($session, 'database', 'Unknown'),
+        ];
+    }
+
     public function forgetConnection()
     {
         $session = $this->request->session();

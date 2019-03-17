@@ -5,6 +5,7 @@ namespace App\Business;
 use App\Business\ClientSession;
 use App\Business\ConnectionConfig;
 use App\Business\Connection\Connect;
+use App\Business\Connection\ConnectionInfo;
 use App\Business\Connection\Disconnect;
 use App\Business\Connection\TestConnection;
 use Illuminate\Database\Capsule\Manager as Capsule;
@@ -54,5 +55,13 @@ class Connection
         $disonnect = new Disconnect();
         $disonnect->setRequest($request);
         $disonnect->execute();
+    }
+
+    public static function getInfo(Request $request)
+    {
+        $connectionInfo = new ConnectionInfo();
+        $connectionInfo->setRequest($request);
+
+        return $connectionInfo->get();
     }
 }

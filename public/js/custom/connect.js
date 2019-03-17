@@ -7,7 +7,7 @@ class Connect {
         let apiRequest = new ApiRequest();
         apiRequest.setData(this.connectionData);
         apiRequest.setCompleteCallback(this.showResult);
-        apiRequest.getToRoute('api.connection.test');
+        apiRequest.getToRoute('api.connection.connect');
     }
 
     showResult(connectResult) {

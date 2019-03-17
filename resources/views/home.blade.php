@@ -15,6 +15,8 @@
 @stop
 
 @section('content')
+    @include('layout.header')
+
     <div class="full-panel">
         <div class="panel-tree">
             <div class="schema-part row">

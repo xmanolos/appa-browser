@@ -1,0 +1,32 @@
+.header {
+    display: flex;
+    height: var(--size-header-height);
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: var(--color-background-dark);
+    padding: 0 15px;
+}
+
+.panel-logo {
+    background-color: white;
+    height: 45px;
+    width: 45px;
+    border-radius: 50%;
+}
+
+.panel-db-data {
+    font-size: 15px;
+}
+
+.panel-exit a,
+.panel-exit a:visited {
+    text-decoration: none;
+    color: var(--color-text-light);
+    font-size: 20px;
+}
+
+.connection-state-off {
+    
+}
