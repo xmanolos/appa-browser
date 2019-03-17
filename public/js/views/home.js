@@ -1,21 +1,14 @@
-var databaseData = null;
 var searchTimer = null;
-var editor = null; 
+var editor = null;
 
 $(document).ready(function() {
-    databaseData = loadDatabaseData();
-
-    showConnectionInfo();
-
     $('#run-query').on('click', function() {
         callRunQuery();
     });
 
-    $('#schemas').on('change', function() {
-        buildTree(this.value);
+    $('.btn-format-query').on('click', function() {
+        formatQuery();
     });
-
-    $('.btn-format-query').click(formatQuery);
 
     $('#search').keyup(function () {
         if(searchTimer) { clearTimeout(searchTimer); }
@@ -34,10 +27,6 @@ $(document).ready(function() {
 
     changeStyleQueryEditor();
 });
-
-function showConnectionInfo() {
-    new ConnectionInfo().show('panel-db-data');
-}
 
 function callRunQuery() {
     if (!editor || !editor.getValue()) {
@@ -67,96 +56,12 @@ function showHideStyleQueryEditor() {
     $('.style-query-editor').toggleClass('show');
 }
 
-function loadDatabaseData() {
-    let completeCallback = function(getResult) {
-        databaseData = getResult.responseJSON;
-
-        showSchemas();
-    };
-
-    let apiRequest = new ApiRequest();
-    apiRequest.setCompleteCallback(completeCallback);
-    apiRequest.getToRoute('api.database-data.get');
-}
-
-function showSchemas() {
-    addSchemaPlaceholder();
-
-    $.each(databaseData.schemas, function(idxSchema, schema) {
-        addSchema(schema);
-    });
-}
-
-function buildTree(schemaName) {
-    $('#tables-tree').html('');
-
-    $.each(databaseData.schemas, function(idxSchema, schema) {
-        if (schema.name == schemaName) {
-            $.each(schema.tables, function(idxTable, table) {
-                addTable(idxTable, table.name);
-
-                if(table.columns) {
-                    $.each(table.columns, function(idxColumn, column) {
-                        addTableColumn(idxTable, idxColumn, column);
-                    });
-                }
-            });
-
-            $.each(schema.views, function(idxView, view) {
-                addView(idxView, view.name);
-
-                if(view.columns) {
-                    $.each(view.columns, function(idxColumn, column) {
-                        addViewColumn(idxView, idxColumn, column);
-                    });
-                }
-            });
-        }
-    });
-
-    $('.panel-tables-tree').jstree({
-        'plugins' : [ 'wholerow', 'search' ]
-    });
-}
-
 function addSchema(schema) {
-    if (schema.available) {
-        $('#schemas').append('<option value="' + schema.name + '">' + schema.name + '</option>');
-    } else {
-        $('#schemas').append('<option disabled value="' + schema.name + '">' + schema.name + '</option>');
-    }
+    $('#schemas').append('<option value="' + schema.schemaname + '">' + schema.schemaname + '</option>');
 }
 
 function addSchemaPlaceholder() {
     $('#schemas').append('<option disabled selected hidden></option>');
-}
-
-function addTable(tableId, tableName){
-    $('#tables-tree').append(
-        '<li data-jstree=\'{"icon":"la la-table"}\'>' + tableName +
-        '   <ul id="table-' + tableId + '"></ul>' +
-        '</li>'
-    );
-}
-
-function addView(viewId, viewName){
-    $('#views-tree').append(
-        '<li data-jstree=\'{"icon":"la la-table"}\'>' + viewName +
-        '   <ul id="view-' + viewId + '"></ul>' +
-        '</li>'
-    );
-}
-
-function addTableColumn(tableId, columnId, column) {
-    $('#tables-tree #table-' + tableId).append(
-        '<li id="column-' + tableId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + column.name + ' (' + column.dataType + ')' + '</li>' // TODO: Refactor!
-    );
-}
-
-function addViewColumn(viewId, columnId, column) {
-    $('#views-tree #view-' + viewId).append(
-        '<li id="column-' + viewId + '-' + columnId + '" data-jstree=\'{"icon":"la la-columns"}\'>' + column.name + ' (' + column.dataType + ')' + '</li>' // TODO: Refactor!
-    );
 }
 
 function formatQuery() {
@@ -174,10 +79,10 @@ function formatQuery() {
         errorDialog('Failed to format query! Please, try again...');
     }
 
-    let requestValues = { 
-        sql: editor.getValue(), 
-        reindent: 1, indent_width: 4, 
-        keyword_case: 'upper' 
+    let requestValues = {
+        sql: editor.getValue(),
+        reindent: 1, indent_width: 4,
+        keyword_case: 'upper'
     };
 
     let apiRequest = new ApiRequest();

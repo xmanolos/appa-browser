@@ -3,7 +3,7 @@
 namespace App\Business;
 
 use App\Business\Connection\Connect;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Business\Session\SchemaSession;
 use Illuminate\Http\Request;
 
 class ClientSession
@@ -64,5 +64,7 @@ class ClientSession
 
         SessionValues::forgetByKeys($session, ['driver', 'hostname', 'port', 'username', 'password', 'database']);
         SessionValues::set($session, 'connected', false);
+
+        SchemaSession::forget($session);
     } 
 }

@@ -32,12 +32,7 @@
                 </div>
             </div>
             <div class="tree-part">
-                <div class="panel-tables-tree">
-                    <ul id="tables-tree"></ul>
-                </div>
-                <div class="panel-tables-tree">
-                    <ul id="views-tree"></ul>
-                </div>
+                @include('database-data')
             </div>
         </div>
         <div class="panel-fill">
@@ -93,7 +88,7 @@
     <script type="text/javascript" src="{{ asset('packages/ace-builds/src-min/ace.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
-    <script type="text/javascript" src="{{ asset('js/custom/driver-icon.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/schema.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
 @stop

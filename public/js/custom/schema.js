@@ -1,10 +1,29 @@
-$(document).ready(function () {
-   loadSchemaSelection();
+$(document).ready(function() {
+    loadSchemas();
+
+    $('#schemas').on('change', function() {
+        buildTree(this.value);
+        saveSchemaSelection(this.value);
+    });
 });
 
-$('#schemas').on('change', function() {
-    saveSchemaSelection(this.value);
-});
+function loadSchemas() {
+    let completeCallback = function(data, bind) {
+        schemas = data.responseJSON;
+
+        bind.addSchemaPlaceholder();
+
+        $.each(schemas, function(index, schema) {
+            bind.addSchema(schema);
+        });
+
+        bind.loadSchemaSelection();
+    };
+
+    let apiRequest = new ApiRequest(this);
+    apiRequest.setCompleteCallback(completeCallback);
+    apiRequest.getToRoute('api.database-data.schemas.get');
+}
 
 function loadSchemaSelection() {
     let successCallback = function(data) {
@@ -14,13 +33,19 @@ function loadSchemaSelection() {
 
         setTimeout(function() {
                 $('#schemas').val(data);
+          
+                bind.buildTree(data);
             }, 500
         );
     };
 
-    let apiRequest = new ApiRequest();
+    let apiRequest = new ApiRequest(this);
     apiRequest.setSuccessCallback(successCallback);
     apiRequest.getToRoute('api.session.schema.load');
+}
+
+function buildTree(schema) {
+    new DatabaseData(schema).show('database-data');
 }
 
 function saveSchemaSelection(schemaValue) {
