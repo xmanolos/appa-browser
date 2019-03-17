@@ -10,7 +10,7 @@
     	<input id="label-connection" type="button" value="Unknown connection state." class="button">
     </div>
     <div class="panel-exit">
-        <a href="{{ route('api.connection.disconnect') }}" title="Exit"><i class="la la-close"></i></a>
+        <a href="{{ route('api.connection.disconnect') }}" title="Disconnect"><i class="la la-unlink"></i></a>
     </div>
 </div>
 
