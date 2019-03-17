@@ -2,6 +2,8 @@ var searchTimer = null;
 var editor = null;
 
 $(document).ready(function() {
+    showConnectionInfo();
+
     $('#run-query').on('click', function() {
         callRunQuery();
     });
@@ -27,6 +29,10 @@ $(document).ready(function() {
 
     changeStyleQueryEditor();
 });
+
+function showConnectionInfo() {
+    new ConnectionInfo().show('panel-db-data');
+}
 
 function callRunQuery() {
     if (!editor || !editor.getValue()) {
