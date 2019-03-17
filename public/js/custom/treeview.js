@@ -17,16 +17,16 @@ class TreeView {
 	}
 
 	openNode(nodeId) {
-		$(this.containerId).jstree().open_node(nodeId);	
+		$(this.containerId).jstree().open_node(nodeId);
 	}
 
 	getNodeText(nodeId) {
-		return $(this.containerId).jstree().get_node(nodeId).text;	
+		return $(this.containerId).jstree().get_node(nodeId).text;
 	}
 
 	clearNode(nodeId) {
 		let childrens = $(this.containerId).jstree().get_node(nodeId).children;
-		
+
 		$(this.containerId).jstree().delete_node(childrens);
 	}
 
@@ -40,7 +40,7 @@ class TreeView {
 				bind: bind
 			};
 
-			this.onSelectedActions.push(event);	
+			this.onSelectedActions.push(event);
 		}
 
 		this.storeNodeSelectionActions();

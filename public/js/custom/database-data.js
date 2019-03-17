@@ -11,14 +11,16 @@ class DatabaseData {
 	}
 
 	load() {
-		this.treeView.addNode({ 
-			id: 'node-tables', 
+		this.treeView.clearNode('#');
+
+		this.treeView.addNode({
+			id: 'node-tables',
 			text: 'Tables',
 			icon: 'la la-ellipsis-h'
 		});
 
-		this.treeView.addNode({ 
-			id: 'node-views', 
+		this.treeView.addNode({
+			id: 'node-views',
 			text: 'Views',
 			icon: 'la la-ellipsis-h'
 		});
@@ -31,13 +33,13 @@ class DatabaseData {
 		let onCompleteCallback = function(data, bind) {
 			let treeView = bind.treeView;
 			let tables = data.responseJSON;
-			
+
 			treeView.clearNode('node-tables');
 
 			$.each(tables, function(index, table) {
 				let nodeId = 'node-table-' + index;
 				let node = {
-					id: nodeId, 
+					id: nodeId,
 					text: table.tablename,
 					icon: 'la la-table'
 				};
@@ -65,7 +67,7 @@ class DatabaseData {
 			$.each(views, function(index, view) {
 				let nodeId = 'node-view-' + index;
 				let node = {
-					id: nodeId, 
+					id: nodeId,
 					text: view.viewname,
 					icon: 'la la-table'
 				};
@@ -86,17 +88,16 @@ class DatabaseData {
 	onTableOrViewSelected(event, bind) {
 		let onCompleteCallback = function(data, bind) {
 			let treeView = bind.treeView;
-			let columns = data.responseJSON;			
+			let columns = data.responseJSON;
 
 			treeView.clearNode(event.nodeId);
 
 			$.each(columns, function(index, column) {
-				console.log(column);
 				let nodeId = 'node-column-' + index;
 				let nodeText = column.name + ' (' + column.dataType + ')';
-				
+
 				let node = {
-					id: nodeId, 
+					id: nodeId,
 					text: nodeText,
 					icon: 'la la-columns'
 				};
@@ -109,7 +110,7 @@ class DatabaseData {
 
 		let tableOrView = bind.treeView.getNodeText(event.nodeId);
 
-		let apiRequest = new ApiRequest(bind);	
+		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ tableOrView: tableOrView });
 		apiRequest.setCompleteCallback(onCompleteCallback);
 		apiRequest.getToRoute('api.database-data.columns.get');

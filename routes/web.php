@@ -3,7 +3,7 @@
 Route::get('/', ['as' => 'home', 'uses' => 'HomeController@index']);
 Route::get('/connect', ['as' => 'connect', 'uses' => 'ConnectController@index']);
 
-Route::prefix('api')->group(function () 
+Route::prefix('api')->group(function ()
 {
     // Connection Routes.
 	Route::get('connect', ['as' => 'api.connection.connect', 'uses' => 'ConnectionController@connect']);

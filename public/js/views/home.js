@@ -1,19 +1,14 @@
-var databaseData = null;
 var searchTimer = null;
-var editor = null; 
+var editor = null;
 
 $(document).ready(function() {
-    loadSchemas();
-
     $('#run-query').on('click', function() {
         callRunQuery();
     });
 
-    $('#schemas').on('change', function() {
-        buildTree(this.value);
+    $('.btn-format-query').on('click', function() {
+        formatQuery();
     });
-
-    $('.btn-format-query').click(formatQuery);
 
     $('#search').keyup(function () {
         if(searchTimer) { clearTimeout(searchTimer); }
@@ -32,26 +27,6 @@ $(document).ready(function() {
 
     changeStyleQueryEditor();
 });
-
-function loadSchemas() {
-    let completeCallback = function(data, bind) {
-        schemas = data.responseJSON;
-
-        bind.addSchemaPlaceholder();
-
-        $.each(schemas, function(index, schema) {
-            bind.addSchema(schema);
-        });
-    };
-
-    let apiRequest = new ApiRequest(this);
-    apiRequest.setCompleteCallback(completeCallback);
-    apiRequest.getToRoute('api.database-data.schemas.get');    
-}
-
-function buildTree(schema) {
-    new DatabaseData(schema).show('database-data');
-}
 
 function callRunQuery() {
     if (!editor || !editor.getValue()) {
@@ -109,10 +84,10 @@ function formatQuery() {
         errorDialog('Failed to format query! Please, try again...');
     }
 
-    let requestValues = { 
-        sql: editor.getValue(), 
-        reindent: 1, indent_width: 4, 
-        keyword_case: 'upper' 
+    let requestValues = {
+        sql: editor.getValue(),
+        reindent: 1, indent_width: 4,
+        keyword_case: 'upper'
     };
 
     let apiRequest = new ApiRequest();
