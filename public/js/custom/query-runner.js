@@ -20,7 +20,7 @@ class QueryRunner {
 
     showQueryResult(bind) {
         let queryState = bind.queryRunResult.state;
-        
+
         if (queryState == 'success') {
             bind.showSuccessQueryResult(bind);
         } else if (queryState == 'error') {

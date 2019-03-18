@@ -71,7 +71,7 @@ function formatQuery() {
     }
 
     let successCallback = function(apiResult) {
-        if(response != null) {
+        if(apiResult) {
             editor.setValue(apiResult.result);
         }
     }
