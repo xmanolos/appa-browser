@@ -8,7 +8,10 @@ class TreeView {
 		$(this.containerId).jstree({
     		'core': {
     			'check_callback': true
-    		}
+    		},
+    		'plugins': [
+    			'search'
+    		]
   		});
 	}
 

@@ -16,16 +16,7 @@ $(document).ready(function() {
         formatQuery();
     });
 
-    $('#search').keyup(function () {
-        if(searchTimer) { clearTimeout(searchTimer); }
-        searchTimer = setTimeout(
-            function () {
-                var textSearch = $('#search').val();
-                $('.panel-tables-tree').jstree(true).search(textSearch);
-            },
-            300
-        );
-    });
+    DatabaeDataSearch.init('search', 'database-data');
 
     setHighLightEditor();
     $('#styleQueryEditor').on('change', changeStyleQueryEditor);

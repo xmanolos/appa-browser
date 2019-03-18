@@ -89,6 +89,7 @@
 
     <!-- Custom (Made by Us) -->
     <script type="text/javascript" src="{{ asset('js/custom/schema.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/database-data-search.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
 @stop
