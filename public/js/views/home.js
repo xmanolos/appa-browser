@@ -4,6 +4,10 @@ var editor = null;
 $(document).ready(function() {
     showConnectionInfo();
 
+    $('#lnk-exit').on('click', function() {
+        Disconnection.now();
+    });
+
     $('#run-query').on('click', function() {
         callRunQuery();
     });

@@ -1,3 +1,26 @@
+function questionYesNoDialog(message, title = 'Please, confirm...', yesCallBack = null, noCallback = null) {
+    swal.fire({
+        title: title,
+        html: message,
+        showCancelButton: true,
+        cancelButtonText: 'No',
+        cancelButtonColor: '#e84118',
+        confirmButtonText: 'Yes, disconnect',
+        confirmButtonColor: '#4cd137',
+        reverseButtons: true
+    }).then((result) => {
+        if (result.value) {
+            if (yesCallBack) {
+                yesCallBack();
+            }
+        } else {
+            if (noCallback) {
+                noCallback();
+            }
+        }
+    });
+}
+
 function successDialog(successMessage = 'Yeah!') {
     const toast = swal.mixin({
         toast: true,
@@ -5,7 +28,7 @@ function successDialog(successMessage = 'Yeah!') {
         showConfirmButton: false,
         timer: 3000
     });
-    
+
     toast.fire({
         type: 'success',
         title: successMessage
