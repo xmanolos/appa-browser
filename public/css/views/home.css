@@ -67,6 +67,7 @@
 }
 .panel-fill .panel-show-result:not(:empty) {
     flex-grow: 4;
+    font-size: 85%;
 }
 
 .panel-query-buttons {
@@ -128,8 +129,21 @@
 
 .jsgrid-grid-header, .jsgrid-grid-body {
     overflow: auto !important;
-    height: auto !important;
+    /*height: auto !important;*/
 }
+
+/*     Grid show result query    */
+/*#grid-builder {
+    overflow: auto;
+}
+*/
+
+.jsgrid-cell {
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+
 
 /*     Scrollbar change    */
 ::-webkit-scrollbar {

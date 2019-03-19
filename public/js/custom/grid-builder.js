@@ -13,7 +13,6 @@ class GridBuilder {
     setData(dbData){
         this.dbData = dbData;
 
-
         let dbDataFirst = this.dbData[0];
         let buildFields =[];
         $.each(dbDataFirst, function(key, value){
@@ -29,10 +28,14 @@ class GridBuilder {
     build(){
         $("#"+this.panelInsert).append('<div id="grid-builder" style="display: block;"></div>')
         $("#grid-builder").jsGrid({
-            width: "100%",
             height: "100%",
-            sorting: true,
+            width: "100%",
+            heading: true,
             paging: true,
+            sorting: true,
+            filtering: true,
+            autoload: true,
+            pageSize: 15,
             data: this.dbData,
             fields: this.dbFields
         });
