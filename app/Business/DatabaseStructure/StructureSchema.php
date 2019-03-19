@@ -15,99 +15,47 @@ class StructureSchema
     public $name;
 
     /**
-     * The schema tables.
+     * The schema charset.
      */
-    public $tables;
-
-    /**
-     * The schema views.
-     */
-    public $views;
-
-    /**
-     * The flag if the schema has usable content.
-     */
-    public $available; // TODO: Rename. "available" != "usable content".
+    public $charset;
 
     /**
      * Gets the schema name.
-     * 
+     *
      * @return string
      */
-    public function getName() 
+    public function getName()
     {
-        return $this->name; 
+        return $this->name;
     }
 
     /**
      * Gets the column tables.
-     * 
-     * @return array
-     */
-    public function getTables() 
-    {   
-        return $this->tables; 
-    }
-
-    /**
-     * Gets the column views.
-     * 
-     * @return array
-     */
-    public function getViews() 
-    { 
-        return $this->views; 
-    }
-
-    /**
-     * Gets the flag if the schema has usable content.
      *
-     * @return array
+     * @return string
      */
-    public function getAvailable()
+    public function getCharset()
     {
-        return $this->available;
+        return $this->charset;
     }
-    
+
     /**
      * Defines the value of the schema name.
-     * 
+     *
      * @param string $name
      */
-    public function setName($name) 
-    { 
+    public function setName($name)
+    {
         $this->name = $name;
     }
-    
-    /**
-     * Defines the value of the schema tables.
-     * 
-     * @param array $tables
-     */
-    public function setTables($tables) 
-    { 
-        $this->tables = $tables; 
-        $this->available = $this->isAvailable();
-    }
 
     /**
-     * Defines the value of the schema views.
-     * 
-     * @param array $views
+     * Defines the value of the schema charset.
+     *
+     * @param string $charset
      */
-    public function setViews($views) 
-    { 
-        $this->views = $views; 
-        $this->available = $this->isAvailable();
-    }
-
-    /**
-     * Check if the schema has usable content.
-     * 
-     * @return boolean
-     */
-    protected function isAvailable() // TODO: Rename.
-    { 
-        return (count($this->tables) > 0 || count($this->views) > 0); 
+    public function setCharset($charset)
+    {
+        $this->charset = $charset;
     }
 }

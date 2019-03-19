@@ -4,8 +4,13 @@ class QueryRunner {
         this.containerId = containerId;
     }
 
-    run() {
-        let queryData = { 'query': this.query };
+    run(schemaName, schemaCharset) {
+        let queryData = { 
+            'schema-name': schemaName, 
+            'schema-charset': schemaCharset,
+            'query': this.query 
+        };
+
         let completeCallback = function(runResult, bind) {
             bind.queryRunResult = runResult.responseJSON;
             bind.showQueryResult(bind);

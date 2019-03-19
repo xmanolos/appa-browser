@@ -14,21 +14,51 @@ class QueryRun
     /**
      * The request that requested the query execution.
      */
-	protected $request;
+    protected $request;
+
+    /**
+     * The name of the schema where query will be executed.
+     */
+    protected $schemaName;
+
+    /**
+     * The charset of the schema where query will be executed.
+     */
+    protected $schemaCharset;
 
     /**
      * The query that will be executed.
      */
-	protected $query;
+    protected $query;
 
     /**
      * Defines the value of the request that requested the query execution.
      *
      * @param Request $request
      */
-	public function setRequest(Request $request)
+    public function setRequest(Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Defines the value of the name of the schema where query will be executed.
+     *
+     * @param string $schemaName
+     */
+    public function setSchemaName($schemaName)
+    {
+        $this->schemaName = $schemaName;
+    }
+
+    /**
+     * Defines the value of the charset of the schema where query will be executed.
+     *
+     * @param string $schemaCharset
+     */
+    public function setSchemaCharset($schemaCharset)
+    {
+        $this->schemaCharset = $schemaCharset;
     }
 
     /**
@@ -36,7 +66,7 @@ class QueryRun
      *
      * @param string $query
      */
-	public function setQuery($query)
+    public function setQuery($query)
     {
         $this->query = $query;
     }
@@ -63,8 +93,10 @@ class QueryRun
     {
     	$queryType = new QueryType();
     	$queryType->setRequest($this->request);
-    	$queryType->setQuery($this->query);
+        $queryType->setSchemaName($this->schemaName);
+        $queryType->setSchemaCharset($this->schemaCharset);
+        $queryType->setQuery($this->query);
 
-    	return $queryType->getExecutor();
+        return $queryType->getExecutor();
     }
 }

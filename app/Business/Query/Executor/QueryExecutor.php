@@ -26,6 +26,16 @@ abstract class QueryExecutor
     protected $request;
 
     /**
+     * The name of the schema where query will be executed.
+     */
+    protected $schemaName;
+
+    /**
+     * The charset of the schema where query will be executed.
+     */
+    protected $schemaCharset;
+
+    /**
      * The query that will be executed.
      */
     protected $query;
@@ -38,6 +48,26 @@ abstract class QueryExecutor
     public function setRequest(Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Defines the value of the name of the schema where query will be executed.
+     *
+     * @param string $schemaName
+     */
+    public function setSchemaName($schemaName)
+    {
+        $this->schemaName = $schemaName;
+    }
+
+    /**
+     * Defines the value of the charset of the schema where query will be executed.
+     *
+     * @param string $schemaCharset
+     */
+    public function setSchemaCharset($schemaCharset)
+    {
+        $this->schemaCharset = $schemaCharset;
     }
 
     /**
@@ -68,7 +98,7 @@ abstract class QueryExecutor
     public function queryMatch()
     {
         $queryUpperCase = strtoupper($this->query);
-        
+
         return strpos($queryUpperCase, $this->identifier) === 0;
     }
 

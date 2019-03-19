@@ -4,6 +4,9 @@ namespace App\Business;
 
 use App\Business\Connection;
 use App\Business\DatabaseStructure\StructureColumn;
+use App\Business\DatabaseStructure\StructureSchema;
+use App\Business\DatabaseStructure\StructureTable;
+use App\Business\DatabaseStructure\StructureView;
 use Illuminate\Http\Request;
 
 class DatabaseData
@@ -18,11 +21,24 @@ class DatabaseData
     public function getSchemas()
     {
     	$connection = Connection::getInstance($this->request);
-    	$schemas = $connection->select('SELECT SCHEMA_NAME AS schemaname FROM information_schema.SCHEMATA;');
 
-    	sort($schemas);
+        $schemasSql = $connection->select('SELECT SCHEMA_NAME AS name, default_character_set_name AS charset FROM information_schema.SCHEMATA;');
+        $schemas = array();
 
-    	return $schemas;
+        sort($schemasSql);
+
+        foreach($schemasSql as $schemaSql)
+        {
+            $schemaCharset = $schemaSql->charset == null ? 'utf8' : $schemaSql->charset;
+
+            $schema = new StructureSchema();
+            $schema->setName($schemaSql->name);
+            $schema->setCharset($schemaCharset);
+
+            array_push($schemas, $schema);
+        }
+
+        return $schemas;
     }
 
     public function getTables()
@@ -30,7 +46,20 @@ class DatabaseData
     	$connection = Connection::getInstance($this->request);
     	$schema = $this->request->input('schema');
 
-    	return $connection->select("SELECT TABLE_NAME AS tablename FROM information_schema.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = '$schema';");
+        $tablesSql = $connection->select("SELECT TABLE_NAME AS name FROM information_schema.TABLES WHERE TABLE_TYPE = 'BASE TABLE' AND TABLE_SCHEMA = '$schema';");
+        $tables = array();
+
+        sort($tablesSql);
+
+        foreach ($tablesSql as $tableSql)
+        {
+            $table = new StructureTable();
+            $table->setName($tableSql->name);
+
+            array_push($tables, $table);
+        }
+
+        return $tables;
     }
 
     public function getViews()
@@ -38,7 +67,20 @@ class DatabaseData
     	$connection = Connection::getInstance($this->request);
     	$schema = $this->request->input('schema');
 
-    	return $connection->select("SELECT TABLE_NAME AS viewname FROM information_schema.VIEWS WHERE TABLE_SCHEMA = '$schema';");
+    	$viewsSql = $connection->select("SELECT TABLE_NAME AS name FROM information_schema.VIEWS WHERE TABLE_SCHEMA = '$schema';");
+        $views = array();
+
+        sort($viewsSql);
+
+        foreach ($viewsSql as $viewSql)
+        {
+            $view = new StructureView();
+            $view->setName($viewSql->name);
+
+            array_push($views, $view);
+        }
+
+        return $views;
     }
 
     public function getColumns()
@@ -58,8 +100,8 @@ class DatabaseData
             $column->setDataType($columnDataType);
 
             array_push($columns, $column);
-    	}
+        }
 
-    	return $columns;
+        return $columns;
     }
 }

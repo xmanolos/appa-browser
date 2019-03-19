@@ -40,7 +40,7 @@ class DatabaseData {
 				let nodeId = 'node-table-' + index;
 				let node = {
 					id: nodeId,
-					text: table.tablename,
+					text: table.name,
 					icon: 'la la-table'
 				};
 
@@ -68,7 +68,7 @@ class DatabaseData {
 				let nodeId = 'node-view-' + index;
 				let node = {
 					id: nodeId,
-					text: view.viewname,
+					text: view.name,
 					icon: 'la la-table'
 				};
 
