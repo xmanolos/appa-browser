@@ -4,6 +4,7 @@ namespace App\Business\Query\Executor;
 
 use App\Business\Interfaces\IQueryExecutor;
 use App\Business\Query\QueryResponse;
+use App\Business\Query\QueryResponseEncode;
 
 /**
  * A Executor for select queries.
@@ -22,10 +23,14 @@ class SelectExecutor extends QueryExecutor implements IQueryExecutor
      */
     public function execute()
     {
-        try 
+        try
         {
             $connection = $this->getConnection();
             $result = $connection->select($this->query);
+
+            if ($this->schemaCharset != 'utf8')
+                QueryResponseEncode::set($result);
+
             $resultMessage = 'Query executed successfully! ' . count($result) . ' rows found.';
 
             $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage, $result);

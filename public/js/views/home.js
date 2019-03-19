@@ -35,9 +35,11 @@ function callRunQuery() {
     }
 
     let queryText = editor.getValue();
+    let schemaName = $('#schemas').val();
+    let schemaCharset = $('#schema-' + schemaName).attr('charset');
 
     let queryRunner = new QueryRunner(queryText, 'panel-show-result');
-    queryRunner.run();
+    queryRunner.run(schemaName, schemaCharset);
 }
 
 function setHighLightEditor() {
@@ -58,7 +60,7 @@ function showHideStyleQueryEditor() {
 }
 
 function addSchema(schema) {
-    $('#schemas').append('<option value="' + schema.schemaname + '">' + schema.schemaname + '</option>');
+    $('#schemas').append('<option id="schema-' + schema.name + '"value="' + schema.name + '" charset="' + schema.charset + '">' + schema.name + '</option>');
 }
 
 function addSchemaPlaceholder() {

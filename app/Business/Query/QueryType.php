@@ -22,9 +22,19 @@ class QueryType
     protected $request;
 
     /**
+     * The name of the schema where query will be executed.
+     */
+    protected $schemaName;
+
+    /**
+     * The charset of the schema where query will be executed.
+     */
+    protected $schemaCharset;
+
+    /**
      * The query that will be identified.
      */
-	protected $query;
+    protected $query;
 
     /**
      * Defines the value of the request that requested the query identification.
@@ -34,6 +44,26 @@ class QueryType
     public function setRequest(Request $request)
     {
         $this->request = $request;
+    }
+
+    /**
+     * Defines the value of the name of the schema where query will be executed.
+     *
+     * @param string $schemaName
+     */
+    public function setSchemaName($schemaName)
+    {
+        $this->schemaName = $schemaName;
+    }
+
+    /**
+     * Defines the value of the charset of the schema where query will be executed.
+     *
+     * @param string $schemaCharset
+     */
+    public function setSchemaCharset($schemaCharset)
+    {
+        $this->schemaCharset = $schemaCharset;
     }
 
     /**
@@ -55,15 +85,17 @@ class QueryType
     {
         $selectExecutor = new SelectExecutor();
         $selectExecutor->setRequest($this->request);
+        $selectExecutor->setSchemaName($this->schemaName);
+        $selectExecutor->setSchemaCharset($this->schemaCharset);
         $selectExecutor->setQuery($this->query);
 
         if ($selectExecutor->queryMatch()) return $selectExecutor;
-         
+
         $insertExecutor = new InsertExecutor();
         $insertExecutor->setRequest($this->request);
         $insertExecutor->setQuery($this->query);
 
-        if ($insertExecutor->queryMatch()) return $insertExecutor; 
+        if ($insertExecutor->queryMatch()) return $insertExecutor;
 
         $updateExecutor = new UpdateExecutor();
         $updateExecutor->setRequest($this->request);
@@ -74,13 +106,13 @@ class QueryType
         $deleteExecutor = new DeleteExecutor();
         $deleteExecutor->setRequest($this->request);
         $deleteExecutor->setQuery($this->query);
-                
+
         if ($deleteExecutor->queryMatch()) return $deleteExecutor;
 
         $anyExecutor = new AnyExecutor();
         $anyExecutor->setRequest($this->request);
         $anyExecutor->setQuery($this->query);
 
-        return $anyExecutor;        
+        return $anyExecutor;
     }
 }
