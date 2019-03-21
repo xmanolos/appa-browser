@@ -2,7 +2,7 @@
 
 namespace App\Business;
 
-use App\Business\SessionValues;
+use App\Business\Session\Session;
 use Illuminate\Http\Request;
 
 class ConnectionConfig
@@ -31,16 +31,17 @@ class ConnectionConfig
         $this->database = $request->input('database');
     }
 
-    public function fromRequestSession(Request $request)
+    public function fromRequestSession($requestSession)
     {
-        $session = $request->session();
-        
-        $this->driver = SessionValues::get($session, 'driver');
-        $this->hostname = SessionValues::get($session, 'hostname');
-        $this->port = SessionValues::get($session, 'port');
-        $this->username = SessionValues::get($session, 'username');
-        $this->password = SessionValues::get($session, 'password');
-        $this->database = SessionValues::get($session, 'database');
+        $session = new Session();
+        $session->setSession($requestSession);
+
+        $this->driver = $session->get('driver');
+        $this->hostname = $session->get('hostname');
+        $this->port = $session->get('port');
+        $this->username = $session->get('username');
+        $this->password = $session->get('password');
+        $this->database = $session->get('database');
     }
 
     public function get()

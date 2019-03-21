@@ -2,7 +2,7 @@
 
 namespace App\Business\Connection;
 
-use App\Business\ClientSession;
+use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,10 +33,11 @@ class Disconnect
      */
     public function execute()
     {
-        $clientSession = new ClientSession();
-        $clientSession->setRequest($this->request);
-    	$clientSession->forgetConnection();
+        $connectionSession = new ConnectionSession();
+        $connectionSession->fromRequest($this->request);
 
-        DB::purge('custom-connection'); // TODO: Try use Capsule.
+        $connectionSession->remove();
+
+        DB::purge('custom-connection'); // TODO: Try use Capsule. // TODO: Move to constants.
     }
 }

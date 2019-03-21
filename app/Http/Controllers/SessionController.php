@@ -2,24 +2,28 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\Session\SchemaSession;
+use App\Business\Session\ClientDataSession;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
-    public function storeSchema(Request $request)
+    public function storeSelectedSchema(Request $request)
     {
-        $schemaSession = new SchemaSession();
-        $schemaSession->setRequest($request);
-        $schemaSession->store();
+        $selectedSchema = $request->input('selected-schema'); // TODO: Move to constants.
+
+        $clientDataSession = new ClientDataSession();
+        $clientDataSession->fromRequest($request);
+
+        $clientDataSession->setSelectedSchema($selectedSchema);
     }
 
-    public function loadSchema(Request $request)
+    public function loadSelectedSchema(Request $request)
     {
-        $schemaSession = new SchemaSession();
-        $schemaSession->setRequest($request);
-        $schema = $schemaSession->load();
+        $clientDataSession = new ClientDataSession();
+        $clientDataSession->fromRequest($request);
 
-        return json_encode($schema);
+        $selectedSchema = $clientDataSession->getSelectedSchema();
+
+        return json_encode($selectedSchema);
     }
 }

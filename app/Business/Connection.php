@@ -2,28 +2,26 @@
 
 namespace App\Business;
 
-use App\Business\ClientSession;
-use App\Business\ConnectionConfig;
 use App\Business\Connection\Connect;
 use App\Business\Connection\ConnectionInfo;
 use App\Business\Connection\Disconnect;
 use App\Business\Connection\TestConnection;
-use Illuminate\Database\Capsule\Manager as Capsule;
+use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
 
 class Connection
 {
     public static function getInstance(Request $request)
     {
-        $clientSession = new ClientSession();
-        $clientSession->setRequest($request);
+        $connectionSession = new ConnectionSession();
+        $connectionSession->fromRequest($request);
 
-        if ($clientSession->isConnected())
-            return $clientSession->getConnection();
+        if ($connectionSession->isConnected())
+            return $connectionSession->get();
 
-        return Connection::disonnect($request);
+        Connection::disonnect($request);
+
+        return null;
     }
 
     public static function connect(Request $request)
@@ -31,13 +29,14 @@ class Connection
         $connectionConfig = new ConnectionConfig();
         $connectionConfig->fromRequestInput($request);
 
-        $connect = new Connect();
+        $connect = new Connect(); // TODO: Can not we take this to ConnectionSession?
         $connect->setConnectionConfig($connectionConfig);
         $connect->execute();
 
-        $clientSession = new ClientSession();
-        $clientSession->setRequest($request);
-        $clientSession->storeConnection($connectionConfig);
+        $connectionSession = new ConnectionSession();
+        $connectionSession->fromRequest($request);
+
+        $connectionSession->set($connectionConfig);
     }
 
     public static function test(Request $request)
@@ -52,9 +51,9 @@ class Connection
 
     public static function disconnect(Request $request)
     {
-        $disonnect = new Disconnect();
-        $disonnect->setRequest($request);
-        $disonnect->execute();
+        $disconnect = new Disconnect();
+        $disconnect->setRequest($request);
+        $disconnect->execute();
     }
 
     public static function getInfo(Request $request)

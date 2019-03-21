@@ -2,33 +2,19 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\ClientSession;
-use App\Business\Connection;
+use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(Request $request)
     {
-        $clientSession = new ClientSession();
-        $clientSession->setRequest($request);
+        $connectionSession = new ConnectionSession();
+        $connectionSession->fromRequest($request);
 
-    	if (!$clientSession->isConnected())
-            return \redirect(route('connect'));
+        if ($connectionSession->isConnected())
+            return view('home');
 
-        $connectionInfo = $this->getConnectionInfo($clientSession);
-    	return \view(
-            'home',
-            [
-                'connectionInfo' => $connectionInfo
-            ]
-        );
-
-
-    }
-
-    public function getConnectionInfo($clientSession) {
-        $connectInfo = $clientSession->getInfo();
-        return $connectInfo['hostname'] . ':' . $connectInfo['port'];
+        return redirect(route('connect'));
     }
 }

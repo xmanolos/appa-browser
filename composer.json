@@ -14,7 +14,8 @@
         "illuminate/database": "^5.7",
         "laravel/framework": "5.7.*",
         "laravel/tinker": "^1.0",
-        "tightenco/ziggy": "^0.6.9"
+        "tightenco/ziggy": "^0.6.9",
+      "ext-json": "*"
     },
     "require-dev": {
         "beyondcode/laravel-dump-server": "^1.0",

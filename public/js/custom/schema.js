@@ -41,7 +41,7 @@ function loadSchemaSelection() {
 
     let apiRequest = new ApiRequest(this);
     apiRequest.setSuccessCallback(successCallback);
-    apiRequest.getToRoute('api.session.schema.load');
+    apiRequest.getToRoute('api.session.selected-schema.load');
 }
 
 function buildTree(schema) {
@@ -49,10 +49,10 @@ function buildTree(schema) {
 }
 
 function saveSchemaSelection(schemaValue) {
-    let requestData = { schema: schemaValue };
+    let requestData = { 'selected-schema': schemaValue };
 
     let apiRequest = new ApiRequest();
     apiRequest.disableContentType();
     apiRequest.setData(requestData);
-    apiRequest.postToRoute('api.session.schema.store');
+    apiRequest.postToRoute('api.session.selected-schema.store');
 }

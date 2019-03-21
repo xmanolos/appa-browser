@@ -3,6 +3,7 @@
 namespace App\Business\Connection;
 
 use App\Business\ClientSession;
+use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -33,9 +34,9 @@ class ConnectionInfo
      */
     public function get()
     {
-        $clientSession = new ClientSession();
-        $clientSession->setRequest($this->request);
+        $connectionSession = new ConnectionSession();
+        $connectionSession->fromRequest($this->request);
 
-        return $clientSession->getInfo();
+        return $connectionSession->getInfo();
     }
 }
