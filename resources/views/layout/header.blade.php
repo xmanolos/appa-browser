@@ -5,7 +5,9 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/custom/connection-info.css') }}">
 
 <div class="header">
-    <div class="panel-logo"></div>
+    <div class="panel-logo">
+        <img src="images/logo/face.png" />
+    </div>
     <div id="panel-db-data" class="panel-db-data">
     	<input id="label-connection" type="button" value="Unknown connection state." class="button">
     </div>

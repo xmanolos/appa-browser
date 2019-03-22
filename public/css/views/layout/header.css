@@ -11,9 +11,15 @@
 
 .panel-logo {
     background-color: white;
-    height: 45px;
+    height: 90%;
     width: 45px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panel-logo > img {
+    height: 95%;
 }
 
 .panel-db-data {
@@ -28,5 +34,5 @@
 }
 
 .connection-state-off {
-    
+
 }
