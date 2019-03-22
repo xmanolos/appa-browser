@@ -8,6 +8,9 @@
 @stop
 
 @section('content')
+<div class="panel-logo">
+    <img src="images/logo/full.png" />
+</div>
 <div class="panel center-center panel-connection">
     <form id="form" action="{{ route('home') }}">
         <div class="row">
