@@ -2,52 +2,57 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Connection;
-use Illuminate\Http\Request;
+use App\Business\Interfaces\IQueryExecutor;
+use App\Business\Query\Response\ErrorResponse;
+use App\Business\Query\Response\SuccessResponse;
+use App\Business\Session\ExecutorConstants;
+use Illuminate\Database\Connection;
 
 /**
+ * Provides the base of queries executors.
+ *
  * @package App\Business\Query\Executor
  */
-abstract class QueryExecutor
+abstract class QueryExecutor implements IQueryExecutor
 {
     /**
-     * The query type identifier.
+     * @var string The query type keyword.
      */
-    protected $identifier;
+    public $queryTypeKeyword;
 
     /**
-     * The response of query execution.
+     * @var Connection The connection where query will be executed.
      */
-    protected $response;
+    protected $connection;
 
     /**
-     * The request that requested the query execution.
-     */
-    protected $request;
-
-    /**
-     * The name of the schema where query will be executed.
+     * @var string The name of the schema where query will be executed.
      */
     protected $schemaName;
 
     /**
-     * The charset of the schema where query will be executed.
+     * @var string The charset of the schema where query will be executed.
      */
     protected $schemaCharset;
 
     /**
-     * The query that will be executed.
+     * @var string The query that will be executed.
      */
     protected $query;
 
     /**
-     * Defines the value of the request that requested the query execution.
-     *
-     * @param Request $request
+     * @var string The response of query execution.
      */
-    public function setRequest(Request $request)
+    protected $response;
+
+    /**
+     * Defines the value of the connection where query will be executed.
+     *
+     * @param Connection $connection
+     */
+    public function setConnection($connection)
     {
-        $this->request = $request;
+        $this->connection = $connection;
     }
 
     /**
@@ -81,16 +86,6 @@ abstract class QueryExecutor
     }
 
     /**
-     * Gets a connection instance to the database.
-     *
-     * @return Connection\Connect
-     */
-    protected function getConnection()
-    {
-        return Connection::getInstance($this->request);
-    }
-
-    /**
      * Checks the query match with the executor.
      *
      * @return bool
@@ -99,7 +94,47 @@ abstract class QueryExecutor
     {
         $queryUpperCase = strtoupper($this->query);
 
-        return strpos($queryUpperCase, $this->identifier) === 0;
+        return strpos($queryUpperCase, $this->queryTypeKeyword) === 0;
+    }
+
+    /**
+     * Checks whether the result of the query that needs encode is forced.
+     *
+     * @return bool
+     */
+    public function needConvertEncode()
+    {
+        $schemaCharsetUpperCase = strtoupper($this->schemaCharset);
+
+        return $schemaCharsetUpperCase == ExecutorConstants::UTF8_ENCODE;
+    }
+
+    /**
+     * Gets an initial Success Response.
+     *
+     * @return SuccessResponse
+     */
+    protected function getSuccessResponse()
+    {
+        $successResponse = new SuccessResponse();
+        $successResponse->setQuery($this->query);
+        $successResponse->setQueryType($this->queryTypeKeyword);
+
+        return $successResponse;
+    }
+
+    /**
+     * Gets an initial Error Response.
+     *
+     * @return ErrorResponse
+     */
+    protected function getErrorResponse()
+    {
+        $errorResponse = new ErrorResponse();
+        $errorResponse->setQuery($this->query);
+        $errorResponse->setQueryType($this->queryTypeKeyword);
+
+        return $errorResponse;
     }
 
     /**

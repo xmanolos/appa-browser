@@ -2,37 +2,42 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Interfaces\IQueryExecutor;
-use App\Business\Query\QueryResponse;
+use App\Business\Session\ExecutorConstants;
 
 /**
  * A Executor for insert queries.
  *
  * @package App\Business\Query\Executor
  */
-class InsertExecutor extends QueryExecutor implements IQueryExecutor
+class InsertExecutor extends QueryExecutor
 {
     /**
-     * The query type identifier.
+     * The query type keyword.
      */
-    protected $identifier = 'INSERT';
+    public $queryTypeKeyword = ExecutorConstants::KEYWORD_INSERT;
 
     /**
-     * Performs the query and sets the result of execution.
+     * Execute the query.
      */
     public function execute()
     {
         try 
         {
-            $connection = $this->getConnection();
-            $result = $connection->insert($this->query);
-            $resultMessage = "Query executed successfully! $result affected rows.";
+            $result = $this->connection->insert($this->query);
 
-            $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage);
+            $responseMessage = "Query executed successfully! $result affected rows."; // TODO: Move to const
+
+            $successResponse = $this->getSuccessResponse();
+            $successResponse->setResponseMessage($responseMessage);
+
+            $this->response = $successResponse->getJson();
         }
         catch (\Exception $exception)
         {
-            $this->response = QueryResponse::getError($exception);
+            $errorResponse = $this->getErrorResponse();
+            $errorResponse->setResponseException($exception);
+
+            $this->response = $errorResponse->getJson();
         }
     }
 }

@@ -2,42 +2,47 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Interfaces\IQueryExecutor;
-use App\Business\Query\QueryResponse;
 use App\Business\Query\QueryResponseEncode;
+use App\Business\Session\ExecutorConstants;
 
 /**
  * A Executor for select queries.
  *
  * @package App\Business\Query\Executor
  */
-class SelectExecutor extends QueryExecutor implements IQueryExecutor
+class SelectExecutor extends QueryExecutor
 {
     /**
-     * The query type identifier.
+     * The query type keyword.
      */
-    protected $identifier = 'SELECT';
+    public $queryTypeKeyword = ExecutorConstants::KEYWORD_SELECT;
 
     /**
-     * Performs the query and sets the result of execution.
+     * Execute the query.
      */
     public function execute()
     {
         try
         {
-            $connection = $this->getConnection();
-            $result = $connection->select($this->query);
+            $result = $this->connection->select($this->query);
 
-            if ($this->schemaCharset != 'utf8')
+            $responseMessage = 'Query executed successfully! ' . count($result) . ' rows found.'; // TODO: Move to const.
+
+            if ($this->needConvertEncode())
                 QueryResponseEncode::set($result);
 
-            $resultMessage = 'Query executed successfully! ' . count($result) . ' rows found.';
+            $successResponse = $this->getSuccessResponse();
+            $successResponse->setResponseMessage($responseMessage);
+            $successResponse->setResponseData($result);
 
-            $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage, $result);
+            $this->response = $successResponse->getJson();
         }
         catch (\Exception $exception)
         {
-            $this->response = QueryResponse::getError($exception);
+            $errorResponse = $this->getErrorResponse();
+            $errorResponse->setResponseException($exception);
+
+            $this->response = $errorResponse->getJson();
         }
     }
 }

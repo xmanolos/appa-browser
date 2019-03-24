@@ -2,37 +2,40 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Interfaces\IQueryExecutor;
-use App\Business\Query\QueryResponse;
+use App\Business\Session\ExecutorConstants;
 
 /**
  * A Executor for update queries.
  *
  * @package App\Business\Query\Executor
  */
-class UpdateExecutor extends QueryExecutor implements IQueryExecutor
+class UpdateExecutor extends QueryExecutor
 {
     /**
-     * The query type identifier.
+     * The query type keyword.
      */
-    protected $identifier = 'UPDATE';
+    public $queryTypeKeyword = ExecutorConstants::KEYWORD_UPDATE;
 
     /**
-     * Performs the query and sets the result of execution.
+     * Execute the query.
      */
     public function execute()
     {
         try
         {
-            $connection = $this->getConnection();
-            $result = $connection->update($this->query);
-            $resultMessage = "Query executed successfully! $result affected rows.";
-            
-            $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage);
+            $result = $this->connection->update($this->query);
+
+            $successResponse = $this->getSuccessResponse();
+            $successResponse->setResponseMessage("Query executed successfully! $result affected rows."); // TODO: Move to const.
+
+            $this->response = $successResponse->getJson();
         }
         catch (\Exception $exception)
         {
-            $this->response = QueryResponse::getError($exception);
+            $errorResponse = $this->getErrorResponse();
+            $errorResponse->setResponseException($exception);
+
+            $this->response = $errorResponse->getJson();
         }
     }
 }

@@ -2,37 +2,42 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Interfaces\IQueryExecutor;
-use App\Business\Query\QueryResponse;
+use App\Business\Session\ExecutorConstants;
 
 /**
- * A Executor for delete queries.
+ * Provides entries to execute delete SQL Query.
  *
  * @package App\Business\Query\Executor
  */
-class DeleteExecutor extends QueryExecutor implements IQueryExecutor
+class DeleteExecutor extends QueryExecutor
 {
     /**
-     * The query type identifier.
+     * The query type keyword.
      */
-    protected $identifier = 'DELETE';
+    public $queryTypeKeyword = ExecutorConstants::KEYWORD_DELETE;
 
     /**
-     * Performs the query and sets the result of execution.
+     * Execute the query.
      */
     public function execute()
     {
         try 
         {
-            $connection = $this->getConnection();
-            $result = $connection->delete($this->query);
-            $resultMessage = "Query executed successfully! $result affected rows.";
+            $result = $this->connection->delete($this->query);
 
-            $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage);
+            $responseMessage = "Query executed successfully! $result affected rows."; // TODO: Move to const.
+
+            $successResponse = $this->getSuccessResponse();
+            $successResponse->setResponseMessage($responseMessage);
+
+            $this->response = $successResponse->getJson();
         }
         catch (\Exception $exception)
         {
-            $this->response = QueryResponse::getError($exception);
+            $errorResponse = $this->getErrorResponse();
+            $errorResponse->setResponseException($exception);
+
+            $this->response = $errorResponse->getJson();
         }
     }
 }

@@ -12,6 +12,7 @@ class QueryRunner {
         };
 
         let completeCallback = function(runResult, bind) {
+            console.log(runResult.responseJSON);
             bind.queryRunResult = runResult.responseJSON;
             bind.showQueryResult(bind);
         }
@@ -24,21 +25,22 @@ class QueryRunner {
     }
 
     showQueryResult(bind) {
-        let queryState = bind.queryRunResult.state;
+        let queryIsSuccess = bind.queryRunResult.isSuccess;
+        let queryIsError = bind.queryRunResult.isError;
 
-        if (queryState == 'success') {
+        if (queryIsSuccess) {
             bind.showSuccessQueryResult(bind);
-        } else if (queryState == 'error') {
+        } else if (queryIsError) {
             bind.showErrorQueryResult(bind);
         }
     }
 
     showSuccessQueryResult(bind) {
-        let queryType = bind.queryRunResult.type;
-        let queryMessage = bind.queryRunResult.message;
+        let queryType = bind.queryRunResult.queryType;
+        let queryMessage = bind.queryRunResult.responseMessage;
 
         if (queryType == 'SELECT') {
-            let queryData = bind.queryRunResult.data;
+            let queryData = bind.queryRunResult.responseData;
 
             bind.loadSelectResult(queryData);
         }
@@ -47,8 +49,8 @@ class QueryRunner {
     }
 
     showErrorQueryResult() {
-        let queryException = this.queryRunResult.exception;
-        let queryMessage = this.queryRunResult.message;
+        let queryMessage = this.queryRunResult.responseMessage;
+        let queryException = this.queryRunResult.responseException;
 
         errorDialog(queryException, queryMessage, 700);
     }

@@ -2,38 +2,42 @@
 
 namespace App\Business\Query\Executor;
 
-use App\Business\Interfaces\IQueryExecutor;
-use App\Business\Query\QueryResponse;
+use App\Business\Session\ExecutorConstants;
 
 /**
- * A Executor for any queries.
+ * Provides entries to execute any SQL Query.
  *
  * @package App\Business\Query\Executor
  */
-class AnyExecutor extends QueryExecutor implements IQueryExecutor
+class AnyExecutor extends QueryExecutor
 {
     /**
-     * The query type identifier.
+     * The query type keyword.
      */
-    protected $identifier = 'ANY';
+    public $queryTypeKeyword = ExecutorConstants::KEYWORD_ANY;
 
     /**
-     * Performs the query and sets the result of execution.
+     * Execute the query.
      */
     public function execute()
     {
         try 
         {
-            $connection = $this->getConnection();
-            $connection->statement($this->query);
-            
-            $resultMessage = 'Query executed successfully! Unknown result.';
+            $this->connection->statement($this->query);
 
-            $this->response = QueryResponse::getSuccess($this->identifier, $resultMessage);
+            $responseMessage = 'Query executed successfully! Unknown result.'; // TODO: Move to const.
+
+            $successResponse = $this->getSuccessResponse();
+            $successResponse->setResponseMessage($responseMessage);
+
+            $this->response = $successResponse->getJson();
         }
         catch (\Exception $exception)
         {
-            $this->response = QueryResponse::getError($exception);
+            $errorResponse = $this->getErrorResponse();
+            $errorResponse->setResponseException($exception);
+
+            $this->response = $errorResponse->getJson();
         }
     }
 }
