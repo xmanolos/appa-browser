@@ -11,7 +11,11 @@ class CreateUsersTable extends Migration
         $buildTestStructure = env('BUILD_TEST_STRUCTURE');
 
         if(!$buildTestStructure)
+        {
+            echo '** The generation of test data is disabled. This migration will be ignored. ** | ';
+
             return;
+        }
 
         Schema::create('users', function (Blueprint $table) {
             $table->increments('id');

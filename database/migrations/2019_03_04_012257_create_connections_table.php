@@ -11,7 +11,11 @@ class CreateConnectionsTable extends Migration
         $buildTestStructure = env('BUILD_TEST_STRUCTURE');
 
         if(!$buildTestStructure)
+        {
+            echo '** The generation of test data is disabled. This migration will be ignored. ** | ';
+
             return;
+        }
 
         Schema::create('connections', function (Blueprint $table) {
             $table->string('name');
