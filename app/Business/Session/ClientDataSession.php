@@ -2,6 +2,7 @@
 
 namespace App\Business\Session;
 
+use App\Business\Session\SessionConstants;
 use Illuminate\Http\Request;
 
 /**
@@ -46,7 +47,7 @@ class ClientDataSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        $clientSession->set('selected-schema', $schema); // TODO: Move to constants.
+        $clientSession->set(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA, $schema);
     }
 
     /**
@@ -59,7 +60,7 @@ class ClientDataSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        return $clientSession->get('selected-schema'); // TODO: Move to constants.
+        return $clientSession->get(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA);
     }
 
     /**
@@ -70,7 +71,7 @@ class ClientDataSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        $clientSession->remove('selected-schema'); // TODO: Move to constants.
+        $clientSession->remove(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA);
     }
 
     /**

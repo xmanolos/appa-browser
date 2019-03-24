@@ -2,8 +2,9 @@
 
 namespace App\Business\Session;
 
-use App\Business\Connection\Connect;
 use App\Business\ConnectionConfig;
+use App\Business\Connection\Connect;
+use App\Business\Session\SessionConstants;
 use Illuminate\Http\Request;
 
 /**
@@ -48,7 +49,7 @@ class ConnectionSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        return $clientSession->get('connected', false); // TODO: Move to constants.
+        return $clientSession->get(SessionConstants::CONNECTION_CONNECTED, false);
     }
 
     /**
@@ -78,12 +79,13 @@ class ConnectionSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
+        // TODO: Move to a class.
         $connectionInfo = array();
-        $connectionInfo['driver'] = $clientSession->get('driver', 'Unknown'); // TODO: Move to constants.
-        $connectionInfo['hostname'] = $clientSession->get('hostname', 'Unknown'); // TODO: Move to constants.
-        $connectionInfo['port'] = $clientSession->get('port', 'Unknown'); // TODO: Move to constants.
-        $connectionInfo['username'] = $clientSession->get('username', 'Unknown'); // TODO: Move to constants.
-        $connectionInfo['database'] = $clientSession->get('database', 'Unknown'); // TODO: Move to constants.
+        $connectionInfo[SessionConstants::CONNECTION_DRIVER] = $clientSession->get(SessionConstants::CONNECTION_DRIVER, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_HOSTNAME] = $clientSession->get(SessionConstants::CONNECTION_HOSTNAME, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_PORT] = $clientSession->get(SessionConstants::CONNECTION_PORT, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_USERNAME] = $clientSession->get(SessionConstants::CONNECTION_USERNAME, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_DATABASE] = $clientSession->get(SessionConstants::CONNECTION_DATABASE, SessionConstants::CONNECTION_DEFAULT_TEXT);
 
         return $connectionInfo;
     }
@@ -98,13 +100,13 @@ class ConnectionSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        $clientSession->set('driver', $connectionConfig->getDriver()); // TODO: Move to constants.
-        $clientSession->set('hostname', $connectionConfig->getHostname()); // TODO: Move to constants.
-        $clientSession->set('port', $connectionConfig->getPort()); // TODO: Move to constants.
-        $clientSession->set('username', $connectionConfig->getUsername()); // TODO: Move to constants.
-        $clientSession->set('password', $connectionConfig->getPassword()); // TODO: Move to constants.
-        $clientSession->set('database', $connectionConfig->getDatabase()); // TODO: Move to constants.
-        $clientSession->set('connected', true); // TODO: Move to constants.
+        $clientSession->set(SessionConstants::CONNECTION_DRIVER, $connectionConfig->getDriver());
+        $clientSession->set(SessionConstants::CONNECTION_HOSTNAME, $connectionConfig->getHostname());
+        $clientSession->set(SessionConstants::CONNECTION_PORT, $connectionConfig->getPort());
+        $clientSession->set(SessionConstants::CONNECTION_USERNAME, $connectionConfig->getUsername());
+        $clientSession->set(SessionConstants::CONNECTION_PASSWORD, $connectionConfig->getPassword());
+        $clientSession->set(SessionConstants::CONNECTION_DATABASE, $connectionConfig->getDatabase());
+        $clientSession->set(SessionConstants::CONNECTION_CONNECTED, true);
     }
 
     /**
@@ -115,13 +117,13 @@ class ConnectionSession
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        $clientSession->remove('driver'); // TODO: Move to constants.
-        $clientSession->remove('hostname'); // TODO: Move to constants.
-        $clientSession->remove('port'); // TODO: Move to constants.
-        $clientSession->remove('username'); // TODO: Move to constants.
-        $clientSession->remove('password'); // TODO: Move to constants.
-        $clientSession->remove('database'); // TODO: Move to constants.
-        $clientSession->set('connected', false); // TODO: Move to constants.
+        $clientSession->remove(SessionConstants::CONNECTION_DRIVER);
+        $clientSession->remove(SessionConstants::CONNECTION_HOSTNAME);
+        $clientSession->remove(SessionConstants::CONNECTION_PORT);
+        $clientSession->remove(SessionConstants::CONNECTION_USERNAME);
+        $clientSession->remove(SessionConstants::CONNECTION_PASSWORD);
+        $clientSession->remove(SessionConstants::CONNECTION_DATABASE);
+        $clientSession->set(SessionConstants::CONNECTION_CONNECTED, false);
 
         $clientDataSession = new ClientDataSession();
         $clientDataSession->setSession($this->session);

@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Business\Session\ClientDataSession;
+use App\Business\Session\SessionConstants;
 use Illuminate\Http\Request;
 
 class SessionController extends Controller
 {
     public function storeSelectedSchema(Request $request)
     {
-        $selectedSchema = $request->input('selected-schema'); // TODO: Move to constants.
+        $selectedSchema = $request->input(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA);
 
         $clientDataSession = new ClientDataSession();
         $clientDataSession->fromRequest($request);
