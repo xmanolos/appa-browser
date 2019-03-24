@@ -1,5 +1,7 @@
 # DB Browser
 
+[![Codacy Badge](https://api.codacy.com/project/badge/Grade/c76156a4297d47c19b57e69fff9ad688)](https://app.codacy.com/app/xmanolos/db-browser?utm_source=github.com&utm_medium=referral&utm_content=xmanolos/db-browser&utm_campaign=Badge_Grade_Settings)
+
 🚧 **Note:** DB Browser is a work-in-progress and in active development! 🚧
 
 DB Browser is an open source administration and development tool for the most popular databases. The project was written in [PHP](http://www.php.net/) with the [Laravel Framework](https://laravel.com/). The tool currently supports [MySQL](https://www.mysql.com/) and [PostgreSQL](https://www.postgresql.org/) databases.
