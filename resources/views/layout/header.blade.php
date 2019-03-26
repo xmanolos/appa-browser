@@ -6,7 +6,7 @@
 
 <div class="header">
     <div class="panel-logo">
-        <img src="images/logo/face.png" />
+        <img src="{{ asset('images/logo/face.svg') }}" />
     </div>
     <div id="panel-db-data" class="panel-db-data">
     	<input id="label-connection" type="button" value="Unknown connection state." class="button">
