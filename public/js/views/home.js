@@ -79,7 +79,9 @@ function formatQuery() {
     }
 
     let errorCallback = function(apiResult) {
-        errorDialog('Failed to format query! Please, try again...');
+        let dialog = new Dialog();
+        dialog.useMessage('Failed to format query! Please, try again...');
+        dialog.showError();
     }
 
     let requestValues = {

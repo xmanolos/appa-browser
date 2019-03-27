@@ -16,9 +16,13 @@ class TestConnection {
         let resultMessage = testResultJson.MESSAGE;
         
         if (resultIsOK) {
-            successDialog(resultMessage);
+            let dialog = new Dialog();
+            dialog.useTitle(resultMessage);
+            dialog.showSuccess();
         } else {
-            errorDialog(resultMessage);
+            let dialog = new Dialog();
+            dialog.useMessage(resultMessage);
+            dialog.showError();
         }
     }
 }

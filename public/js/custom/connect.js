@@ -18,7 +18,9 @@ class Connect {
         if (resultIsOK) {
             window.location.href = route('home');
         } else {
-            errorDialog(resultMessage);
+            let dialog = new Dialog();
+            dialog.useMessage(resultMessage);
+            dialog.showError();
         }
     }
 }

@@ -12,7 +12,6 @@ class QueryRunner {
         };
 
         let completeCallback = function(runResult, bind) {
-            console.log(runResult.responseJSON);
             bind.queryRunResult = runResult.responseJSON;
             bind.showQueryResult(bind);
         }
@@ -45,14 +44,20 @@ class QueryRunner {
             bind.loadSelectResult(queryData);
         }
 
-        successDialog(queryMessage);
+        let dialog = new Dialog();
+        dialog.useTitle(queryMessage);
+        dialog.showSuccess();
     }
 
     showErrorQueryResult() {
         let queryMessage = this.queryRunResult.responseMessage;
         let queryException = this.queryRunResult.responseException;
 
-        errorDialog(queryException, queryMessage, 700);
+        let dialog = new Dialog();
+        dialog.setWidth(700);
+        dialog.useTitle(queryMessage);
+        dialog.useMessage(queryException);
+        dialog.showError();
     }
 
     loadSelectResult(queryData) {

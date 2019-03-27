@@ -1,7 +1,9 @@
 class ConnectionInfo {
 	show(containerId) {
 		let errorCallback = function(data) {
-			errorDialog('Failed to get your connection information.');
+			let dialog = new Dialog();
+			dialog.useMessage('Failed to get your connection information.');
+			dialog.showError();
 		};
 
 		let completeCallback = function(data) {
@@ -18,10 +20,12 @@ class ConnectionInfo {
 				$('#' + containerId + ' #label-connection').attr('value', 'Connected on ' + response.INFO.hostname);
 				$('#' + containerId + ' #label-connection').addClass('green');
 				$('#' + containerId + ' #label-connection').on('click', function() {
-					listInfoDialog(connectionInfoValues);listInfoDialog(connectionInfoValues);
+					listInfoDialog(connectionInfoValues);
 				});
 			} else {
-				errorDialog('Failed to get your connection information.');		
+				let dialog = new Dialog();
+				dialog.useMessage('Failed to get your connection information.');
+				dialog.showError();
 			}
 		};
 
