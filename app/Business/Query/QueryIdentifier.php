@@ -5,6 +5,7 @@ namespace App\Business\Query;
 use App\Business\Query\Executor\AnyExecutor;
 use App\Business\Query\Executor\DeleteExecutor;
 use App\Business\Query\Executor\InsertExecutor;
+use App\Business\Query\Executor\ProcedureExecutor;
 use App\Business\Query\Executor\QueryExecutor;
 use App\Business\Query\Executor\SelectExecutor;
 use App\Business\Query\Executor\UpdateExecutor;
@@ -42,6 +43,11 @@ class QueryIdentifier
     private $deleteExecutor;
 
     /**
+     * @var ProcedureExecutor An Procedure Executor to the query.
+     */
+    private $procedureExecutor;
+
+    /**
      * @var AnyExecutor An Any Executor to the query.
      */
     private $anyExecutor;
@@ -67,6 +73,7 @@ class QueryIdentifier
         $this->loadInsertExecutor();
         $this->loadUpdateExecutor();
         $this->loadDeleteExecutor();
+        $this->loadProcedureExecutor();
         $this->loadAnyExecutor();
 
         if ($this->selectExecutor->queryMatch())
@@ -80,6 +87,9 @@ class QueryIdentifier
 
         if ($this->deleteExecutor->queryMatch())
             return $this->deleteExecutor;
+
+        if ($this->procedureExecutor->queryMatch())
+            return $this->procedureExecutor;
 
         return $this->anyExecutor;
     }
@@ -118,6 +128,15 @@ class QueryIdentifier
     {
         $this->deleteExecutor = new DeleteExecutor();
         $this->deleteExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Procedure Executor to the query.
+     */
+    private function loadProcedureExecutor()
+    {
+        $this->procedureExecutor = new ProcedureExecutor();
+        $this->procedureExecutor->setQuery($this->query);
     }
 
     /**
