@@ -51,6 +51,7 @@
         <script type="text/javascript" src="{{ asset('packages/sweetalert2/dist/sweetalert2.min.js') }}"></script>
 
         <!-- Custom (Made by Us) -->
+        <script type="text/javascript" src="{{ asset('js/custom/asset.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/custom/api.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/custom/swal.js') }}"></script>
         <script type="text/javascript" src="{{ asset('js/custom/custom-loading.js') }}"></script>

@@ -26,7 +26,7 @@ $(document).ready(function() {
 });
 
 function showConnectionInfo() {
-    new ConnectionInfo().show('panel-db-data');
+    new ConnectionInfo().show('panel-connection');
 }
 
 function callRunQuery() {

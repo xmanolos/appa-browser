@@ -16,17 +16,9 @@
     border-radius: 50%;
 }
 
-.panel-db-data {
-    font-size: 15px;
-}
-
 .panel-exit a,
 .panel-exit a:visited {
     text-decoration: none;
     color: var(--color-text-light);
     font-size: 20px;
-}
-
-.connection-state-off {
-    
 }
