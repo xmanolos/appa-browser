@@ -83,6 +83,26 @@ class DatabaseData
         return $views;
     }
 
+    public function getRoutines()
+    {
+        $connection = Connection::getInstance($this->request);
+        $schema = $this->request->input('schema');
+
+        $routinesSql = $connection->select("SELECT ROUTINE_NAME AS name FROM information_schema.ROUTINES WHERE ROUTINE_SCHEMA = '$schema';");
+        $routines = array();
+
+        sort($routinesSql);
+
+        foreach ($routinesSql as $routineSql) {
+            $routine = new StructureView();
+            $routine->setName($routineSql->name);
+
+            array_push($routines, $routine);
+        }
+
+        return $routines;
+    }
+
     public function getColumns()
     {
     	$connection = Connection::getInstance($this->request);
