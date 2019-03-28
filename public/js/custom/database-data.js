@@ -25,8 +25,15 @@ class DatabaseData {
 			icon: 'la la-ellipsis-h'
 		});
 
+		this.treeView.addNode({
+			id: 'node-routines',
+			text: 'Routines',
+			icon: 'la la-ellipsis-h'
+		});
+
 		this.treeView.addOnNodeSelectedAction('node-tables', this.onTablesOpen, this);
 		this.treeView.addOnNodeSelectedAction('node-views', this.onViewsOpen, this);
+		this.treeView.addOnNodeSelectedAction('node-routines', this.onRoutinesOpen, this);
 	}
 
 	onTablesOpen(event, bind) {
@@ -49,7 +56,7 @@ class DatabaseData {
 			});
 
 			treeView.openNode('node-tables');
-		}
+		};
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ schema: bind.schema });
@@ -77,12 +84,39 @@ class DatabaseData {
 			});
 
 			treeView.openNode('node-views');
-		}
+		};
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ schema: bind.schema });
 		apiRequest.setCompleteCallback(onCompleteCallback);
 		apiRequest.getToRoute('api.database-data.views.get');
+	}
+
+	onRoutinesOpen(event, bind) {
+		let onCompleteCallback = function(data, bind) {
+			let treeView = bind.treeView;
+			let views = data.responseJSON;
+
+			treeView.clearNode('node-routines');
+
+			$.each(views, function(index, view) {
+				let nodeId = 'node-routine-' + index;
+				let node = {
+					id: nodeId,
+					text: view.name,
+					icon: 'la la-flash'
+				};
+
+				treeView.addNode(node, 'node-routines');
+			});
+
+			treeView.openNode('node-routines');
+		};
+
+		let apiRequest = new ApiRequest(bind);
+		apiRequest.setData({ schema: bind.schema });
+		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.getToRoute('api.database-data.routines.get');
 	}
 
 	onTableOrViewSelected(event, bind) {
@@ -106,7 +140,7 @@ class DatabaseData {
 			});
 
 			treeView.openNode(event.nodeId);
-		}
+		};
 
 		let tableOrView = bind.treeView.getNodeText(event.nodeId);
 

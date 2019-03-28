@@ -37,6 +37,16 @@ class DatabaseDataController extends Controller
     	return json_encode($views);
     }
 
+    public function getRoutines(Request $request)
+    {
+        $databaseData = new DatabaseData();
+        $databaseData->setRequest($request);
+
+        $functions = $databaseData->getRoutines();
+
+        return json_encode($functions);
+    }
+
     public function getColumns(Request $request)
     {
     	$databaseData = new DatabaseData();
