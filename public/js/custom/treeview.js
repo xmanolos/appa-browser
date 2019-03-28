@@ -1,21 +1,21 @@
 class TreeView {
 	constructor(containerId) {
-		this.containerId = '#' + containerId;
+		this.containerId = "#" + containerId;
 		this.onSelectedActions = [ ];
 	}
 
 	init() {
 		$(this.containerId).jstree({
-    		'core': {
-    			'check_callback': true
+    		"core": {
+    			"check_callback": true
     		},
-    		'plugins': [
-    			'search'
+    		"plugins": [
+    			"search"
     		]
   		});
 	}
 
-	addNode(node, parent = '#') {
+	addNode(node, parent = "#") {
 		$(this.containerId).jstree().create_node(parent, node);
 	}
 
@@ -27,6 +27,10 @@ class TreeView {
 		return $(this.containerId).jstree().get_node(nodeId).text;
 	}
 
+	getNodeValue(nodeId) {
+		return $(this.containerId).jstree().get_node(nodeId).original.value;
+	}
+
 	clearNode(nodeId) {
 		let childrens = $(this.containerId).jstree().get_node(nodeId).children;
 
@@ -34,8 +38,8 @@ class TreeView {
 	}
 
 	addOnNodeSelectedAction(nodeId, action, bind) {
-		if (this.onSelectedActions.some(x => x.nodeId == nodeId)) {
-			this.onSelectedActions.filter(x => x.nodeId == nodeId).action = action;
+		if (this.onSelectedActions.some(x => x.nodeId === nodeId)) {
+			this.onSelectedActions.filter(x => x.nodeId === nodeId).action = action;
 		} else {
 			let event = {
 				nodeId: nodeId,
@@ -52,11 +56,11 @@ class TreeView {
 	storeNodeSelectionActions() {
 		let onSelectedActions = this.onSelectedActions;
 
-		$(this.containerId).on('changed.jstree', function (e, data) {
+		$(this.containerId).on("select_node.jstree", function (e, data) {
     		let selectedNode = data.selected[0];
 
     		$.each(onSelectedActions, function(index, event) {
-				if (event.nodeId == selectedNode) {
+				if (event.nodeId === selectedNode) {
 					event.action(event, event.bind);
 				}
     		});
