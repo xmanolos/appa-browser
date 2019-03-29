@@ -18,11 +18,10 @@ class TreeView {
   		});
 
   		$(this.containerId).on("select_node.jstree", function (e, data) {
-    		let selectedNode = data.selected[0];
+			let selectedNode = data.selected[0];
 
     		$.each(treeViewOnSelectedEvents, function(index, event) {
 				if (event.nodeId === selectedNode) {
-					console.log('calling');
 					event.action(event, event.bind);
 				}
     		});
@@ -63,19 +62,5 @@ class TreeView {
 
 			treeViewOnSelectedEvents.push(event);
 		}
-	}
-
-	storeNodeSelectionActions() {
-		let onSelectedActions = treeViewOnSelectedEvents;
-
-		$(this.containerId).on("select_node.jstree", function (e, data) {
-    		let selectedNode = data.selected[0];
-
-    		$.each(onSelectedActions, function(index, event) {
-				if (event.nodeId === selectedNode) {
-					event.action(event, event.bind);
-				}
-    		});
-  		});
 	}
 }
