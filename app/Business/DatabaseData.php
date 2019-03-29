@@ -4,6 +4,7 @@ namespace App\Business;
 
 use App\Business\Connection;
 use App\Business\DatabaseStructure\StructureColumn;
+use App\Business\DatabaseStructure\StructureConstraint;
 use App\Business\DatabaseStructure\StructureSchema;
 use App\Business\DatabaseStructure\StructureTable;
 use App\Business\DatabaseStructure\StructureView;
@@ -103,17 +104,60 @@ class DatabaseData
         return $routines;
     }
 
-    public function getColumns()
+    public function getTableColumns()
+    {
+        $connection = Connection::getInstance($this->request);
+        $table = $this->request->input('table');
+
+        $columnsSql = $connection->getSchemaBuilder()->getColumnListing($table);
+        $columns = array();
+        
+        foreach($columnsSql as $columnSql)
+        {
+            $columnDataType = $connection->getSchemaBuilder()->getColumnType($table, $columnSql);
+
+            $column = new StructureColumn();
+            $column->setName($columnSql);
+            $column->setDataType($columnDataType);
+
+            array_push($columns, $column);
+        }
+
+        return $columns;
+    }
+
+    public function getTableConstraints()
+    {
+        $connection = Connection::getInstance($this->request);
+        $schema = $this->request->input('schema');
+        $table = $this->request->input('table');
+        
+        $constraintsSql = $connection->select("SELECT CONSTRAINT_NAME AS name, CONSTRAINT_TYPE AS type FROM information_schema.TABLE_CONSTRAINTS WHERE CONSTRAINT_SCHEMA = '$schema' AND TABLE_NAME = '$table' AND CONSTRAINT_TYPE IN ('PRIMARY KEY', 'FOREIGN KEY');");
+        $constraints = array();
+
+        foreach($constraintsSql as $constraintSql)
+        {
+            $constraint = new StructureConstraint();
+            $constraint->setName($constraintSql->name);
+            $constraint->setType($constraintSql->type);
+
+            array_push($constraints, $constraint);
+        }
+
+        return $constraints;
+    }
+
+    public function getViewColumns()
     {
     	$connection = Connection::getInstance($this->request);
-    	$tableOrView = $this->request->input('tableOrView');
+    	$view = $this->request->input('view');
 
-    	$columnsSql = $connection->getSchemaBuilder()->getColumnListing($tableOrView);
+    	$columnsSql = $connection->getSchemaBuilder()->getColumnListing($view);
     	$columns = array();
 
     	foreach($columnsSql as $columnSql)
     	{
-    		$columnDataType = $connection->getSchemaBuilder()->getColumnType($tableOrView, $columnSql);
+    		$columnDataType = $connection->getSchemaBuilder()->getColumnType($view, $columnSql);
 
             $column = new StructureColumn();
             $column->setName($columnSql);

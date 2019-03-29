@@ -16,7 +16,9 @@ Route::prefix('api')->group(function ()
 	Route::get('database-data/tables/get', ['as' => 'api.database-data.tables.get', 'uses' => 'DatabaseDataController@getTables']);
 	Route::get('database-data/views/get', ['as' => 'api.database-data.views.get', 'uses' => 'DatabaseDataController@getViews']);
     Route::get('database-data/routines/get', ['as' => 'api.database-data.routines.get', 'uses' => 'DatabaseDataController@getRoutines']);
-	Route::get('database-data/columns/get', ['as' => 'api.database-data.columns.get', 'uses' => 'DatabaseDataController@getColumns']);
+	Route::get('database-data/table/columns/get', ['as' => 'api.database-data.table.columns.get', 'uses' => 'DatabaseDataController@getTableColumns']);
+	Route::get('database-data/table/constraints/get', ['as' => 'api.database-data.table.constraints.get', 'uses' => 'DatabaseDataController@getTableConstraints']);
+	Route::get('database-data/view/columns/get', ['as' => 'api.database-data.view.columns.get', 'uses' => 'DatabaseDataController@getViewColumns']);
 
 	// Query Execution.
 	Route::post('query/run', ['as' => 'api.query.run', 'uses' => 'QueryController@run']);

@@ -47,13 +47,33 @@ class DatabaseDataController extends Controller
         return json_encode($functions);
     }
 
-    public function getColumns(Request $request)
+    public function getTableColumns(Request $request)
+    {
+        $databaseData = new DatabaseData();
+        $databaseData->setRequest($request);
+
+        $tableColumns = $databaseData->getTableColumns();
+
+        return json_encode($tableColumns);
+    }
+
+    public function getTableConstraints(Request $request)
+    {
+        $databaseData = new DatabaseData();
+        $databaseData->setRequest($request);
+
+        $tableConstraints = $databaseData->getTableConstraints();
+
+        return json_encode($tableConstraints);
+    }
+
+    public function getViewColumns(Request $request)
     {
     	$databaseData = new DatabaseData();
     	$databaseData->setRequest($request);
 
-    	$columns = $databaseData->getColumns();
+    	$viewColumns = $databaseData->getViewColumns();
 
-    	return json_encode($columns);
+    	return json_encode($viewColumns);
     }
 }
