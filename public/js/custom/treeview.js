@@ -1,7 +1,10 @@
+var treeViewOnSelectedEvents;
+
 class TreeView {
 	constructor(containerId) {
 		this.containerId = "#" + containerId;
-		this.onSelectedActions = [ ];
+		
+		treeViewOnSelectedEvents = [];
 	}
 
 	init() {
@@ -12,6 +15,16 @@ class TreeView {
     		"plugins": [
     			"search"
     		]
+  		});
+
+  		$(this.containerId).on("select_node.jstree", function (e, data) {
+			let selectedNode = data.selected[0];
+
+    		$.each(treeViewOnSelectedEvents, function(index, event) {
+				if (event.nodeId === selectedNode) {
+					event.action(event, event.bind);
+				}
+    		});
   		});
 	}
 
@@ -38,8 +51,8 @@ class TreeView {
 	}
 
 	addOnNodeSelectedAction(nodeId, action, bind) {
-		if (this.onSelectedActions.some(x => x.nodeId === nodeId)) {
-			this.onSelectedActions.filter(x => x.nodeId === nodeId).action = action;
+		if (treeViewOnSelectedEvents.some(x => x.nodeId === nodeId)) {
+			treeViewOnSelectedEvents.filter(x => x.nodeId === nodeId).action = action;
 		} else {
 			let event = {
 				nodeId: nodeId,
@@ -47,23 +60,7 @@ class TreeView {
 				bind: bind
 			};
 
-			this.onSelectedActions.push(event);
+			treeViewOnSelectedEvents.push(event);
 		}
-
-		this.storeNodeSelectionActions();
-	}
-
-	storeNodeSelectionActions() {
-		let onSelectedActions = this.onSelectedActions;
-
-		$(this.containerId).on("select_node.jstree", function (e, data) {
-    		let selectedNode = data.selected[0];
-
-    		$.each(onSelectedActions, function(index, event) {
-				if (event.nodeId === selectedNode) {
-					event.action(event, event.bind);
-				}
-    		});
-  		});
 	}
 }

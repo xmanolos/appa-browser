@@ -260,7 +260,7 @@ class DatabaseData {
 		};
 
 		let view = bind.treeView.getNodeValue(event.nodeId);
-		console.log(view);
+		
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema, "view": view });
 		apiRequest.setCompleteCallback(onCompleteCallback);
