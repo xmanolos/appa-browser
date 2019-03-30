@@ -2,14 +2,14 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\AvailableDatabases;
+use App\Business\Driver\AvailableDrivers;
 
 class ConnectController extends Controller
 {
     public function index()
     {
-        $availableDatabases = AvailableDatabases::getAll();
-        
-        return \view('connect')->with('availableDatabases', $availableDatabases);
+        $drivers = AvailableDrivers::getInstance()->getAll();
+
+        return view('connect')->with('drivers', $drivers);
     }
 }
