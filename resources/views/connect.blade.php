@@ -13,10 +13,10 @@
         <div class="row">
             <div class="col tfd panel-field" style="width: 50%;">
                 <select name="driver" required="true">
-                    <option selected disaled hidden value=""></option>
+                    <option selected disabled hidden value=""></option>
 
-                    @foreach($availableDatabases as $key => $value)
-                        <option value="{{ $key }}">{{ $value }}</option>
+                    @foreach($drivers as $driver)
+                        <option value="{{ $driver->identifier }}">{{ $driver->name }}</option>
                     @endforeach
                 </select>
                 <span>Driver</span>
