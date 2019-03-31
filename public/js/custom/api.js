@@ -1,6 +1,5 @@
 class ApiRequest {
-	constructor(bind) 
-	{
+	constructor(bind) {
 		this.bind = bind;
 
 		this.target = null;
@@ -77,37 +76,37 @@ class ApiRequest {
 	getRequest() {
 		return {
 			url: this.target,
-        	type: this.requestType,
-        	data : this.data,
-        	dataType: this.dataType, 
-        	contentType: this.contentType,
-        	headers: {
-        		'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        	},
-        	beforeSend: function() {
-            	startLoading();
+			type: this.requestType,
+			data: this.data,
+			dataType: this.dataType,
+			contentType: this.contentType,
+			headers: {
+				'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+			},
+			beforeSend: function () {
+				startLoading();
 
-            	if(this.beforeSendCallback) {
-                	this.beforeSendCallback(this.bind);
-            	}
-        	}.bind(this),
-        	complete: function(data) {
-        		stopLoading();
-    			
-            	if(this.completeCallback) {
-                	this.completeCallback(data, this.bind);
-            	}
-        	}.bind(this),
-        	success : function(data) {
-            	if(this.successCallback) {
-                	this.successCallback(data, this.bind);
-            	}
-        	}.bind(this),
-        	error: function(data) {
-            	if(this.errorCallback) {
-                	this.errorCallback(data, this.bind);
-            	}
-            }.bind(this)
-    	};
+				if (this.beforeSendCallback) {
+					this.beforeSendCallback(this.bind);
+				}
+			}.bind(this),
+			complete: function (data) {
+				stopLoading();
+
+				if (this.completeCallback) {
+					this.completeCallback(data, this.bind);
+				}
+			}.bind(this),
+			success: function (data) {
+				if (this.successCallback) {
+					this.successCallback(data, this.bind);
+				}
+			}.bind(this),
+			error: function (data) {
+				if (this.errorCallback) {
+					this.errorCallback(data, this.bind);
+				}
+			}.bind(this)
+		};
 	}
 }
