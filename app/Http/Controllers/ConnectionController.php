@@ -2,31 +2,24 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\Builders\ResultMessageBuilder;
 use App\Business\Connection;
-use App\Business\CustomResponse;
+use Exception;
 use Illuminate\Http\Request;
 
 class ConnectionController extends Controller
 {
     public function connect(Request $request)
     {
-        try 
+        try
         {
             Connection::test($request);
             Connection::connect($request);
 
-            $response = new CustomResponse();
-            $response->addSuccessStatus('Connection established successfully!');
-
-            return $response->getJson();
-        } 
-        catch (\Exception $exception) 
+            return response([], 200);
+        }
+        catch (Exception $error)
         {
-            $response = new CustomResponse();
-            $response->addErrorStatus($exception->getMessage());
-
-            return $response->getJson();
+            return response($error->getMessage(), 500);
         }
     }
 
@@ -34,26 +27,20 @@ class ConnectionController extends Controller
     {
         Connection::disconnect($request);
         
-        return \redirect(route('home'));
+        return redirect(route('home'));
     }
 
     public function testConnection(Request $request)
     {
-        try 
+        try
         {
             Connection::test($request);
 
-            $response = new CustomResponse();
-            $response->addSuccessStatus('Connection established successfully!');
-
-            return $response->getJson();
-        } 
-        catch (\Exception $exception) 
+            return response([], 200);
+        }
+        catch (Exception $error)
         {
-            $response = new CustomResponse();
-            $response->addErrorStatus($exception->getMessage());
-
-            return $response->getJson();
+            return response($error->getMessage(), 500);
         }
     }
 
@@ -63,18 +50,11 @@ class ConnectionController extends Controller
         {
             $connectionInfo = Connection::getInfo($request);
 
-            $response = new CustomResponse();
-            $response->addSuccessStatus('Connection established successfully!');
-            $response->add('INFO', $connectionInfo);
-
-            return $response->getJson();
+            return response($connectionInfo, 200);
         }
-        catch (\Exception $exception)
+        catch (Exception $exception)
         {
-            $response = new CustomResponse();
-            $response->addErrorStatus($exception->getMessage());
-
-            return $response->getJson();
+            return response($exception->getMessage(), 500);
         }
     }
 }

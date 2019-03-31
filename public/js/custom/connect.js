@@ -4,23 +4,20 @@ class Connect {
     }
 
     now() {
+        let successCallback = function() {
+            window.location.href = route('home');
+        };
+
+        let errorCallback = function(response) {
+            let dialog = new Dialog();
+            dialog.useMessage(response.responseText);
+            dialog.showError();
+        };
+
         let apiRequest = new ApiRequest();
         apiRequest.setData(this.connectionData);
-        apiRequest.setCompleteCallback(this.showResult);
+        apiRequest.setSuccessCallback(successCallback);
+        apiRequest.setErrorCallback(errorCallback);
         apiRequest.getToRoute('api.connection.connect');
-    }
-
-    showResult(connectResult) {
-        let connectResultJson = connectResult.responseJSON;
-        let resultIsOK = connectResultJson.STATUS === 'SUCCESS';
-        let resultMessage = connectResultJson.MESSAGE;
-
-        if (resultIsOK) {
-            window.location.href = route('home');
-        } else {
-            let dialog = new Dialog();
-            dialog.useMessage(resultMessage);
-            dialog.showError();
-        }
     }
 }
