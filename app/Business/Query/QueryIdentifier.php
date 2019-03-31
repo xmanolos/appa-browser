@@ -2,13 +2,12 @@
 
 namespace App\Business\Query;
 
-use App\Business\Query\Executor\AnyExecutor;
-use App\Business\Query\Executor\DeleteExecutor;
-use App\Business\Query\Executor\InsertExecutor;
-use App\Business\Query\Executor\ProcedureExecutor;
-use App\Business\Query\Executor\QueryExecutor;
-use App\Business\Query\Executor\SelectExecutor;
-use App\Business\Query\Executor\UpdateExecutor;
+use App\Business\Query\Executors\AnyExecutor;
+use App\Business\Query\Executors\DeleteExecutor;
+use App\Business\Query\Executors\InsertExecutor;
+use App\Business\Query\Executors\ProcedureExecutor;
+use App\Business\Query\Executors\SelectExecutor;
+use App\Business\Query\Executors\UpdateExecutor;
 
 /**
  * Provides entries to identify the query.

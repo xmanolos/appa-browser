@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Business\Session;
+namespace App\Business\Query;
 
 /**
- * Provides variables for the constant values of Executors.
+ * Provides constant values of Executors.
  *
  * @package App\Business\Session
  */
