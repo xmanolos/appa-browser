@@ -30,7 +30,7 @@ class Dialog {
 
     useOkAction() {
         this.options.showConfirmButton = true;
-        this.options.confirmButtonText = 'Ok';
+        this.options.confirmButtonText = "Ok";
     }
 
     showInfo() {
@@ -41,11 +41,11 @@ class Dialog {
     }
 
     showSuccess() {
-        this.options.type = 'success';
+        this.options.type = "success";
 
         this.toast = swal.mixin({
             toast: true,
-            position: 'top-end',
+            position: "top-end",
             showConfirmButton: false,
             timer: 3000
         });
@@ -54,8 +54,8 @@ class Dialog {
     }
 
     showError() {
-        this.options.type = 'error';
-        this.options.title = (this.options.title) ? this.options.title : 'Ops...';
+        this.options.type = "error";
+        this.options.title = (this.options.title) ? this.options.title : "Ops...";
         this.options.width = (this.options.width ) ? this.options.width : 500;
 
         this.useOkAction();
@@ -67,11 +67,11 @@ class Dialog {
         this.options.showCancelButton = true;
         this.options.showConfirmButton = true;
 
-        this.options.cancelButtonText = 'No';
-        this.options.confirmButtonText = 'Yes';
+        this.options.cancelButtonText = "No";
+        this.options.confirmButtonText = "Yes";
 
-        this.options.cancelButtonColor = '#E84118'; // TODO: Fix.
-        this.options.confirmButtonColor = '#4CD137'; // TODO: Fix.
+        this.options.cancelButtonColor = "#E84118"; // TODO: Fix.
+        this.options.confirmButtonColor = "#4CD137"; // TODO: Fix.
 
         this.options.reverseButtons = true;
 

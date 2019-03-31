@@ -14,7 +14,7 @@ class QueryRunner {
         let completeCallback = function(runResult, bind) {
             bind.queryRunResult = runResult.responseJSON;
             bind.showQueryResult(bind);
-        }
+        };
 
         let apiRequest = new ApiRequest(this);
         apiRequest.setData(queryData);
