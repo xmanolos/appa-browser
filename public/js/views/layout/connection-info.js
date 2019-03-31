@@ -1,49 +1,42 @@
 class ConnectionInfo {
 	show(container) {
-		let errorCallback = function(data) {
+		let errorCallback = function(response) {
 			let dialog = new Dialog();
-			dialog.useMessage('Failed to get your connection information.');
+			dialog.useMessage(response.responseText);
 			dialog.showError();
 		};
 
-		let completeCallback = function(data, bind) {
-			let connectionInfo = data.responseJSON;
+		let successCallback = function(response) {
+			let showDialog = function (containerElement) {
+				let driverImage = Asset.getImageDriver(response.driver);
 
-			if (connectionInfo.STATUS === 'SUCCESS') {
-				let showDialog = function (containerElement) {
-					let driverImagem = Asset.getImageDriver(connectionInfo.INFO.driver);
+				$('.connection-driver', containerElement).attr('src', driverImage);
+				$('.connection-hostname', containerElement).text(response.hostname);
+				$('.connection-port', containerElement).text(response.port);
+				$('.connection-username', containerElement).text(response.username);
+				$('.connection-database', containerElement).text(response.database);
 
-					$('.connection-driver', containerElement).attr('src', driverImagem);
-					$('.connection-hostname', containerElement).text(connectionInfo.INFO.hostname);
-					$('.connection-port', containerElement).text(connectionInfo.INFO.port);
-					$('.connection-username', containerElement).text(connectionInfo.INFO.username);
-					$('.connection-database', containerElement).text(connectionInfo.INFO.database);
+				let containerHtml = $('.panel-connection-info', containerElement).html();
 
-					let containerHtml = $('.panel-connection-info', containerElement).html();
-
-					let dialog = new Dialog();
-					dialog.useHtml(containerHtml);
-					dialog.showInfo();
-				};
-
-				let containerElement = $('.' + container);
-				let labelConnectionElement = $('#label-connection', containerElement);
-
-				$(labelConnectionElement).addClass('green');
-				$(labelConnectionElement).html('Connected on <b>' + connectionInfo.INFO.hostname + '</b>');
-				
-				$(labelConnectionElement).on('click', function() {
-					showDialog(containerElement);
-				});
-			} else {
 				let dialog = new Dialog();
-				dialog.useMessage('Failed to get your connection information.');
-				dialog.showError();
-			}
+				dialog.useHtml(containerHtml);
+				dialog.showInfo();
+			};
+
+			let containerElement = $('.' + container);
+			let labelConnectionElement = $('#label-connection', containerElement);
+
+			$(labelConnectionElement).addClass('green');
+			$(labelConnectionElement).html('Connected on <b>' + response.hostname + '</b>');
+
+			$(labelConnectionElement).on('click', function() {
+				showDialog(containerElement);
+			});
 		};
 
 		let apiRequest = new ApiRequest(this);
-		apiRequest.setCompleteCallback(completeCallback);
+		apiRequest.setSuccessCallback(successCallback);
+		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.getToRoute('api.connection.info');
 	}
 }
