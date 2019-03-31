@@ -3,7 +3,6 @@
 namespace App\Business\Query;
 
 use App\Business\Connection as ClientConnection;
-use App\Business\Query\Executor\QueryExecutor;
 use Illuminate\Database\Connection;
 use Illuminate\Http\Request;
 
@@ -45,7 +44,7 @@ class QueryProcessor
     protected $executor;
 
     /**
-     * @var QueryResponse The response of the query execution.
+     * @var string The response of the query execution.
      */
     protected $response;
 

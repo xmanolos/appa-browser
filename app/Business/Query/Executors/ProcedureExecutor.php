@@ -1,23 +1,30 @@
 <?php
 
-namespace App\Business\Query\Executor;
+namespace App\Business\Query\Executors;
 
-use App\Business\Session\ExecutorConstants;
+use App\Business\Query\ExecutorConstants;
+use App\Business\Query\QueryExecutor;
+use Exception;
 
 /**
- * Provides entries to execute precedure SQL Query.
+ * Executor for Queries of procedure type.
  *
- * @package App\Business\Query\Executor
+ * @package App\Business\Query\Executors
  */
 class ProcedureExecutor extends QueryExecutor
 {
     /**
-     * The query type keyword.
+     * Gets the keyword of the type of the Query of the Executor.
+     *
+     * @return string
      */
-    public $queryTypeKeyword = ExecutorConstants::KEYWORD_PROCEDURE;
+    public function getTypeKeyword()
+    {
+        return ExecutorConstants::KEYWORD_PROCEDURE;
+    }
 
     /**
-     * Execute the query.
+     * Executes Query and sets the response of execution.
      */
     public function execute()
     {
@@ -25,14 +32,14 @@ class ProcedureExecutor extends QueryExecutor
         {
             $this->connection->statement($this->query);
 
-            $responseMessage = 'Procedure executed successfully!'; // TODO: Move to const.
+            $responseMessage = 'Procedure executed successfully!';
 
             $successResponse = $this->getSuccessResponse();
             $successResponse->setResponseMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }
-        catch (\Exception $exception)
+        catch (Exception $exception)
         {
             $errorResponse = $this->getErrorResponse();
             $errorResponse->setResponseException($exception);

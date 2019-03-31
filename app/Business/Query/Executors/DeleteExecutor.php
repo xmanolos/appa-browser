@@ -1,23 +1,30 @@
 <?php
 
-namespace App\Business\Query\Executor;
+namespace App\Business\Query\Executors;
 
-use App\Business\Session\ExecutorConstants;
+use App\Business\Query\QueryExecutor;
+use App\Business\Query\ExecutorConstants;
+use Exception;
 
 /**
- * Provides entries to execute delete SQL Query.
+ * Executor for Queries of delete type.
  *
- * @package App\Business\Query\Executor
+ * @package App\Business\Query\Executors
  */
 class DeleteExecutor extends QueryExecutor
 {
     /**
-     * The query type keyword.
+     * Gets the keyword of the type of the Query of the Executor.
+     *
+     * @return string
      */
-    public $queryTypeKeyword = ExecutorConstants::KEYWORD_DELETE;
+    public function getTypeKeyword()
+    {
+        return ExecutorConstants::KEYWORD_DELETE;
+    }
 
     /**
-     * Execute the query.
+     * Executes Query and sets the response of execution.
      */
     public function execute()
     {
@@ -25,14 +32,14 @@ class DeleteExecutor extends QueryExecutor
         {
             $result = $this->connection->delete($this->query);
 
-            $responseMessage = "Query executed successfully! $result affected rows."; // TODO: Move to const.
+            $responseMessage = "Query executed successfully! $result affected rows.";
 
             $successResponse = $this->getSuccessResponse();
             $successResponse->setResponseMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }
-        catch (\Exception $exception)
+        catch (Exception $exception)
         {
             $errorResponse = $this->getErrorResponse();
             $errorResponse->setResponseException($exception);
