@@ -2,10 +2,8 @@
 
 namespace App\Business\Connection;
 
-use App\Business\ClientSession;
 use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\DB;
 
 /**
  * Provides the data of the current connection of the client.

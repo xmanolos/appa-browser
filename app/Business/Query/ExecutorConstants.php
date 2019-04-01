@@ -5,7 +5,7 @@ namespace App\Business\Query;
 /**
  * Provides constant values of Executors.
  *
- * @package App\Business\Session
+ * @package App\Business\SessionProcessor
  */
 class ExecutorConstants
 {

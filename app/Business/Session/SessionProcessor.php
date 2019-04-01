@@ -2,32 +2,33 @@
 
 namespace App\Business\Session;
 
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 /**
- * Provides entries to handle the Session.
+ * Provides entries to handle the session.
  *
- * @package App\Business\Session
+ * @package App\Business
  */
-class Session
+class SessionProcessor
 {
     /**
-     * @var string The Session that will be handled.
+     * @var Session The session that will be handled.
      */
     protected $session;
 
     /**
-     * Defines the value of the Session that will be handled.
+     * Defines the value of the session that will be handled.
      *
-     * @param mixed $session
+     * @param Session $session
      */
-    public function setSession($session)
+    public function setSession(Session $session)
     {
         $this->session = $session;
     }
 
     /**
-     * Defines the value of the Session that will be handled from a Request.
+     * Defines the value of the session that will be handled from a request.
      * 
      * @param Request $request
      */
@@ -37,7 +38,7 @@ class Session
     }
 
     /**
-     * Adds a new set to Session.
+     * Adds a new set to the session.
      * 
      * @param string $key
      * @param mixed $value
@@ -48,7 +49,7 @@ class Session
     }
 
     /**
-     * Gets the value of a Session set from the key.
+     * Gets the value of a session set from the key.
      * If there is no set with this key the default value is returned.
      *
      * @param string $key
@@ -65,7 +66,7 @@ class Session
     }
 
     /**
-     * Sets the value of a Session set from the key.
+     * Sets the value of a session set from the key.
      * 
      * @param string $key
      * @param mixed $value
@@ -79,7 +80,7 @@ class Session
     }
 
     /**
-     * Remove a set from the Session from the key.
+     * Remove a set from the session from the key.
      * If there is no set with this key nothing happens.
      *
      * @param string $key

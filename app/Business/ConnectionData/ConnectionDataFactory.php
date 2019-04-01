@@ -2,7 +2,8 @@
 
 namespace App\Business\ConnectionData;
 
-use App\Business\Session\Session;
+use App\Business\Session\SessionProcessor;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 class ConnectionDataFactory
@@ -20,10 +21,10 @@ class ConnectionDataFactory
         return $connectionData;
     }
 
-    public static function createFromRequestSession($requestSession)
+    public static function createFromSession(Session $session)
     {
-        $session = new Session();
-        $session->setSession($requestSession);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($session);
 
         $connectionData = new ConnectionData();
         $connectionData->driver = $session->get('driver');

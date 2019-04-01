@@ -6,7 +6,6 @@ use App\Business\Connection\Connect;
 use App\Business\Connection\ConnectionInfo;
 use App\Business\Connection\Disconnect;
 use App\Business\Connection\TestConnection;
-use App\Business\ConnectionData\ConnectionData;
 use App\Business\ConnectionData\ConnectionDataFactory;
 use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
