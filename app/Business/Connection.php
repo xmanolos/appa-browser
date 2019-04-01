@@ -6,6 +6,8 @@ use App\Business\Connection\Connect;
 use App\Business\Connection\ConnectionInfo;
 use App\Business\Connection\Disconnect;
 use App\Business\Connection\TestConnection;
+use App\Business\ConnectionData\ConnectionData;
+use App\Business\ConnectionData\ConnectionDataFactory;
 use App\Business\Session\ConnectionSession;
 use Illuminate\Http\Request;
 
@@ -26,26 +28,24 @@ class Connection
 
     public static function connect(Request $request)
     {
-        $connectionConfig = new ConnectionConfig();
-        $connectionConfig->fromRequestInput($request);
+        $connectionData = ConnectionDataFactory::createFromRequest($request);
 
         $connect = new Connect(); // TODO: Can not we take this to ConnectionSession?
-        $connect->setConnectionConfig($connectionConfig);
+        $connect->setConnectionData($connectionData);
         $connect->execute();
 
         $connectionSession = new ConnectionSession();
         $connectionSession->fromRequest($request);
 
-        $connectionSession->set($connectionConfig);
+        $connectionSession->set($connectionData);
     }
 
     public static function test(Request $request)
     {
-        $connectionConfig = new ConnectionConfig();
-        $connectionConfig->fromRequestInput($request);
+        $connectionData = ConnectionDataFactory::createFromRequest($request);
 
         $testConnection = new TestConnection();
-        $testConnection->setConnectionConfig($connectionConfig);
+        $testConnection->setConnectionData($connectionData);
         $testConnection->execute();
     }
 

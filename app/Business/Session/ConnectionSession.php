@@ -2,9 +2,9 @@
 
 namespace App\Business\Session;
 
-use App\Business\ConnectionConfig;
 use App\Business\Connection\Connect;
-use App\Business\Session\SessionConstants;
+use App\Business\ConnectionData\ConnectionData;
+use App\Business\ConnectionData\ConnectionDataFactory;
 use Illuminate\Http\Request;
 
 /**
@@ -59,11 +59,10 @@ class ConnectionSession
      */
     public function get()
     {
-        $connectionConfig = new ConnectionConfig();
-        $connectionConfig->fromRequestSession($this->session);
+        $connectionData = ConnectionDataFactory::createFromRequestSession($this->session);
 
         $connect = new Connect();
-        $connect->setConnectionConfig($connectionConfig);
+        $connect->setConnectionData($connectionData);
         $connect->execute();
 
         return $connect->getConnection();
@@ -93,19 +92,19 @@ class ConnectionSession
     /**
      * Sets the Connection of the Session from the Connection Settings.
      *
-     * @param ConnectionConfig $connectionConfig
+     * @param ConnectionData $connectionData
      */
-    public function set(ConnectionConfig $connectionConfig) // TODO: Rename "ConnectionConfig" to "ConnectionSettings".
+    public function set(ConnectionData $connectionData)
     {
         $clientSession = new Session();
         $clientSession->setSession($this->session);
 
-        $clientSession->set(SessionConstants::CONNECTION_DRIVER, $connectionConfig->getDriver());
-        $clientSession->set(SessionConstants::CONNECTION_HOSTNAME, $connectionConfig->getHostname());
-        $clientSession->set(SessionConstants::CONNECTION_PORT, $connectionConfig->getPort());
-        $clientSession->set(SessionConstants::CONNECTION_USERNAME, $connectionConfig->getUsername());
-        $clientSession->set(SessionConstants::CONNECTION_PASSWORD, $connectionConfig->getPassword());
-        $clientSession->set(SessionConstants::CONNECTION_DATABASE, $connectionConfig->getDatabase());
+        $clientSession->set(SessionConstants::CONNECTION_DRIVER, $connectionData->driver);
+        $clientSession->set(SessionConstants::CONNECTION_HOSTNAME, $connectionData->host);
+        $clientSession->set(SessionConstants::CONNECTION_PORT, $connectionData->port);
+        $clientSession->set(SessionConstants::CONNECTION_USERNAME, $connectionData->username);
+        $clientSession->set(SessionConstants::CONNECTION_PASSWORD, $connectionData->password);
+        $clientSession->set(SessionConstants::CONNECTION_DATABASE, $connectionData->database);
         $clientSession->set(SessionConstants::CONNECTION_CONNECTED, true);
     }
 

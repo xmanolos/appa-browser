@@ -2,19 +2,22 @@
 
 namespace App\Business;
 
-use App\Business\ConnectionConfig;
+use App\Business\ConnectionData\ConnectionData;
 use Illuminate\Database\Capsule\Manager as Capsule;
 
 class CapsuleConnection
 {
-    protected $connectionConfig;
+    protected $connectionData;
 
-    public function setConnectionConfig(ConnectionConfig $connectionConfig)  { $this->connectionConfig = $connectionConfig; }
+    public function setConnectionData(ConnectionData $connectionData)
+    {
+        $this->connectionData = $connectionData;
+    }
 
     public function getTestConnection()
     {
         $capsule = new Capsule;
-        $capsule->addConnection($this->connectionConfig->get(), 'client-connection-test');
+        $capsule->addConnection($this->connectionData->getArray(), 'client-connection-test');
 
         return $capsule->getConnection('client-connection-test');	
     }
@@ -22,7 +25,7 @@ class CapsuleConnection
     public function getConnection()
     {
         $capsule = new Capsule;
-        $capsule->addConnection($this->connectionConfig->get(), 'client-connection');
+        $capsule->addConnection($this->connectionData->getArray(), 'client-connection');
         $capsule->bootEloquent();
         $capsule->setAsGlobal();
         
