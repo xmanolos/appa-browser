@@ -2,12 +2,10 @@
 
 namespace App\Business\Session;
 
-use Illuminate\Http\Request;
-
 /**
- * Provides variables for the constant values of Session.
+ * Provides variables for the constant values of SessionProcessor.
  *
- * @package App\Business\Session
+ * @package App\Business\SessionProcessor
  */
 class SessionConstants
 {

@@ -23,7 +23,7 @@ Route::prefix('api')->group(function ()
 	// Query Execution.
 	Route::post('query/run', ['as' => 'api.query.run', 'uses' => 'QueryController@run']);
 
-	// Session.
+	// SessionProcessor.
     Route::post('session/selected-schema/store', ['as' => 'api.session.selected-schema.store', 'uses' => 'SessionController@storeSelectedSchema']);
     Route::get('session/selected-schema/load', ['as' => 'api.session.selected-schema.load', 'uses' => 'SessionController@loadSelectedSchema']);
 });

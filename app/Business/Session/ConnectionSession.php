@@ -2,35 +2,38 @@
 
 namespace App\Business\Session;
 
-use App\Business\ConnectionConfig;
 use App\Business\Connection\Connect;
+use App\Business\ConnectionData\ConnectionData;
+use App\Business\ConnectionData\ConnectionDataFactory;
 use App\Business\Session\SessionConstants;
+use App\Business\Session\SessionProcessor;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 /**
- * Provides entries to handle the Connection of the Session.
+ * Manages the connection in the session.
  *
  * @package App\Business\Session
  */
 class ConnectionSession
 {
     /**
-     * @var string The Session that will be handled.
+     * @var Session The session that will be managed.
      */
     protected $session;
 
     /**
-     * Defines the value of the Session that will be handled.
+     * Defines the value of the session that will be managed.
      *
-     * @param mixed $session
+     * @param Session $session
      */
-    public function setSession($session)
+    public function setSession(Session $session)
     {
         $this->session = $session;
     }
 
     /**
-     * Defines the value of the Session that will be handled from a Request.
+     * Defines the value of the session that will be managed from a Request.
      *
      * @param Request $request
      */
@@ -40,90 +43,89 @@ class ConnectionSession
     }
 
     /**
-     * Checks the status of the Connection in the Session.
+     * Checks the status of the connection in the session.
      *
      * @return boolean
      */
     public function isConnected()
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
-        return $clientSession->get(SessionConstants::CONNECTION_CONNECTED, false);
+        return $sessionProcessor->get(SessionConstants::CONNECTION_CONNECTED, false);
     }
 
     /**
-     * Gets an instance of Connection from the Session.
+     * Gets an instance of connection from the session.
      *
      * @return Connect
      */
     public function get()
     {
-        $connectionConfig = new ConnectionConfig();
-        $connectionConfig->fromRequestSession($this->session);
+        $connectionData = ConnectionDataFactory::createFromSession($this->session);
 
         $connect = new Connect();
-        $connect->setConnectionConfig($connectionConfig);
+        $connect->setConnectionData($connectionData);
         $connect->execute();
 
         return $connect->getConnection();
     }
 
     /**
-     * Gets the information of Connection from the Session.
+     * Gets the information of connection from the session.
      *
      * @return array
      */
     public function getInfo()
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
         // TODO: Move to a class.
         $connectionInfo = array();
-        $connectionInfo[SessionConstants::CONNECTION_DRIVER] = $clientSession->get(SessionConstants::CONNECTION_DRIVER, SessionConstants::CONNECTION_DEFAULT_TEXT);
-        $connectionInfo[SessionConstants::CONNECTION_HOSTNAME] = $clientSession->get(SessionConstants::CONNECTION_HOSTNAME, SessionConstants::CONNECTION_DEFAULT_TEXT);
-        $connectionInfo[SessionConstants::CONNECTION_PORT] = $clientSession->get(SessionConstants::CONNECTION_PORT, SessionConstants::CONNECTION_DEFAULT_TEXT);
-        $connectionInfo[SessionConstants::CONNECTION_USERNAME] = $clientSession->get(SessionConstants::CONNECTION_USERNAME, SessionConstants::CONNECTION_DEFAULT_TEXT);
-        $connectionInfo[SessionConstants::CONNECTION_DATABASE] = $clientSession->get(SessionConstants::CONNECTION_DATABASE, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_DRIVER] = $sessionProcessor->get(SessionConstants::CONNECTION_DRIVER, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_HOSTNAME] = $sessionProcessor->get(SessionConstants::CONNECTION_HOSTNAME, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_PORT] = $sessionProcessor->get(SessionConstants::CONNECTION_PORT, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_USERNAME] = $sessionProcessor->get(SessionConstants::CONNECTION_USERNAME, SessionConstants::CONNECTION_DEFAULT_TEXT);
+        $connectionInfo[SessionConstants::CONNECTION_DATABASE] = $sessionProcessor->get(SessionConstants::CONNECTION_DATABASE, SessionConstants::CONNECTION_DEFAULT_TEXT);
 
         return $connectionInfo;
     }
 
     /**
-     * Sets the Connection of the Session from the Connection Settings.
+     * Sets the connection of the session from the connection data.
      *
-     * @param ConnectionConfig $connectionConfig
+     * @param ConnectionData $connectionData
      */
-    public function set(ConnectionConfig $connectionConfig) // TODO: Rename "ConnectionConfig" to "ConnectionSettings".
+    public function set(ConnectionData $connectionData)
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
-        $clientSession->set(SessionConstants::CONNECTION_DRIVER, $connectionConfig->getDriver());
-        $clientSession->set(SessionConstants::CONNECTION_HOSTNAME, $connectionConfig->getHostname());
-        $clientSession->set(SessionConstants::CONNECTION_PORT, $connectionConfig->getPort());
-        $clientSession->set(SessionConstants::CONNECTION_USERNAME, $connectionConfig->getUsername());
-        $clientSession->set(SessionConstants::CONNECTION_PASSWORD, $connectionConfig->getPassword());
-        $clientSession->set(SessionConstants::CONNECTION_DATABASE, $connectionConfig->getDatabase());
-        $clientSession->set(SessionConstants::CONNECTION_CONNECTED, true);
+        $sessionProcessor->set(SessionConstants::CONNECTION_DRIVER, $connectionData->driver);
+        $sessionProcessor->set(SessionConstants::CONNECTION_HOSTNAME, $connectionData->host);
+        $sessionProcessor->set(SessionConstants::CONNECTION_PORT, $connectionData->port);
+        $sessionProcessor->set(SessionConstants::CONNECTION_USERNAME, $connectionData->username);
+        $sessionProcessor->set(SessionConstants::CONNECTION_PASSWORD, $connectionData->password);
+        $sessionProcessor->set(SessionConstants::CONNECTION_DATABASE, $connectionData->database);
+        $sessionProcessor->set(SessionConstants::CONNECTION_CONNECTED, true);
     }
 
     /**
-     * Removes the Connection and the Client Data from the Session.
+     * Removes the connection and the client data from the session.
      */
     public function remove()
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
-        $clientSession->remove(SessionConstants::CONNECTION_DRIVER);
-        $clientSession->remove(SessionConstants::CONNECTION_HOSTNAME);
-        $clientSession->remove(SessionConstants::CONNECTION_PORT);
-        $clientSession->remove(SessionConstants::CONNECTION_USERNAME);
-        $clientSession->remove(SessionConstants::CONNECTION_PASSWORD);
-        $clientSession->remove(SessionConstants::CONNECTION_DATABASE);
-        $clientSession->set(SessionConstants::CONNECTION_CONNECTED, false);
+        $sessionProcessor->remove(SessionConstants::CONNECTION_DRIVER);
+        $sessionProcessor->remove(SessionConstants::CONNECTION_HOSTNAME);
+        $sessionProcessor->remove(SessionConstants::CONNECTION_PORT);
+        $sessionProcessor->remove(SessionConstants::CONNECTION_USERNAME);
+        $sessionProcessor->remove(SessionConstants::CONNECTION_PASSWORD);
+        $sessionProcessor->remove(SessionConstants::CONNECTION_DATABASE);
+        $sessionProcessor->set(SessionConstants::CONNECTION_CONNECTED, false);
 
         $clientDataSession = new ClientDataSession();
         $clientDataSession->setSession($this->session);
