@@ -15,6 +15,6 @@ class HomeController extends Controller
         if ($connectionSession->isConnected())
             return view('home');
 
-        return redirect(route('connect'));
+        return response()->redirectToRoute('connect');
     }
 }
