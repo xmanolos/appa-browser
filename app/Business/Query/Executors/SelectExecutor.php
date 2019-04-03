@@ -32,8 +32,9 @@ class SelectExecutor extends QueryExecutor
         try
         {
             $result = $this->connection->select($this->query);
+            $resultCount = count($result);
 
-            $responseMessage = 'Query executed successfully! ' . count($result) . ' rows found.';
+            $responseMessage = "Query executed successfully! $resultCount rows selected.";
 
             if ($this->needConvertEncode())
                 QueryResponseEncode::set($result);

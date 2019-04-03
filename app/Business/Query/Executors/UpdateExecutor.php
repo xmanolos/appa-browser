@@ -32,8 +32,10 @@ class UpdateExecutor extends QueryExecutor
         {
             $result = $this->connection->update($this->query);
 
+            $responseMessage = "Query executed successfully! $result rows updated.";
+
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage("Query executed successfully! $result affected rows.");
+            $successResponse->setResponseMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }

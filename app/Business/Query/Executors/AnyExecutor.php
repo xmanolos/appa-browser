@@ -32,7 +32,7 @@ class AnyExecutor extends QueryExecutor
         {
             $this->connection->statement($this->query);
 
-            $responseMessage = 'Query executed successfully! Unknown result.';
+            $responseMessage = 'Query executed successfully!';
 
             $successResponse = $this->getSuccessResponse();
             $successResponse->setResponseMessage($responseMessage);
