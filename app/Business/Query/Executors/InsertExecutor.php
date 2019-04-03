@@ -32,7 +32,7 @@ class InsertExecutor extends QueryExecutor
         {
             $result = $this->connection->insert($this->query);
 
-            $responseMessage = "Query executed successfully! $result affected rows.";
+            $responseMessage = "Query executed successfully! $result rows inserted.";
 
             $successResponse = $this->getSuccessResponse();
             $successResponse->setResponseMessage($responseMessage);

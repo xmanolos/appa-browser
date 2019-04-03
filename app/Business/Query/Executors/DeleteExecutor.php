@@ -32,7 +32,7 @@ class DeleteExecutor extends QueryExecutor
         {
             $result = $this->connection->delete($this->query);
 
-            $responseMessage = "Query executed successfully! $result affected rows.";
+            $responseMessage = "Query executed successfully! $result rows deleted.";
 
             $successResponse = $this->getSuccessResponse();
             $successResponse->setResponseMessage($responseMessage);
