@@ -70,20 +70,20 @@
     <script type="text/javascript">
         function testConnectionPgsql() {
             $('select[name=driver]').val('pgsql');
-            $('input[name=hostname]').val('{{ env('TEST_PGSQL_HOST') }}');
-            $('input[name=port]').val('{{ env('TEST_PGSQL_PORT') }}');
-            $('input[name=username]').val('{{ env('TEST_PGSQL_USERNAME') }}');
-            $('input[name=password]').val('{{ env('TEST_PGSQL_PASSWORD') }}');
-            $('input[name=database]').val('{{ env('TEST_PGSQL_DATABASE') }}');
+            $('input[name=hostname]').val('{{ env('DATA_PGSQL_HOST') }}');
+            $('input[name=port]').val('{{ env('DATA_PGSQL_PORT') }}');
+            $('input[name=username]').val('{{ env('DATA_PGSQL_USERNAME') }}');
+            $('input[name=password]').val('{{ env('DATA_PGSQL_PASSWORD') }}');
+            $('input[name=database]').val('{{ env('DATA_PGSQL_DATABASE') }}');
         }
 
         function testConnectionMysql() {
             $('select[name=driver]').val('mysql');
-            $('input[name=hostname]').val('{{ env('TEST_MYSQL_HOST') }}');
-            $('input[name=port]').val('{{ env('TEST_MYSQL_PORT') }}');
-            $('input[name=username]').val('{{ env('TEST_MYSQL_USERNAME') }}');
-            $('input[name=password]').val('{{ env('TEST_MYSQL_PASSWORD') }}');
-            $('input[name=database]').val('{{ env('TEST_MYSQL_DATABASE') }}');
+            $('input[name=hostname]').val('{{ env('DATA_MYSQL_HOST') }}');
+            $('input[name=port]').val('{{ env('DATA_MYSQL_PORT') }}');
+            $('input[name=username]').val('{{ env('DATA_MYSQL_USERNAME') }}');
+            $('input[name=password]').val('{{ env('DATA_MYSQL_PASSWORD') }}');
+            $('input[name=database]').val('{{ env('DATA_MYSQL_DATABASE') }}');
         }
     </script>
 @stop
