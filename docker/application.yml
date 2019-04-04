@@ -1,0 +1,49 @@
+version: '3.2'
+networks:
+  dbbrowser-network:
+    driver: bridge
+    driver_opts:
+      com.docker.network.enable_ipv6: "false"
+    ipam:
+      config:
+        - subnet: 172.28.0.0/16
+services:
+  application:
+    container_name: dbbrowser
+    image: arthurlehdermann/ubuntu-apache-php
+    networks:
+      dbbrowser-network:
+        ipv4_address: 172.28.0.7
+    ports:
+      - 80:80
+    volumes:
+      - type: bind
+        source: ../
+        target: /var/www/html
+    links:
+      - postgres
+      - mysql
+  postgres:
+    container_name: dbbrowser-data-pgsql
+    image: postgres
+    restart: always
+    networks:
+      dbbrowser-network:
+        ipv4_address: 172.28.0.8
+    ports:
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: dbbrowser-data
+      POSTGRES_DB: dbbrowser-data
+  mysql:
+    container_name: dbbrowser-data-mysql
+    image: mysql:5.7
+    restart: always
+    networks:
+      dbbrowser-network:
+        ipv4_address: 172.28.0.9
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: dbbrowser-data
+      MYSQL_DATABASE: dbbrowser-data
