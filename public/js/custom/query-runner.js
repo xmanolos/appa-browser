@@ -11,16 +11,23 @@ class QueryRunner {
             'query': this.query 
         };
 
-        let completeCallback = function(runResult, bind) {
-            bind.queryRunResult = runResult.responseJSON;
+        let errorCallback = function(response) {
+            let dialog = new Dialog();
+            dialog.useMessage(response.responseText);
+            dialog.showError();
+        };
+
+        let successCallback = function(response, bind) {
+            bind.queryRunResult = response;
             bind.showQueryResult(bind);
         };
 
         let apiRequest = new ApiRequest(this);
         apiRequest.setData(queryData);
-        apiRequest.setCompleteCallback(completeCallback);
         apiRequest.disableContentType();
-        apiRequest.postToRoute('api.query.run');
+        apiRequest.setErrorCallback(errorCallback);
+        apiRequest.setSuccessCallback(successCallback);
+        apiRequest.postToRoute("api.query.run");
     }
 
     showQueryResult(bind) {
@@ -38,7 +45,7 @@ class QueryRunner {
         let queryType = bind.queryRunResult.queryType;
         let queryMessage = bind.queryRunResult.responseMessage;
 
-        if (queryType == 'SELECT') {
+        if (queryType === "SELECT") {
             let queryData = bind.queryRunResult.responseData;
 
             bind.loadSelectResult(queryData);
