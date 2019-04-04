@@ -37,9 +37,15 @@ class DatabaseData {
 	}
 
 	onTablesOpen(event, bind) {
-		let onCompleteCallback = function(data, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
 			let treeView = bind.treeView;
-			let tables = data.responseJSON;
+			let tables = response;
 
 			treeView.clearNode("node-tables");
 
@@ -61,14 +67,21 @@ class DatabaseData {
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema });
-		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.tables.get");
 	}
 
 	onViewsOpen(event, bind) {
-		let onCompleteCallback = function(data, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
 			let treeView = bind.treeView;
-			let views = data.responseJSON;
+			let views = response;
 
 			treeView.clearNode("node-views");
 
@@ -90,14 +103,21 @@ class DatabaseData {
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema });
-		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.views.get");
 	}
 
 	onRoutinesOpen(event, bind) {
-		let onCompleteCallback = function(data, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
 			let treeView = bind.treeView;
-			let routines = data.responseJSON;
+			let routines = response;
 
 			treeView.clearNode("node-routines");
 
@@ -118,7 +138,8 @@ class DatabaseData {
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema });
-		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.routines.get");
 	}
 
@@ -172,9 +193,15 @@ class DatabaseData {
 	}
 
 	onTableColumnsOpen(event, bind) {
-		let onCompleteCallback = function(data, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
 			let treeView = bind.treeView;
-			let columns = data.responseJSON;
+			let columns = response;
 
 			bind.treeView.clearNode(event.nodeId);
 
@@ -199,14 +226,21 @@ class DatabaseData {
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema, "table": table });
-		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.table.columns.get");
 	}
 
 	onTableConstraintsOpen(event, bind) {
-		let onCompleteCallback = function(data, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
 			let treeView = bind.treeView;
-			let constraints = data.responseJSON;
+			let constraints = response;
 
 			bind.treeView.clearNode(event.nodeId);
 
@@ -231,14 +265,21 @@ class DatabaseData {
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema, "table": table });
-		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.table.constraints.get");
 	}
 
 	onViewColumnsOpen(event, bind) {
-		let onCompleteCallback = function(data, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
 			let treeView = bind.treeView;
-			let columns = data.responseJSON;
+			let columns = response;
 
 			bind.treeView.clearNode(event.nodeId);
 
@@ -263,7 +304,8 @@ class DatabaseData {
 		
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.setData({ "schema": bind.schema, "view": view });
-		apiRequest.setCompleteCallback(onCompleteCallback);
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.view.columns.get");
 	}
 }

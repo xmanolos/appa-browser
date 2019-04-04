@@ -8,8 +8,14 @@ $(document).ready(function() {
 });
 
 function loadSchemas() {
-    let completeCallback = function(data, bind) {
-        schemas = data.responseJSON;
+    let errorCallback = function(response) {
+        let dialog = new Dialog();
+        dialog.useMessage(response.responseText);
+        dialog.showError();
+    };
+
+    let successCallback = function(response, bind) {
+        let schemas = response;
 
         bind.addSchemaPlaceholder();
 
@@ -21,7 +27,8 @@ function loadSchemas() {
     };
 
     let apiRequest = new ApiRequest(this);
-    apiRequest.setCompleteCallback(completeCallback);
+    apiRequest.setErrorCallback(errorCallback);
+    apiRequest.setSuccessCallback(successCallback);
     apiRequest.getToRoute("api.database-data.schemas.get");
 }
 
