@@ -30,6 +30,11 @@ class ExecutorConstants
     public const KEYWORD_DELETE = 'DELETE';
 
     /**
+     * Keyword of create queries identification.
+     */
+    public const KEYWORD_CREATE = 'CREATE';
+
+    /**
      * Keyword of procedure queries identification.
      */
     public const KEYWORD_PROCEDURE = 'CALL';
