@@ -35,7 +35,7 @@ class CreateExecutor extends QueryExecutor
             $responseMessage = $this->getResponseMessage();
 
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage($responseMessage);
+            $successResponse->setMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }

@@ -35,7 +35,7 @@ class AnyExecutor extends QueryExecutor
             $responseMessage = 'Query executed successfully!';
 
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage($responseMessage);
+            $successResponse->setMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }

@@ -31,17 +31,17 @@ class SelectExecutor extends QueryExecutor
     {
         try
         {
-            $result = $this->connection->select($this->query);
-            $resultCount = count($result);
+            $responseData = $this->connection->select($this->query);
+            $responseDataCount = count($responseData);
 
-            $responseMessage = "Query executed successfully! $resultCount rows selected.";
+            $responseMessage = "Query executed successfully! $responseDataCount rows selected.";
 
             if ($this->needConvertEncode())
-                QueryResponseEncode::set($result);
+                QueryResponseEncode::set($responseData);
 
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage($responseMessage);
-            $successResponse->setResponseData($result);
+            $successResponse->setMessage($responseMessage);
+            $successResponse->setData($responseData);
 
             $this->response = $successResponse->getJson();
         }

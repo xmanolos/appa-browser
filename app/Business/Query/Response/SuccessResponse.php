@@ -25,12 +25,12 @@ class SuccessResponse
     /**
      * @var string The result message of query that was executed.
      */
-    protected $responseMessage = 'Query executed successfully!';
+    protected $message = 'Query executed successfully!';
 
     /**
      * @var mixed The result data of query that was executed.
      */
-    protected $responseData;
+    protected $data;
 
     /**
      * Defines the value of the query that was be executed.
@@ -55,21 +55,21 @@ class SuccessResponse
     /**
      * Defines the value of the result message of query that was executed.
      *
-     * @param string $responseMessage
+     * @param string $message
      */
-    public function setResponseMessage($responseMessage)
+    public function setMessage($message)
     {
-        $this->responseMessage = $responseMessage;
+        $this->message = $message;
     }
 
     /**
      * Defines the value of the result data of query that was executed.
      *
-     * @param mixed $responseData
+     * @param mixed $data
      */
-    public function setResponseData($responseData)
+    public function setData($data)
     {
-        $this->responseData = $responseData;
+        $this->data = $data;
     }
 
     /**

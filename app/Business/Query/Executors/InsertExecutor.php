@@ -35,7 +35,7 @@ class InsertExecutor extends QueryExecutor
             $responseMessage = "Query executed successfully! $result rows inserted.";
 
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage($responseMessage);
+            $successResponse->setMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }
