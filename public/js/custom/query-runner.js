@@ -34,20 +34,11 @@ class QueryRunner {
             selectResult.showGrid();
         };
 
-        this.clearSelectResult();
-
         let apiRequest = new ApiRequest(this);
         apiRequest.setData(queryData);
         apiRequest.disableContentType();
         apiRequest.setErrorCallback(errorCallback);
         apiRequest.setSuccessCallback(successCallback);
         apiRequest.postToRoute("api.query.run");
-    }
-
-    clearSelectResult() {
-        let selectResult = new SelectResult();
-        selectResult.setContainer(this.container);
-        selectResult.setData(null);
-        selectResult.showGrid();
     }
 }

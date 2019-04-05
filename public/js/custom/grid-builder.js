@@ -12,7 +12,7 @@ class GridBuilder {
     }
 
     build() {
-        $(this.container).append('<div id="grid-builder" style="display: block;"></div>');
+        $(this.container).append("<div id=\"grid-builder\" style=\"display: block;\"></div>");
 
         $("#grid-builder").jsGrid({
             height: "100%",
