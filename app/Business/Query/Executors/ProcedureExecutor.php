@@ -35,7 +35,7 @@ class ProcedureExecutor extends QueryExecutor
             $responseMessage = 'Procedure executed successfully!';
 
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage($responseMessage);
+            $successResponse->setMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }

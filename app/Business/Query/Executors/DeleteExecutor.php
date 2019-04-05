@@ -35,7 +35,7 @@ class DeleteExecutor extends QueryExecutor
             $responseMessage = "Query executed successfully! $result rows deleted.";
 
             $successResponse = $this->getSuccessResponse();
-            $successResponse->setResponseMessage($responseMessage);
+            $successResponse->setMessage($responseMessage);
 
             $this->response = $successResponse->getJson();
         }

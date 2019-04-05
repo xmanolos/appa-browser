@@ -1,10 +1,10 @@
 class SelectResult {
-    setData(data) {
-        this.data = data;
-    }
-
     setContainer(container) {
         this.container = container;
+    }
+
+    setData(data) {
+        this.data = data;
     }
 
     showGrid() {
