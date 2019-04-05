@@ -1,3 +1,0 @@
-insert into migrations values (20, 'dasdsa', 1)
-
-select * from migrations
