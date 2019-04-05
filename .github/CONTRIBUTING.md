@@ -1,4 +1,4 @@
-# Contributing to DBBrowser
+# Contributing to Appa Browser.
 1. [Setting up the application.](#setting-up-the-application)
 2. [Running the application.](#running-the-application)
 3. [Generating test data.](#generating-test-data)
@@ -9,7 +9,7 @@
 
 To setting up the application, follow the steps below.
 
-1. Clone the repository: `git clone https://github.com/xdanif/db-browser`
+1. Clone the repository: `git clone https://github.com/xmanolos/appa-browser`
 2. Access the cloned folder: `cd db-browser`
 3. Duplicate the `.env.example` file by renaming it to `.env` only.
 4. Install the [Composer](https://getcomposer.org/) dependencies: `composer install`
@@ -18,8 +18,9 @@ To setting up the application, follow the steps below.
 
 ## Running the application.
 
-##### Using [Docker](https://www.docker.com/), do:
+To run the application, follow the steps below.
 
+##### Using [Docker](https://www.docker.com/), do:
 1. Access the cloned folder.
 2. Run: `docker-compose -f docker\application.yml up -d`
 
@@ -53,7 +54,7 @@ In either case you can use JavaScript methods to populate the connection data on
 
 ## Submitting an Issue.
 
-Before you submit an issue, please search the [issue tracker](https://github.com/xdanif/db-browser/issues), maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
+Before you submit an issue, please search the [issue tracker](https://github.com/xmanolos/appa-browser/issues), maybe an issue for your problem already exists and the discussion might inform you of workarounds readily available.
 
 We want to fix all the issues as soon as possible, but before fixing a bug we need to reproduce and confirm it. In order to reproduce bugs we will systematically ask you to provide a minimal reproduction scenario.
 
@@ -61,7 +62,7 @@ We want to fix all the issues as soon as possible, but before fixing a bug we ne
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-1. Search [GitHub](https://github.com/xdanif/db-browser) for an open or closed PR that relates to your submission. You don't want to duplicate effort.
+1. Search [GitHub](https://github.com/xmanolos/appa-browser) for an open or closed PR that relates to your submission. You don't want to duplicate effort.
 2. Fork this repository.
 3. Create a branch for your changes, so we'll be easier to merge:
 
@@ -78,6 +79,6 @@ Before you submit your Pull Request (PR) consider the following guidelines:
     git push origin my-fix-branch
     ```
 
-9. In GitHub, send a pull request to `db-browser:master`.
+9. In GitHub, send a pull request to `appa-browser:master`.
 
 That's it! Thank you for your contribution!
