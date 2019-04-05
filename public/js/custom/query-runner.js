@@ -6,9 +6,9 @@ class QueryRunner {
 
     run(schemaName, schemaCharset) {
         let queryData = { 
-            'schema-name': schemaName, 
-            'schema-charset': schemaCharset,
-            'query': this.query 
+            "schema-name": schemaName,
+            "schema-charset": schemaCharset,
+            "query": this.query
         };
 
         let errorCallback = function(response) {
@@ -21,6 +21,8 @@ class QueryRunner {
             bind.queryRunResult = response;
             bind.showQueryResult(bind);
         };
+
+        this.clearSelectResult();
 
         let apiRequest = new ApiRequest(this);
         apiRequest.setData(queryData);
@@ -48,7 +50,7 @@ class QueryRunner {
         if (queryType === "SELECT") {
             let queryData = bind.queryRunResult.responseData;
 
-            bind.loadSelectResult(queryData);
+            bind.showSelectResult(queryData);
         }
 
         let dialog = new Dialog();
@@ -67,9 +69,17 @@ class QueryRunner {
         dialog.showError();
     }
 
-    loadSelectResult(queryData) {
-        let gridBuilder = new GridBuilder(this.containerId);
-        gridBuilder.setData(queryData);
-        gridBuilder.build();
+    showSelectResult(queryData) {
+        let selectResult = new SelectResult();
+        selectResult.setData(queryData);
+        selectResult.setContainer(this.containerId);
+        selectResult.showGrid();
+    }
+
+    clearSelectResult() {
+        let selectResult = new SelectResult();
+        selectResult.setData(null);
+        selectResult.setContainer(this.containerId);
+        selectResult.showGrid();
     }
 }

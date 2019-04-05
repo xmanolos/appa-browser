@@ -38,7 +38,7 @@ function callRunQuery() {
     let schemaName = $('#schemas').val();
     let schemaCharset = $('#schema-' + schemaName).attr('charset');
 
-    let queryRunner = new QueryRunner(queryText, 'panel-show-result');
+    let queryRunner = new QueryRunner(queryText, '.panel-show-result');
     queryRunner.run(schemaName, schemaCharset);
 }
 
