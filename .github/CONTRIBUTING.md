@@ -10,7 +10,7 @@
 To setting up the application, follow the steps below.
 
 1. Clone the repository: `git clone https://github.com/xmanolos/appa-browser`
-2. Access the cloned folder: `cd db-browser`
+2. Access the cloned folder: `cd appa-browser`
 3. Duplicate the `.env.example` file by renaming it to `.env` only.
 4. Install the [Composer](https://getcomposer.org/) dependencies: `composer install`
 5. Install the [Yarn](https://yarnpkg.com/) dependencies: `yarn install`
