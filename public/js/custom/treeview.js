@@ -17,11 +17,15 @@ class TreeView {
     		]
   		});
 
+		let startLoading = this.startLoadingNode;
+
   		$(this.containerId).on("select_node.jstree", function (e, data) {
 			let selectedNode = data.selected[0];
 
     		$.each(treeViewOnSelectedEvents, function(index, event) {
 				if (event.nodeId === selectedNode) {
+					startLoading(event.nodeId);
+
 					event.action(event, event.bind);
 				}
     		});
@@ -36,6 +40,10 @@ class TreeView {
 		$(this.containerId).jstree().open_node(nodeId);
 	}
 
+	getNode(nodeId) {
+		return $(this.containerId).jstree().get_node(nodeId);
+	}
+
 	getNodeText(nodeId) {
 		return $(this.containerId).jstree().get_node(nodeId).text;
 	}
@@ -48,6 +56,12 @@ class TreeView {
 		let childrens = $(this.containerId).jstree().get_node(nodeId).children;
 
 		$(this.containerId).jstree().delete_node(childrens);
+	}
+
+	startLoadingNode(nodeId) {
+		let nodeAnchor = $("#" + nodeId + " .jstree-anchor");
+
+		$("i", nodeAnchor).addClass("la-spinner");
 	}
 
 	addOnNodeSelectedAction(nodeId, action, bind) {
