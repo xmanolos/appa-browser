@@ -13,8 +13,29 @@ class TreeView {
     			"check_callback": true
     		},
     		"plugins": [
-    			"search"
-    		]
+    			"search", "contextmenu"
+    		],
+			"contextmenu": {
+    			"select_node": false,
+    			"items": {
+					"action-refresh": {
+						"label": "Refresh",
+						"icon": "la la-refresh",
+						"action" : function (data) {
+							let treeView = $.jstree.reference(data.reference);
+							let selectedNode = treeView.get_node(data.reference).id;
+
+							$.each(treeViewOnSelectedEvents, function(index, event) {
+								if (event.nodeId === selectedNode) {
+									startLoading(event.nodeId);
+
+									event.action(event, event.bind);
+								}
+							});
+						}
+					}
+				}
+			}
   		});
 
 		let startLoading = this.startLoadingNode;
