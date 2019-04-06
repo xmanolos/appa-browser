@@ -6,9 +6,9 @@ php:
     - 7.3
 
 before_script:
-  - curl -sSfL -o ~/.phpenv/versions/hhvm/bin/phpunit https://phar.phpunit.de/phpunit-5.7.phar
   - cp .env.example .env
   - composer install
+  - composer require phpunit/phpunit
   - php artisan key:generate
   - yarn install
 
@@ -16,4 +16,4 @@ notifications:
   on_success: always
   on_failure: always
 
-script: vendor/bin/atoum
+script: ./vendor/bin/phpunit --version
