@@ -2,7 +2,10 @@
 <link rel="stylesheet" type="text/css" href="{{ asset('css/views/layout/header.css') }}">
 
 <div class="header">
-    <div class="panel-logo"></div>
+    <div class="panel-logo">
+        <img src="{{ asset('images/logo/face.svg') }}" />
+    </div>
+
     @include('layout.connection-info')
 
     <div class="panel-exit">

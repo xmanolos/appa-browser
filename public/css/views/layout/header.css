@@ -10,10 +10,16 @@
 }
 
 .panel-logo {
-    background-color: white;
-    height: 45px;
+    height: 90%;
     width: 45px;
     border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.panel-logo > img {
+    max-height: 95%;
+    max-width: 95%;
 }
 
 .panel-exit a,
@@ -21,4 +27,8 @@
     text-decoration: none;
     color: var(--color-text-light);
     font-size: 20px;
+    transition: var(--time-effect) ease;
+}
+.panel-exit a:hover {
+    text-shadow: 0px 0px 2px var(--color-text-light);
 }
