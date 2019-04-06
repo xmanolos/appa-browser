@@ -11,14 +11,14 @@ class SelectResult {
         let columns = this.getDataColumns();
         let rows = this.getDataRows();
 
-        let gridBuilder = new GridBuilder(this.container);
-        gridBuilder.setColumns(columns);
-        gridBuilder.setRows(rows);
+        let dataGrid = new DataGrid(this.container);
+        dataGrid.setColumns(columns);
+        dataGrid.setRows(rows);
 
         if (this.hasData()) {
-            gridBuilder.build();
+            dataGrid.build();
         } else {
-            gridBuilder.clear();
+            dataGrid.clear();
         }
     }
 
