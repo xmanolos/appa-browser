@@ -66,6 +66,7 @@ class DatabaseData {
 		};
 
 		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": bind.schema });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
@@ -102,6 +103,7 @@ class DatabaseData {
 		};
 
 		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": bind.schema });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
@@ -137,6 +139,7 @@ class DatabaseData {
 		};
 
 		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": bind.schema });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
@@ -225,6 +228,7 @@ class DatabaseData {
 		let table = bind.treeView.getNodeValue(event.nodeId);
 
 		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": bind.schema, "table": table });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
@@ -264,6 +268,7 @@ class DatabaseData {
 		let table = bind.treeView.getNodeValue(event.nodeId);
 
 		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": bind.schema, "table": table });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
@@ -301,8 +306,9 @@ class DatabaseData {
 		};
 
 		let view = bind.treeView.getNodeValue(event.nodeId);
-		
+
 		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": bind.schema, "view": view });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);

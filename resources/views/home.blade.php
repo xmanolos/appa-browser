@@ -12,6 +12,9 @@
     <!-- JSGrid (By Tabalinas) -->
     <link rel="stylesheet" type="text/css" href="{{ asset('packages/jsgrid/dist/jsgrid.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('packages/jsgrid/dist/jsgrid-theme.min.css') }}" />
+
+    <!-- Custom (Made by Us) -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/components/mini-loading.css') }}">
 @stop
 
 @section('content')
