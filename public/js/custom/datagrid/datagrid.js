@@ -1,4 +1,4 @@
-class GridBuilder {
+class DataGrid {
     constructor(container) {
         this.container = container;
     }
@@ -12,15 +12,15 @@ class GridBuilder {
     }
 
     build() {
-        $(this.container).append("<div id=\"grid-builder\" style=\"display: block;\"></div>");
+        $(this.container).append("<div class=\"data-grid\" style=\"display: block;\"></div>");
 
-        $("#grid-builder").jsGrid({
+        $(".data-grid").jsGrid({
             height: "100%",
             width: "100%",
             heading: true,
             paging: true,
             sorting: true,
-            filtering: true,
+            filtering: false,
             autoload: true,
             pageSize: 15,
             data: this.rows,

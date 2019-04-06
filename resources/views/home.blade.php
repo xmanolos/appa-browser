@@ -91,6 +91,6 @@
     <script type="text/javascript" src="{{ asset('js/custom/schema.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/database-data-search.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/datagrid/datagrid.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query/select-result.js') }}"></script>
 @stop
