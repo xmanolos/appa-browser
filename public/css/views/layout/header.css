@@ -22,10 +22,6 @@
     max-width: 95%;
 }
 
-.panel-db-data {
-    font-size: 15px;
-}
-
 .panel-exit a,
 .panel-exit a:visited {
     text-decoration: none;
@@ -35,8 +31,4 @@
 }
 .panel-exit a:hover {
     text-shadow: 0px 0px 2px var(--color-text-light);
-}
-
-.connection-state-off {
-
 }

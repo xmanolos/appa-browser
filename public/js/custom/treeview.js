@@ -1,21 +1,38 @@
+var treeViewOnSelectedEvents;
+
 class TreeView {
 	constructor(containerId) {
-		this.containerId = '#' + containerId;
-		this.onSelectedActions = [ ];
+		this.containerId = "#" + containerId;
+		
+		treeViewOnSelectedEvents = [];
 	}
 
 	init() {
 		$(this.containerId).jstree({
-    		'core': {
-    			'check_callback': true
+    		"core": {
+    			"check_callback": true
     		},
-    		'plugins': [
-    			'search'
+    		"plugins": [
+    			"search"
     		]
+  		});
+
+		let startLoading = this.startLoadingNode;
+
+  		$(this.containerId).on("select_node.jstree", function (e, data) {
+			let selectedNode = data.selected[0];
+
+    		$.each(treeViewOnSelectedEvents, function(index, event) {
+				if (event.nodeId === selectedNode) {
+					startLoading(event.nodeId);
+
+					event.action(event, event.bind);
+				}
+    		});
   		});
 	}
 
-	addNode(node, parent = '#') {
+	addNode(node, parent = "#") {
 		$(this.containerId).jstree().create_node(parent, node);
 	}
 
@@ -23,8 +40,16 @@ class TreeView {
 		$(this.containerId).jstree().open_node(nodeId);
 	}
 
+	getNode(nodeId) {
+		return $(this.containerId).jstree().get_node(nodeId);
+	}
+
 	getNodeText(nodeId) {
 		return $(this.containerId).jstree().get_node(nodeId).text;
+	}
+
+	getNodeValue(nodeId) {
+		return $(this.containerId).jstree().get_node(nodeId).original.value;
 	}
 
 	clearNode(nodeId) {
@@ -33,9 +58,15 @@ class TreeView {
 		$(this.containerId).jstree().delete_node(childrens);
 	}
 
+	startLoadingNode(nodeId) {
+		let nodeAnchor = $("#" + nodeId + " .jstree-anchor");
+
+		$("i", nodeAnchor).addClass("la-spinner");
+	}
+
 	addOnNodeSelectedAction(nodeId, action, bind) {
-		if (this.onSelectedActions.some(x => x.nodeId == nodeId)) {
-			this.onSelectedActions.filter(x => x.nodeId == nodeId).action = action;
+		if (treeViewOnSelectedEvents.some(x => x.nodeId === nodeId)) {
+			treeViewOnSelectedEvents.filter(x => x.nodeId === nodeId).action = action;
 		} else {
 			let event = {
 				nodeId: nodeId,
@@ -43,23 +74,7 @@ class TreeView {
 				bind: bind
 			};
 
-			this.onSelectedActions.push(event);
+			treeViewOnSelectedEvents.push(event);
 		}
-
-		this.storeNodeSelectionActions();
-	}
-
-	storeNodeSelectionActions() {
-		let onSelectedActions = this.onSelectedActions;
-
-		$(this.containerId).on('changed.jstree', function (e, data) {
-    		let selectedNode = data.selected[0];
-
-    		$.each(onSelectedActions, function(index, event) {
-				if (event.nodeId == selectedNode) {
-					event.action(event, event.bind);
-				}
-    		});
-  		});
 	}
 }

@@ -3,7 +3,7 @@
 namespace App\Business\Connection;
 
 use App\Business\CapsuleConnection;
-use App\Business\ConnectionConfig;
+use App\Business\ConnectionData\ConnectionData;
 
 /**
  * @package App\Business\Connection
@@ -16,18 +16,23 @@ abstract class Connection
     protected $connectionConfig;
 
     /**
+     * @var ConnectionData The Connection Data to define the connection.
+     */
+    protected $connectionData;
+
+    /**
      * The connection instance.
      */
     protected $connection;
 
     /**
-     * Defines the value of the Connection Config to define the connection.
-     * 
-     * @param ConnectionConfig $connectionConfig
+     * Defines the value of the Connection Data to define the connection.
+     *
+     * @param ConnectionData $connectionData
      */
-    public function setConnectionConfig(ConnectionConfig $connectionConfig) 
-    { 
-        $this->connectionConfig = $connectionConfig; 
+    public function setConnectionData(ConnectionData $connectionData)
+    {
+        $this->connectionData= $connectionData;
     }
 
     /**
@@ -38,7 +43,7 @@ abstract class Connection
     protected function getCapsuleConnection()
     {
         $capsuleConnection = new CapsuleConnection();
-        $capsuleConnection->setConnectionConfig($this->connectionConfig);
+        $capsuleConnection->setConnectionData($this->connectionData);
 
         return $capsuleConnection;
     }

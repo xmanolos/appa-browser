@@ -69,9 +69,14 @@ body .footer {
     transition: var(--time-effect-hover-button) ease;
 }
 
+span.button {
+    padding: 8px 15px;
+}
+
 input.button {
     padding: 8px 15px;
 }
+
 .button:hover {
     background-color: var(--color-button-blue-dark);
 }

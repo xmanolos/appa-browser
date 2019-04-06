@@ -1,61 +1,44 @@
 class QueryRunner {
-    constructor(query, containerId) {
+    setContainer(container) {
+        this.container = container;
+    }
+
+    setQuery(query) {
         this.query = query;
-        this.containerId = containerId;
     }
 
     run(schemaName, schemaCharset) {
-        let queryData = { 
-            'schema-name': schemaName, 
-            'schema-charset': schemaCharset,
-            'query': this.query 
+        let queryData = { "schema-name": schemaName,
+            "schema-charset": schemaCharset,
+            "query": this.query
         };
 
-        let completeCallback = function(runResult, bind) {
-            bind.queryRunResult = runResult.responseJSON;
-            bind.showQueryResult(bind);
-        }
+        let selectResult = new SelectResult();
+        selectResult.setContainer(this.container);
+
+        let errorCallback = function(response) {
+            let dialog = new Dialog();
+            dialog.useMessage(response.responseText);
+            dialog.showError();
+
+            selectResult.setData(null);
+            selectResult.showGrid();
+        };
+
+        let successCallback = function(response) {
+            let dialog = new Dialog();
+            dialog.useTitle(response.message);
+            dialog.showSuccess();
+
+            selectResult.setData(response.data);
+            selectResult.showGrid();
+        };
 
         let apiRequest = new ApiRequest(this);
         apiRequest.setData(queryData);
-        apiRequest.setCompleteCallback(completeCallback);
         apiRequest.disableContentType();
-        apiRequest.postToRoute('api.query.run');
-    }
-
-    showQueryResult(bind) {
-        let queryState = bind.queryRunResult.state;
-
-        if (queryState == 'success') {
-            bind.showSuccessQueryResult(bind);
-        } else if (queryState == 'error') {
-            bind.showErrorQueryResult(bind);
-        }
-    }
-
-    showSuccessQueryResult(bind) {
-        let queryType = bind.queryRunResult.type;
-        let queryMessage = bind.queryRunResult.message;
-
-        if (queryType == 'SELECT') {
-            let queryData = bind.queryRunResult.data;
-
-            bind.loadSelectResult(queryData);
-        }
-
-        successDialog(queryMessage);
-    }
-
-    showErrorQueryResult() {
-        let queryException = this.queryRunResult.exception;
-        let queryMessage = this.queryRunResult.message;
-
-        errorDialog(queryException, queryMessage, 700);
-    }
-
-    loadSelectResult(queryData) {
-        let gridBuilder = new GridBuilder(this.containerId);
-        gridBuilder.setData(queryData);
-        gridBuilder.build();
+        apiRequest.setErrorCallback(errorCallback);
+        apiRequest.setSuccessCallback(successCallback);
+        apiRequest.postToRoute("api.query.run");
     }
 }

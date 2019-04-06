@@ -1,0 +1,25 @@
+.connection-state-off {
+	color: var(--color-text-light);
+}
+
+.connection-state-on {
+	color: #B4E080;
+}
+
+.panel-connection-info {
+	display: none;
+}
+
+.connection-driver {
+	height: 80px;
+	width: 80px; 
+}
+
+.connection-general ul {
+	list-style-type: none;
+	display: inline;
+}
+
+.connection-general li {
+	margin-bottom: 5px;
+}

@@ -2,32 +2,35 @@
 
 namespace App\Business\Session;
 
+use App\Business\Session\SessionConstants;
+use App\Business\Session\SessionProcessor;
+use Illuminate\Contracts\Session\Session;
 use Illuminate\Http\Request;
 
 /**
- * Provides entries to handle the Client Data of the Session.
+ * Manages the client data in the session.
  *
  * @package App\Business\Session
  */
 class ClientDataSession
 {
     /**
-     * @var string The Session that will be handled.
+     * @var Session The session that will be managed.
      */
     protected $session;
 
     /**
-     * Defines the value of the Session that will be handled.
+     * Defines the value of the sessions that will be managed.
      *
-     * @param mixed $session
+     * @param Session $session
      */
-    public function setSession($session)
+    public function setSession(Session $session)
     {
         $this->session = $session;
     }
 
     /**
-     * Defines the value of the Session that will be handled from a Request.
+     * Defines the value of the session that will be managed from a Request.
      *
      * @param Request $request
      */
@@ -37,44 +40,44 @@ class ClientDataSession
     }
 
     /**
-     * Sets the Selected Schema of the Session.
+     * Sets the selected schema of the session.
      *
      * @param string $schema
      */
     public function setSelectedSchema($schema)
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
-        $clientSession->set('selected-schema', $schema); // TODO: Move to constants.
+        $sessionProcessor->set(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA, $schema);
     }
 
     /**
-     * Gets the Selected Schema from the Session.
+     * Gets the selected schema from the session.
      *
      * @return string
      */
     public function getSelectedSchema()
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
-        return $clientSession->get('selected-schema'); // TODO: Move to constants.
+        return $sessionProcessor->get(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA);
     }
 
     /**
-     * Removes the Selected Schema from the Session.
+     * Removes the selected schema from the session.
      */
     public function removeSelectedSchema()
     {
-        $clientSession = new Session();
-        $clientSession->setSession($this->session);
+        $sessionProcessor = new SessionProcessor();
+        $sessionProcessor->setSession($this->session);
 
-        $clientSession->remove('selected-schema'); // TODO: Move to constants.
+        $sessionProcessor->remove(SessionConstants::CLIENT_DATA_SELECTED_SCHEMA);
     }
 
     /**
-     * Removes all Client Data from the Session.
+     * Removes all Client Data from the session.
      */
     public function removeAll()
     {

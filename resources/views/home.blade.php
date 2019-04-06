@@ -12,6 +12,9 @@
     <!-- JSGrid (By Tabalinas) -->
     <link rel="stylesheet" type="text/css" href="{{ asset('packages/jsgrid/dist/jsgrid.min.css') }}" />
     <link rel="stylesheet" type="text/css" href="{{ asset('packages/jsgrid/dist/jsgrid-theme.min.css') }}" />
+
+    <!-- Custom (Made by Us) -->
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/components/mini-loading.css') }}">
 @stop
 
 @section('content')
@@ -91,5 +94,6 @@
     <script type="text/javascript" src="{{ asset('js/custom/schema.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/database-data-search.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
-    <script type="text/javascript" src="{{ asset('js/custom/grid-builder.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/datagrid/datagrid.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/query/select-result.js') }}"></script>
 @stop

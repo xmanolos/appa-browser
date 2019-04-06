@@ -1,16 +1,13 @@
 <!-- View CSS -->
 <link rel="stylesheet" type="text/css" href="{{ asset('css/views/layout/header.css') }}">
 
-<!-- Custom (Made by Us) -->
-<link rel="stylesheet" type="text/css" href="{{ asset('css/custom/connection-info.css') }}">
-
 <div class="header">
     <div class="panel-logo">
         <img src="{{ asset('images/logo/face.svg') }}" />
     </div>
-    <div id="panel-db-data" class="panel-db-data">
-    	<input id="label-connection" type="button" value="Unknown connection state." class="button">
-    </div>
+
+    @include('layout.connection-info')
+
     <div class="panel-exit">
         <a id="lnk-exit" href="#" title="Disconnect">
         	<i class="la la-unlink"></i>
@@ -23,4 +20,3 @@
 
 <!-- Custom (Made by Us) -->
 <script type="text/javascript" src="{{ asset('js/custom/disconnection.js') }}"></script>
-<script type="text/javascript" src="{{ asset('js/custom/connection-info.js') }}"></script>

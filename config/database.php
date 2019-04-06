@@ -82,22 +82,22 @@ return [
             'prefix_indexes' => true,
         ],
 
-        'test-pgsql' => [
+        'data-pgsql' => [
             'driver' => 'pgsql',
-            'host' => env('TEST_PGSQL_HOST', 'localhost'),
-            'port' => env('TEST_PGSQL_PORT', '5432'),
-            'username' => env('TEST_PGSQL_USERNAME', 'postgres'),
-            'password' => env('TEST_PGSQL_PASSWORD', 'dbbrowser-test'),
-            'database' => env('TEST_PGSQL_DATABASE', 'dbbrowser-test-pgsql'),
+            'host' => env('DATA_PGSQL_HOST'),
+            'port' => env('DATA_PGSQL_PORT'),
+            'username' => env('DATA_PGSQL_USERNAME'),
+            'password' => env('DATA_PGSQL_PASSWORD'),
+            'database' => env('DATA_PGSQL_DATABASE'),
         ],
 
-        'test-mysql' => [
+        'data-mysql' => [
             'driver' => 'mysql',
-            'host' => env('TEST_MYSQL_HOST', 'localhost'),
-            'port' => env('TEST_MYSQL_PORT', '3306'),
-            'username' => env('TEST_MYSQL_USERNAME', 'root'),
-            'password' => env('TEST_MYSQL_PASSWORD', 'dbbrowser-test'),
-            'database' => env('TEST_MYSQL_DATABASE', 'dbbrowser-test-mysql'),
+            'host' => env('DATA_MYSQL_HOST'),
+            'port' => env('DATA_MYSQL_PORT'),
+            'username' => env('DATA_MYSQL_USERNAME'),
+            'password' => env('DATA_MYSQL_PASSWORD'),
+            'database' => env('DATA_MYSQL_DATABASE'),
         ],
     ],
 

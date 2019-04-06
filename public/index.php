@@ -7,6 +7,10 @@
  * @author   Taylor Otwell <taylor@laravel.com>
  */
 
+use App\Business\Driver\AvailableDrivers;
+use App\Business\Driver\Drivers\MySqlDriver;
+use App\Business\Driver\Drivers\PostgresSqlDriver;
+
 define('LARAVEL_START', microtime(true));
 
 /*
@@ -48,6 +52,9 @@ $app = require_once __DIR__.'/../bootstrap/app.php';
 | and wonderful application we have prepared for them.
 |
 */
+
+AvailableDrivers::getInstance()->registerFromClass(MySqlDriver::class);
+AvailableDrivers::getInstance()->registerFromClass(PostgresSqlDriver::class);
 
 $kernel = $app->make(Illuminate\Contracts\Http\Kernel::class);
 

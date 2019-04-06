@@ -1,0 +1,18 @@
+language: php
+
+php:
+    - 7.1
+    - 7.2
+    - 7.3
+
+before_script:
+  - cp .env.example .env
+  - composer install
+  - php artisan key:generate
+  - yarn install
+
+notifications:
+  on_success: always
+  on_failure: always
+
+script: ./vendor/bin/phpunit --version
