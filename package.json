@@ -22,11 +22,11 @@
         "sass-loader": "^7.1.0",
         "vue": "^2.5.17"
     },
-    "name": "db-browser",
+    "name": "appa-browser",
     "version": "0.0.0",
     "description": "Administration and development tool for the most popular databases.",
     "main": "index.js",
-    "repository": "http://github.com/xdanif/db-browser.git",
+    "repository": "http://github.com/xmanolos/appa-browser.git",
     "author": "Daniel Freitas <daniel1208x@gmail.com>",
     "license": "MIT",
     "dependencies": {

@@ -7,7 +7,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
         <link rel="icon" type="image/x-icon" class="js-site-favicon" href="{{ asset('images/logo/favicon.ico') }}">
 
-        <title>DB Browser - @yield('title')</title>
+        <title>Appa Browser - @yield('title')</title>
 
         <!-- SweetAlert2 (By SweetAlert2) -->
         <link rel="stylesheet" type="text/css" href="{{ asset('packages/sweetalert2/dist/sweetalert2.min.css') }}" />
