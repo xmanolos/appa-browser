@@ -1,8 +1,4 @@
 class DatabaseData {
-	constructor(schema) {
-		this.schema = schema;
-	}
-
 	show(containerId) {
 		this.treeView = new TreeView(containerId);
 		this.treeView.init();
@@ -14,26 +10,92 @@ class DatabaseData {
 		this.treeView.clearNode("#");
 
 		this.treeView.addNode({
-			id: "node-tables",
+			id: "node-schemas",
+			text: "Schemas",
+			icon: "la la-ellipsis-h"
+		});
+
+		this.treeView.addOnNodeSelectedAction("node-schemas", this.onSchemasOpen, this);
+	}
+
+	onSchemasOpen(event, bind) {
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
+			let treeView = bind.treeView;
+			let schemas = response;
+
+			treeView.clearNode("node-schemas");
+
+			if (schemas && schemas.length) {
+				$.each(schemas, function(index, schema) {
+					let nodeId = "node-schema-" + index;
+					let node = {
+						id: nodeId,
+						text: schema.name,
+						icon: "la la-database",
+						value: schema.name
+					};
+
+					treeView.addNode(node, "node-schemas");
+					treeView.addOnNodeSelectedAction(nodeId, bind.onSchemaSelected, bind);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
+			treeView.openNode("node-schemas");
+		};
+
+		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
+		apiRequest.getToRoute("api.database-data.schemas.get");
+	}
+
+	onSchemaSelected(event, bind) {
+		let treeView = bind.treeView;
+		let schema = bind.treeView.getNodeValue(event.nodeId);
+
+		bind.treeView.clearNode(event.nodeId);
+
+		let nodeTablesId = event.nodeId + "-tables";
+		let nodeViewsId = event.nodeId + "-views";
+		let nodeRoutinesId = event.nodeId + "-routines";
+
+		bind.treeView.addNode({
+			id: nodeTablesId,
 			text: "Tables",
-			icon: "la la-ellipsis-h"
-		});
+			icon: "la la-ellipsis-h",
+			value: schema
+		}, event.nodeId);
 
-		this.treeView.addNode({
-			id: "node-views",
+		bind.treeView.addNode({
+			id: nodeViewsId,
 			text: "Views",
-			icon: "la la-ellipsis-h"
-		});
+			icon: "la la-ellipsis-h",
+			value: schema
+		}, event.nodeId);
 
-		this.treeView.addNode({
-			id: "node-routines",
+		bind.treeView.addNode({
+			id: nodeRoutinesId,
 			text: "Routines",
-			icon: "la la-ellipsis-h"
-		});
+			icon: "la la-ellipsis-h",
+			value: schema
+		}, event.nodeId);
 
-		this.treeView.addOnNodeSelectedAction("node-tables", this.onTablesOpen, this);
-		this.treeView.addOnNodeSelectedAction("node-views", this.onViewsOpen, this);
-		this.treeView.addOnNodeSelectedAction("node-routines", this.onRoutinesOpen, this);
+		treeView.stopLoadingNode(event.nodeId);
+		treeView.openNode(event.nodeId);
+
+		bind.treeView.addOnNodeSelectedAction(nodeTablesId, bind.onTablesOpen, bind);
+		bind.treeView.addOnNodeSelectedAction(nodeViewsId, bind.onViewsOpen, bind);
+		bind.treeView.addOnNodeSelectedAction(nodeRoutinesId, bind.onRoutinesOpen, bind);
 	}
 
 	onTablesOpen(event, bind) {
@@ -47,27 +109,36 @@ class DatabaseData {
 			let treeView = bind.treeView;
 			let tables = response;
 
-			treeView.clearNode("node-tables");
+			treeView.clearNode(event.nodeId);
 
-			$.each(tables, function(index, table) {
-				let nodeId = "node-table-" + index;
-				let node = {
-					id: nodeId,
-					text: table.name,
-					icon: "la la-th-large",
-					value: table.name
-				};
+			if (tables && tables.length) {
+				let nodeTableId = event.nodeId + "-table-";
 
-				treeView.addNode(node, "node-tables");
-				treeView.addOnNodeSelectedAction(nodeId, bind.onTableSelected, bind);
-			});
+				$.each(tables, function(index, table) {
+					let nodeId = nodeTableId + index;
+					let node = {
+						id: nodeId,
+						text: table.name,
+						icon: "la la-th-large",
+						value: table.name
+					};
 
-			treeView.openNode("node-tables");
+					treeView.addNode(node, event.nodeId);
+					treeView.addOnNodeSelectedAction(nodeId, bind.onTableSelected, bind);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
+			treeView.openNode(event.nodeId);
 		};
+
+		let schema = bind.treeView.getNodeValue(event.nodeId);
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
-		apiRequest.setData({ "schema": bind.schema });
+		apiRequest.setData({ "schema": schema });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.tables.get");
@@ -84,27 +155,36 @@ class DatabaseData {
 			let treeView = bind.treeView;
 			let views = response;
 
-			treeView.clearNode("node-views");
+			treeView.clearNode(event.nodeId);
 
-			$.each(views, function(index, view) {
-				let nodeId = "node-view-" + index;
-				let node = {
-					id: nodeId,
-					text: view.name,
-					icon: "la la-th-large",
-					value: view.name
-				};
+			if (views && views.length) {
+				let nodeViewId = event.nodeId + "-view-";
 
-				treeView.addNode(node, "node-views");
-				treeView.addOnNodeSelectedAction(nodeId, bind.onViewSelected, bind);
-			});
+				$.each(views, function(index, view) {
+					let nodeId = nodeViewId + index;
+					let node = {
+						id: nodeId,
+						text: view.name,
+						icon: "la la-th-large",
+						value: view.name
+					};
 
-			treeView.openNode("node-views");
+					treeView.addNode(node, event.nodeId);
+					treeView.addOnNodeSelectedAction(nodeId, bind.onViewSelected, bind);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
+			treeView.openNode(event.nodeId);
 		};
+
+		let schema = bind.treeView.getNodeValue(event.nodeId);
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
-		apiRequest.setData({ "schema": bind.schema });
+		apiRequest.setData({ "schema": schema });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.views.get");
@@ -121,26 +201,35 @@ class DatabaseData {
 			let treeView = bind.treeView;
 			let routines = response;
 
-			treeView.clearNode("node-routines");
+			treeView.clearNode(event.nodeId);
 
-			$.each(routines, function(index, routine) {
-				let nodeId = "node-routine-" + index;
-				let node = {
-					id: nodeId,
-					text: routine.name,
-					icon: "la la-flash",
-					value: routine.name
-				};
+			if (routines || routines.length) {
+				let nodeRoutineId = event.nodeId + "-routine-";
 
-				treeView.addNode(node, "node-routines");
-			});
+				$.each(routines, function(index, routine) {
+					let nodeId = nodeRoutineId + index;
+					let node = {
+						id: nodeId,
+						text: routine.name,
+						icon: "la la-flash",
+						value: routine.name
+					};
 
-			treeView.openNode("node-routines");
+					treeView.addNode(node, event.nodeId);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
+			treeView.openNode(event.nodeId);
 		};
+
+		let schema = bind.treeView.getNodeValue(event.nodeId);
 
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
-		apiRequest.setData({ "schema": bind.schema });
+		apiRequest.setData({ "schema": schema });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.routines.get");
@@ -169,6 +258,7 @@ class DatabaseData {
 			value: table
 		}, event.nodeId);
 
+		treeView.stopLoadingNode(event.nodeId);
 		treeView.openNode(event.nodeId);
 
 		bind.treeView.addOnNodeSelectedAction(nodeColumnsId, bind.onTableColumnsOpen, bind);
@@ -190,6 +280,7 @@ class DatabaseData {
 			value: view
 		}, event.nodeId);
 
+		treeView.stopLoadingNode(event.nodeId);
 		treeView.openNode(event.nodeId);
 
 		bind.treeView.addOnNodeSelectedAction(nodeColumnsId, bind.onViewColumnsOpen, bind);
@@ -208,20 +299,27 @@ class DatabaseData {
 
 			bind.treeView.clearNode(event.nodeId);
 
-			$.each(columns, function(index, column) {
-				let nodeId = "node-column-" + index;
-				let nodeText = column.name + " (" + column.dataType + ")";
+			if (columns && columns.length) {
+				let nodeColumnId = event.nodeId + "-column-";
 
-				let node = {
-					id: nodeId,
-					text: nodeText,
-					icon: "la la-columns",
-					value: column.name
-				};
+				$.each(columns, function(index, column) {
+					let nodeId = nodeColumnId + index;
+					let nodeText = column.name + " (" + column.dataType + ")";
 
-				treeView.addNode(node, event.nodeId);
-			});
+					let node = {
+						id: nodeId,
+						text: nodeText,
+						icon: "la la-columns",
+						value: column.name
+					};
 
+					treeView.addNode(node, event.nodeId);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
 			treeView.openNode(event.nodeId);
 		};
 
@@ -248,20 +346,27 @@ class DatabaseData {
 
 			bind.treeView.clearNode(event.nodeId);
 
-			$.each(constraints, function(index, constraint) {
-				let nodeId = "node-constraint-" + index;
-				let nodeText = constraint.name;
+			if (constraints && constraints.length) {
+				let nodeConstraintId = event.nodeId + "-constraint-";
 
-				let node = {
-					id: nodeId,
-					text: nodeText,
-					icon: "la la-key",
-					value: constraint.name
-				};
+				$.each(constraints, function(index, constraint) {
+					let nodeId = nodeConstraintId + index;
+					let nodeText = constraint.name;
 
-				treeView.addNode(node, event.nodeId);
-			});
+					let node = {
+						id: nodeId,
+						text: nodeText,
+						icon: "la la-key",
+						value: constraint.name
+					};
 
+					treeView.addNode(node, event.nodeId);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
 			treeView.openNode(event.nodeId);
 		};
 
@@ -288,20 +393,27 @@ class DatabaseData {
 
 			bind.treeView.clearNode(event.nodeId);
 
-			$.each(columns, function(index, column) {
-				let nodeId = "node-column-" + index;
-				let nodeText = column.name + " (" + column.dataType + ")";
+			if (columns && columns.length) {
+				let nodeColumnId = event.nodeId + "-column-";
 
-				let node = {
-					id: nodeId,
-					text: nodeText,
-					icon: "la la-columns",
-					value: column.name
-				};
+				$.each(columns, function(index, column) {
+					let nodeId = nodeColumnId + index;
+					let nodeText = column.name + " (" + column.dataType + ")";
 
-				treeView.addNode(node, event.nodeId);
-			});
+					let node = {
+						id: nodeId,
+						text: nodeText,
+						icon: "la la-columns",
+						value: column.name
+					};
 
+					treeView.addNode(node, event.nodeId);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
 			treeView.openNode(event.nodeId);
 		};
 

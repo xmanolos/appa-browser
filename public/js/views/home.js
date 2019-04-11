@@ -3,6 +3,7 @@ var editor = null;
 
 $(document).ready(function() {
     showConnectionInfo();
+    showDatabaseData();
 
     $("#lnk-exit").on("click", function() {
         Disconnection.now();
@@ -27,6 +28,10 @@ $(document).ready(function() {
 
 function showConnectionInfo() {
     new ConnectionInfo().show("panel-connection");
+}
+
+function showDatabaseData() {
+    new DatabaseData().show("database-data");
 }
 
 function callRunQuery() {

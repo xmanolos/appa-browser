@@ -10,10 +10,13 @@ class TreeView {
 	init() {
 		$(this.containerId).jstree({
     		"core": {
-    			"check_callback": true
+    			"check_callback": true,
+				"themes": {
+					"responsive": true
+				}
     		},
     		"plugins": [
-    			"search"
+    			"search", "wholerow"
     		]
   		});
 
@@ -33,6 +36,19 @@ class TreeView {
 	}
 
 	addNode(node, parent = "#") {
+		$(this.containerId).jstree().create_node(parent, node);
+
+		this.addNodeNoData(node.nodeId);
+	}
+
+	addNodeNoData(parent) {
+		let node = {
+			id: "node-no-data",
+			text: "No data",
+			icon: "la la-ban",
+			value: "no-data"
+		};
+
 		$(this.containerId).jstree().create_node(parent, node);
 	}
 
@@ -62,6 +78,12 @@ class TreeView {
 		let nodeAnchor = $("#" + nodeId + " .jstree-anchor");
 
 		$("i", nodeAnchor).addClass("la-spinner");
+	}
+
+	stopLoadingNode(nodeId) {
+		let nodeAnchor = $("#" + nodeId + " .jstree-anchor");
+
+		$("i", nodeAnchor).removeClass("la-spinner");
 	}
 
 	addOnNodeSelectedAction(nodeId, action, bind) {

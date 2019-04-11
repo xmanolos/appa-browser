@@ -22,18 +22,6 @@
 
     <div class="full-panel">
         <div class="panel-tree">
-            <div class="schema-part row">
-                <div class="col tfd panel-field" style="width: 100%;">
-                    <select id="schemas" name="schemas" required="true"></select>
-                    <span>Schemas</span>
-                </div>
-            </div>
-            <div class="filter-part row">
-                <div class="col tfd panel-field" style="width: 100%;">
-                    <input id="search" name="search" type="text" placeholder=" " />
-                    <span>Search</span>
-                </div>
-            </div>
             <div class="tree-part">
                 @include('database-data')
             </div>
@@ -91,7 +79,6 @@
     <script type="text/javascript" src="{{ asset('packages/ace-builds/src-min/ace.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
-    <script type="text/javascript" src="{{ asset('js/custom/schema.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/database-data-search.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/datagrid/datagrid.js') }}"></script>
