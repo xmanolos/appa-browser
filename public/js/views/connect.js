@@ -1,35 +1,102 @@
 function testConnection() {
-    let connectionData = $("#form").serialize();
-    
+    let connectionData = getFormSerialize();
+
     new TestConnection(connectionData).now();
 }
 
 function connect() {
-    let connectionData = $("#form").serialize();
+    let connectionData = getFormSerialize();
     
     new Connect(connectionData).now();
 }
 
 function validateForm() {
-    let valid = $("form")[0].checkValidity();
+    let formValidation = getForm()[0];
+    let valid = formValidation.checkValidity() && getForm().form("is valid");
 
     if (!valid) {
-        $("form")[0].reportValidity();
+        formValidation.reportValidity();
     }
 
     return valid;
 }
 
-$("#btn-test-conn").on("click", function() {
-    if (validateForm()) {
-        testConnection();
-    }
-});
+function loadDrivers() {
+    let errorCallback = function() {
+        let dialog = new Dialog();
+        dialog.useDefaultErrorMessage();
+        dialog.showError();
+    };
 
-$("#form").submit(function(e) {
-    e.preventDefault();
+    let successCallback = function(response) {
+        let drivers = [];
 
-    if (validateForm()) {
-        connect();
-    }
+        $.each(response, function(index, value) {
+            let driver = {
+                value: value.identifier,
+                name: value.name
+            };
+
+            drivers.push(driver);
+        });
+
+        $("select[name='driver']").dropdown({
+            placeholder: "Driver",
+            values: drivers
+        });
+    };
+
+    let apiRequest = new ApiRequest();
+    apiRequest.setErrorCallback(errorCallback);
+    apiRequest.setSuccessCallback(successCallback);
+    apiRequest.getToRoute("drivers.get");
+}
+
+function registerRules() {
+    getForm().form({
+        fields: {
+            "database": "empty",
+            "host": "empty",
+            "port": "empty",
+            "username": "empty",
+            "password": "empty",
+        }
+    });
+}
+
+function registerEvents() {
+    getForm().submit(function(e) {
+        e.preventDefault();
+    });
+
+    $("button[name='connect']").on("click", function() {
+        if (validateForm()) {
+            connect();
+        }
+    });
+
+    $("button[name='test-connection']").on("click", function() {
+        if (validateForm()) {
+            testConnection();
+        }
+    });
+}
+
+function getFormSerialize() {
+    let driver = SemanticExtensions.getDropDownValue("driver");
+
+    let connectionData = getForm().serializeArray();
+    connectionData.push({ name: "driver", value: driver});
+
+    return connectionData;
+}
+
+function getForm() {
+    return $("#form");
+}
+
+$(document).ready(function() {
+    registerEvents();
+    registerRules();
+    loadDrivers();
 });

@@ -33,6 +33,10 @@ class Dialog {
         this.options.confirmButtonText = "Ok";
     }
 
+    useDefaultErrorMessage() {
+        this.options.html = "Looks like something did not go as expected. I think you\'d better come back later.";
+    }
+
     showInfo() {
         this.options.showCloseButton = true;
         this.options.focusConfirm = false;

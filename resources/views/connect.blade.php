@@ -8,58 +8,54 @@
 @stop
 
 @section('content')
-<div class="center-center panel-main">
-    <div class="panel-logo">
-        <img src="images/logo/full.png" />
-    </div>
-    <div class="panel panel-connection">
-        <form id="form" action="{{ route('home') }}">
-            <div class="row">
-                <div class="col tfd panel-field" style="width: 50%;">
-                    <select name="driver" required="true">
-                        <option selected disabled hidden value=""></option>
+<div class="center-center panel-connect">
+    <form id="form" class="ui form clearing segment stacked">
+        <div class="fields">
+            <div class="field eight wide">
+                <select name="driver" class="ui fluid dropdown"></select>
+            </div>
 
-                        @foreach($drivers as $driver)
-                            <option value="{{ $driver->identifier }}">{{ $driver->name }}</option>
-                        @endforeach
-                    </select>
-                    <span>Driver</span>
-                </div>
-                <div class="col tfd panel-field" style="width: 50%;">
-                    <input name="database" type="text" placeholder=" " required="true" />
-                    <span>Database</span>
-                </div>
+            <div class="field eight wide">
+                <input name="database" type="text" placeholder="Database">
             </div>
-            <div class="row">
-                <div class="col tfd panel-field" style="width: 70%;">
-                    <input name="hostname" type="text" placeholder=" " required="true" />
-                    <span>Host</span>
-                </div>
-                <div class="col tfd panel-field" style="width: 30%;">
-                    <input name="port" type="text" placeholder=" " required="true" />
-                    <span>Port</span>
-                </div>
+        </div>
+
+        <div class="fields">
+            <div class="field eleven wide">
+                <input name="host" type="text" placeholder="Host">
             </div>
-            <div class="row">
-                <div class="col tfd panel-field" style="width: 50%;">
-                    <input name="username" type="text" placeholder=" " required="true" />
-                    <span>Username</span>
-                </div>
-                <div class="col tfd panel-field" style="width: 50%;">
-                    <input name="password" type="password" placeholder=" " required="true" />
-                    <span>Password</span>
-                </div>
+
+            <div class="field five wide">
+                <input name="port" type="text" class="only-numbers" placeholder="Port">
             </div>
-            <div class="row right">
-                <div class="col">
-                    <input id="btn-test-conn" type="button" value="Test connection" class="button d-inLoading" />
-                </div>
-                <div class="col">
-                    <input id="btn-connect" type="submit" value="Connect" class="button green d-inLoading" />
-                </div>
+        </div>
+
+        <div class="fields">
+            <div class="field eight wide">
+                <input name="username" type="text" placeholder="Username">
             </div>
-        </form>
-    </div>
+
+            <div class="field eight wide">
+                <input name="password" type="password" placeholder="Password">
+            </div>
+        </div>
+
+        <div class="fields">
+            <div class="field sixteen wide">
+                <button name="save-connection" class="ui button left floated">
+                    Save connection
+                </button>
+
+                <button name="connect" class="ui button right floated">
+                    Connect
+                </button>
+
+                <button name="test-connection" class="ui button right floated">
+                    Test connection
+                </button>
+            </div>
+        </div>
+    </form>
 </div>
 
 @stop
@@ -72,23 +68,24 @@
     <script type="text/jscript" src="{{ asset('js/custom/connect.js') }}"></script>
     <script type="text/jscript" src="{{ asset('js/custom/test-connection.js') }}"></script>
 
+    <!-- Test Connections -->
     <script type="text/javascript">
         function testConnectionPgsql() {
-            $('select[name=driver]').val('pgsql');
-            $('input[name=hostname]').val('{{ env('DATA_PGSQL_HOST') }}');
-            $('input[name=port]').val('{{ env('DATA_PGSQL_PORT') }}');
-            $('input[name=username]').val('{{ env('DATA_PGSQL_USERNAME') }}');
-            $('input[name=password]').val('{{ env('DATA_PGSQL_PASSWORD') }}');
-            $('input[name=database]').val('{{ env('DATA_PGSQL_DATABASE') }}');
+            $("select[name='driver']").dropdown("set selected", "pgsql");
+            $("input[name='database']").val("{{ env('DATA_PGSQL_DATABASE') }}");
+            $("input[name='host']").val("{{ env('DATA_PGSQL_HOST') }}");
+            $("input[name='port']").val("{{ env('DATA_PGSQL_PORT') }}");
+            $("input[name='username']").val("{{ env('DATA_PGSQL_USERNAME') }}");
+            $("input[name='password']").val("{{ env('DATA_PGSQL_PASSWORD') }}");
         }
 
         function testConnectionMysql() {
-            $('select[name=driver]').val('mysql');
-            $('input[name=hostname]').val('{{ env('DATA_MYSQL_HOST') }}');
-            $('input[name=port]').val('{{ env('DATA_MYSQL_PORT') }}');
-            $('input[name=username]').val('{{ env('DATA_MYSQL_USERNAME') }}');
-            $('input[name=password]').val('{{ env('DATA_MYSQL_PASSWORD') }}');
-            $('input[name=database]').val('{{ env('DATA_MYSQL_DATABASE') }}');
+            $("select[name='driver']").dropdown("set selected", "mysql");
+            $("input[name='database']").val("{{ env('DATA_MYSQL_DATABASE') }}");
+            $("input[name='name']").val("{{ env('DATA_MYSQL_HOST') }}");
+            $("input[name='port']").val("{{ env('DATA_MYSQL_PORT') }}");
+            $("input[name='username']").val("{{ env('DATA_MYSQL_USERNAME') }}");
+            $("input[name='password']").val("{{ env('DATA_MYSQL_PASSWORD') }}");
         }
     </script>
 @stop

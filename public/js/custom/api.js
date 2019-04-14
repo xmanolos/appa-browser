@@ -91,7 +91,7 @@ class ApiRequest {
 			},
 			beforeSend: function () {
 				if (this.showLoading) {
-					startLoading();
+					//startLoading();
 				}
 
 				if (this.beforeSendCallback) {
@@ -100,7 +100,7 @@ class ApiRequest {
 			}.bind(this),
 			complete: function (data) {
 				if (this.showLoading) {
-					stopLoading();
+					//stopLoading();
 				}
 
 				if (this.completeCallback) {
@@ -109,7 +109,7 @@ class ApiRequest {
 			}.bind(this),
 			success: function (data) {
 				if (this.showLoading) {
-					stopLoading();
+					//stopLoading();
 				}
 
 				if (this.successCallback) {
@@ -118,7 +118,7 @@ class ApiRequest {
 			}.bind(this),
 			error: function (data) {
 				if (this.showLoading) {
-					stopLoading();
+					//stopLoading();
 				}
 
 				if (this.errorCallback) {
