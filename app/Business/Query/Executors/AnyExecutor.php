@@ -2,7 +2,7 @@
 
 namespace App\Business\Query\Executors;
 
-use App\Business\Query\QueryExecutor;
+use App\Business\Query\Executors\BaseSelectExecutor;
 use App\Business\Query\ExecutorConstants;
 use Exception;
 
@@ -11,7 +11,7 @@ use Exception;
 *
 * @package App\Business\Query\Executors
 */
-class AnyExecutor extends QueryExecutor
+class AnyExecutor extends BaseSelectExecutor
 {
     /**
     * Gets the keyword of the type of the Query of the Executor.
@@ -21,20 +21,5 @@ class AnyExecutor extends QueryExecutor
     public function getTypeKeyword()
     {
         return ExecutorConstants::KEYWORD_ANY;
-    }
-
-    /**
-    * Executes Query and sets the response of execution.
-    */
-    public function execute()
-    {
-        $this->connection->statement($this->query);
-
-        $responseMessage = 'Query executed successfully!';
-
-        $successResponse = $this->getSuccessResponse();
-        $successResponse->setMessage($responseMessage);
-
-        $this->response = $successResponse->getJson();
     }
 }
