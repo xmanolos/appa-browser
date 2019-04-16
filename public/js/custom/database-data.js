@@ -1,6 +1,6 @@
 class DatabaseData {
-	show(containerId) {
-		this.treeView = new TreeView(containerId);
+	show(container) {
+		this.treeView = new TreeView(container);
 		this.treeView.init();
 
 		this.load();

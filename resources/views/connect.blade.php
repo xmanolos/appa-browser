@@ -8,56 +8,55 @@
 @stop
 
 @section('content')
-<div class="center-center panel-connect">
-    <form id="form" class="ui form clearing segment stacked">
-        <div class="fields">
-            <div class="field eight wide">
-                <select name="driver" class="ui fluid dropdown"></select>
+    <div class="center-center panel-connect">
+        <form id="form" class="ui form clearing segment stacked">
+            <div class="fields">
+                <div class="field eight wide">
+                    <select name="driver" class="ui fluid dropdown"></select>
+                </div>
+
+                <div class="field eight wide">
+                    <input name="database" type="text" placeholder="Database">
+                </div>
             </div>
 
-            <div class="field eight wide">
-                <input name="database" type="text" placeholder="Database">
-            </div>
-        </div>
+            <div class="fields">
+                <div class="field eleven wide">
+                    <input name="host" type="text" placeholder="Host">
+                </div>
 
-        <div class="fields">
-            <div class="field eleven wide">
-                <input name="host" type="text" placeholder="Host">
-            </div>
-
-            <div class="field five wide">
-                <input name="port" type="text" class="only-numbers" placeholder="Port">
-            </div>
-        </div>
-
-        <div class="fields">
-            <div class="field eight wide">
-                <input name="username" type="text" placeholder="Username">
+                <div class="field five wide">
+                    <input name="port" type="text" class="only-numbers" placeholder="Port">
+                </div>
             </div>
 
-            <div class="field eight wide">
-                <input name="password" type="password" placeholder="Password">
+            <div class="fields">
+                <div class="field eight wide">
+                    <input name="username" type="text" placeholder="Username">
+                </div>
+
+                <div class="field eight wide">
+                    <input name="password" type="password" placeholder="Password">
+                </div>
             </div>
-        </div>
 
-        <div class="fields">
-            <div class="field sixteen wide">
-                <button name="save-connection" class="ui button left floated">
-                    Save connection
-                </button>
+            <div class="fields">
+                <div class="field sixteen wide">
+                    <button name="save-connection" class="ui button left floated">
+                        Save connection
+                    </button>
 
-                <button name="connect" class="ui button right floated">
-                    Connect
-                </button>
+                    <button name="connect" class="ui button right floated">
+                        Connect
+                    </button>
 
-                <button name="test-connection" class="ui button right floated">
-                    Test connection
-                </button>
+                    <button name="test-connection" class="ui button right floated">
+                        Test connection
+                    </button>
+                </div>
             </div>
-        </div>
-    </form>
-</div>
-
+        </form>
+    </div>
 @stop
 
 @section('custom-js')

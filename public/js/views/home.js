@@ -1,37 +1,8 @@
 var searchTimer = null;
 var editor = null;
 
-$(document).ready(function() {
-    showConnectionInfo();
-    showDatabaseData();
-
-    $("#lnk-exit").on("click", function() {
-        Disconnection.now();
-    });
-
-    $("#run-query").on("click", function() {
-        callRunQuery();
-    });
-
-    $(".btn-format-query").on("click", function() {
-        formatQuery();
-    });
-
-    DatabaeDataSearch.init("search", "database-data");
-
-    setHighLightEditor();
-    $("#styleQueryEditor").on("change", changeStyleQueryEditor);
-    $(".btn-change-style-query > i").click(showHideStyleQueryEditor);
-
-    changeStyleQueryEditor();
-});
-
 function showConnectionInfo() {
     new ConnectionInfo().show("panel-connection");
-}
-
-function showDatabaseData() {
-    new DatabaseData().show("database-data");
 }
 
 function callRunQuery() {
@@ -104,3 +75,40 @@ function formatQuery() {
     apiRequest.disableIncludeToken();
     apiRequest.getToUrl("https://sqlformat.org/api/v1/format", );
 }
+
+function loadDatabaseData() {
+    new DatabaseData().show("div[name='database-data']");
+}
+
+function registerEvents() {
+    $("div[name='disconnect']").on("click", function() {
+        Disconnection.now();
+    });
+}
+
+$(document).ready(function() {
+    SemanticExtensions.initlizeDropDowns();
+
+    registerEvents();
+    loadDatabaseData();
+
+    /*$("#lnk-exit").on("click", function() {
+        Disconnection.now();
+    });
+
+    $("#run-query").on("click", function() {
+        callRunQuery();
+    });
+
+    $(".btn-format-query").on("click", function() {
+        formatQuery();
+    });
+
+    DatabaeDataSearch.init("search", "database-data");
+
+    setHighLightEditor();
+    $("#styleQueryEditor").on("change", changeStyleQueryEditor);
+    $(".btn-change-style-query > i").click(showHideStyleQueryEditor);
+
+    changeStyleQueryEditor();*/
+});

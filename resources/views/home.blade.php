@@ -15,53 +15,25 @@
 
     <!-- Custom (Made by Us) -->
     <link rel="stylesheet" type="text/css" href="{{ asset('css/components/mini-loading.css') }}">
+
+
+
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/layout/database-data.css') }}">
 @stop
 
 @section('content')
-    @include('layout.header')
-
-    <div class="full-panel">
-        <div class="panel-tree">
-            <div class="tree-part">
-                @include('database-data')
-            </div>
+    <div class="ui vertical left visible sidebar menu">
+        <div class="item">
+            <img src="{{ asset('images/logo/face.svg') }}" style="width: 100%; height: 45px;">
         </div>
-        <div class="panel-fill">
-            <div class="panel-query">
-                <div class="btn-change-style-query">
-                    <i class="la la-gears"></i>
-                    <div class="style-query-editor">
-                        <div class="col tfd panel-field" style="width: 100%;">
-                            <select id="styleQueryEditor" name="styleQueryEditor" required="true">
-                                <option value="xcode">X-Code</option>
-                                <option value="textmate">Textmate</option>
-                                <option selected value="sqlserver">SQL Server</option>
-                                <option value="eclipse">Eclipse</option>
-                                <option value="github">Github</option>
-                                <option value="terminal">Terminal</option>
-                                <option value="tomorrow">Tomorrow</option>
-                                <option value="tomorrow_night">Tomorrow Night</option>
-                                <option value="vibrant_ink">Vibrant</option>
-                            </select>
-                            <span>Editor style</span>
-                        </div>
-                    </div>
-                </div>
-                <div id="editorTextQuery" class="text-query"></div>
 
-                <!-- Actions -->
-                <div  class="panel-query-buttons">
-                    <div class="button btn-format-query" title="Format query">
-                        <i class="la la-code"></i>
-                    </div>
-                    <div id="run-query" class="button btn-run-query" title="Run query">
-                        <i class="la la-play"></i>
-                    </div>
-                </div>
+        <div name="database-data" class="database-data-panel"></div>
+    </div>
 
-            </div>
-            <div id="panel-show-result" class="panel-show-result"></div>
-        </div>
+    <div class="pusher">
+        @include('layout.header')
+
+        xmp
     </div>
 @stop
 
@@ -79,8 +51,11 @@
     <script type="text/javascript" src="{{ asset('packages/ace-builds/src-min/ace.js') }}"></script>
 
     <!-- Custom (Made by Us) -->
+    <script type="text/javascript" src="{{ asset('js/custom/disconnection.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/database-data-search.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/datagrid/datagrid.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query/select-result.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/database-data.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/treeview.js') }}"></script>
 @stop

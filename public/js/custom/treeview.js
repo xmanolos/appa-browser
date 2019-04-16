@@ -1,8 +1,8 @@
 var treeViewOnSelectedEvents;
 
 class TreeView {
-	constructor(containerId) {
-		this.containerId = "#" + containerId;
+	constructor(container) {
+		this.containerId = container;
 		
 		treeViewOnSelectedEvents = [];
 	}
