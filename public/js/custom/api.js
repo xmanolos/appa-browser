@@ -18,7 +18,7 @@ class ApiRequest {
 	setRequestType(requestType) { this.requestType = requestType; }
 	setData(data) { this.data = data; }
 	setDataType(dataType) { this.dataType = dataType; }
-	setContentType(contentType) { this.contentType = contentType; }	
+	setContentType(contentType) { this.contentType = contentType; }
 
 	disableIncludeToken() {
 		this.includeToken = false;

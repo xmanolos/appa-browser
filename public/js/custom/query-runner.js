@@ -18,6 +18,7 @@ class QueryRunner {
 
         let errorCallback = function(response) {
             let dialog = new Dialog();
+            dialog.useTitle("Failed to execute query!");
             dialog.useMessage(response.responseText);
             dialog.showError();
 
