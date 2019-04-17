@@ -5,7 +5,6 @@ namespace App\Business\Query\Executors;
 use App\Business\Query\ExecutorConstants;
 use App\Business\Query\QueryExecutor;
 use App\Business\Query\QueryResponseEncode;
-use Exception;
 
 /**
 * Base Executor for Queries of select type.

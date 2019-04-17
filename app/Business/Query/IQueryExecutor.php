@@ -12,9 +12,9 @@ interface IQueryExecutor
     /**
      * Gets the Query Type keyword.
      *
-     * @return string
+     * @return mixed
      */
-    public function getTypeKeyword();
+    public function getTypeKeywords();
 
     /**
      * Executes Query and sets the response of execution.

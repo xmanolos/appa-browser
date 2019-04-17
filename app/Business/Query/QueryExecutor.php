@@ -42,15 +42,25 @@ abstract class QueryExecutor implements IQueryExecutor
 
     public function queryMatch()
     {
-        $typeKeyword = $this->getTypeKeyword();
+        $typeKeywords = $this->getTypeKeywords();
         $queryUpperCase = strtoupper($this->query);
 
-        return strpos($queryUpperCase, $typeKeyword) === 0;
+        if (is_array($typeKeywords)) {
+            foreach ($typeKeywords as $typeKeyword) {
+                if (strpos($queryUpperCase, $typeKeyword) === 0) {
+                    return true;
+                }
+            }
+
+            $typeKeywords = $typeKeywords[0];
+        }
+
+        return strpos($queryUpperCase, $typeKeywords) === 0;
     }
 
     protected function getSuccessResponse()
     {
-        $typeKeyword = $this->getTypeKeyword();
+        $typeKeyword = $this->getTypeKeywords();
 
         $successResponse = new SuccessResponse();
         $successResponse->setQuery($this->query);
@@ -61,7 +71,7 @@ abstract class QueryExecutor implements IQueryExecutor
 
     protected function getErrorResponse()
     {
-        $typeKeyword = $this->getTypeKeyword();
+        $typeKeyword = $this->getTypeKeywords();
 
         $errorResponse = new ErrorResponse();
         $errorResponse->setQuery($this->query);

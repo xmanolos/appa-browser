@@ -2,9 +2,7 @@
 
 namespace App\Business\Query\Executors;
 
-use App\Business\Query\Executors\BaseSelectExecutor;
 use App\Business\Query\ExecutorConstants;
-use Exception;
 
 /**
 * Executor for Queries of select type.
@@ -18,7 +16,7 @@ class SelectExecutor extends BaseSelectExecutor
     *
     * @return string
     */
-    public function getTypeKeyword()
+    public function getTypeKeywords()
     {
         return ExecutorConstants::KEYWORD_SELECT;
     }
