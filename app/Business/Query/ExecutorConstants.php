@@ -55,9 +55,35 @@ class ExecutorConstants
     public const KEYWORD_CREATE_INDEX = 'CREATE INDEX';
 
     /**
-     * Keyword of create index queries identification.
+
+     * Keyword of create unique index queries identification.
      */
     public const KEYWORD_CREATE_UNIQUE_INDEX = 'CREATE UNIQUE INDEX';
+
+    /**
+     * Keyword of drop table queries identification.
+     */
+    public const KEYWORD_DROP_TABLE = 'DROP TABLE';
+
+    /**
+     * Keyword of drop view queries identification.
+     */
+    public const KEYWORD_DROP_VIEW = 'DROP VIEW';
+
+    /**
+     * Keyword of drop table queries identification.
+     */
+    public const KEYWORD_DROP_PROCEDURE = 'DROP PROCEDURE';
+
+    /**
+     * Keyword of drop function queries identification.
+     */
+    public const KEYWORD_DROP_FUNCTION = 'DROP FUNCTION';
+
+    /**
+     * Keyword of drop index queries identification.
+     */
+    public const KEYWORD_DROP_INDEX = 'DROP INDEX';
 
     /**
      * Keyword of procedure queries identification.

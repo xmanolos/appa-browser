@@ -9,6 +9,11 @@ use App\Business\Query\Executors\CreateProcedureExecutor;
 use App\Business\Query\Executors\CreateTableExecutor;
 use App\Business\Query\Executors\CreateViewExecutor;
 use App\Business\Query\Executors\DeleteExecutor;
+use App\Business\Query\Executors\DropFunctionExecutor;
+use App\Business\Query\Executors\DropIndexExecutor;
+use App\Business\Query\Executors\DropProcedureExecutor;
+use App\Business\Query\Executors\DropTableExecutor;
+use App\Business\Query\Executors\DropViewExecutor;
 use App\Business\Query\Executors\InsertExecutor;
 use App\Business\Query\Executors\ProcedureExecutor;
 use App\Business\Query\Executors\SelectExecutor;
@@ -72,6 +77,31 @@ class QueryIdentifier
     private $createIndexExecutor;
 
     /**
+     * @var DropTableExecutor An Drop Table Executor to the query.
+     */
+    private $dropTableExecutor;
+
+    /**
+     * @var DropViewExecutor An Drop View Executor to the query.
+     */
+    private $dropViewExecutor;
+
+    /**
+     * @var DropProcedureExecutor An Drop Procedure Executor to the query.
+     */
+    private $dropProcedureExecutor;
+
+    /**
+     * @var DropFunctionExecutor An Drop Function Executor to the query.
+     */
+    private $dropFunctionExecutor;
+
+    /**
+     * @var DropIndexExecutor An Drop Index Executor to the query.
+     */
+    private $dropIndexExecutor;
+
+    /**
      * @var ProcedureExecutor An Procedure Executor to the query.
      */
     private $procedureExecutor;
@@ -102,11 +132,19 @@ class QueryIdentifier
         $this->loadInsertExecutor();
         $this->loadUpdateExecutor();
         $this->loadDeleteExecutor();
+
         $this->loadCreateTableExecutor();
         $this->loadCreateViewExecutor();
         $this->loadCreateProcedureExecutor();
         $this->loadCreateFunctionExecutor();
         $this->loadCreateIndexExecutor();
+
+        $this->loadDropTableExecutor();
+        $this->loadDropViewExecutor();
+        $this->loadDropProcedureExecutor();
+        $this->loadDropFunctionExecutor();
+        $this->loadDropIndexExecutor();
+
         $this->loadProcedureExecutor();
         $this->loadAnyExecutor();
 
@@ -136,6 +174,21 @@ class QueryIdentifier
 
         if ($this->createIndexExecutor->queryMatch())
             return $this->createIndexExecutor;
+
+        if ($this->dropTableExecutor->queryMatch())
+            return $this->dropTableExecutor;
+
+        if ($this->dropViewExecutor->queryMatch())
+            return $this->dropViewExecutor;
+
+        if ($this->dropProcedureExecutor->queryMatch())
+            return $this->dropProcedureExecutor;
+
+        if ($this->dropFunctionExecutor->queryMatch())
+            return $this->dropFunctionExecutor;
+
+        if ($this->dropIndexExecutor->queryMatch())
+            return $this->dropIndexExecutor;
 
         if ($this->procedureExecutor->queryMatch())
             return $this->procedureExecutor;
@@ -222,6 +275,51 @@ class QueryIdentifier
     {
         $this->createIndexExecutor = new CreateIndexExecutor();
         $this->createIndexExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Drop Table Executor to the query.
+     */
+    private function loadDropTableExecutor()
+    {
+        $this->dropTableExecutor = new DropTableExecutor();
+        $this->dropTableExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Drop View Executor to the query.
+     */
+    private function loadDropViewExecutor()
+    {
+        $this->dropViewExecutor = new DropViewExecutor();
+        $this->dropViewExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Drop Procedure Executor to the query.
+     */
+    private function loadDropProcedureExecutor()
+    {
+        $this->dropProcedureExecutor = new DropProcedureExecutor();
+        $this->dropProcedureExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Drop Function Executor to the query.
+     */
+    private function loadDropFunctionExecutor()
+    {
+        $this->dropFunctionExecutor = new DropFunctionExecutor();
+        $this->dropFunctionExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Drop Index Executor to the query.
+     */
+    private function loadDropIndexExecutor()
+    {
+        $this->dropIndexExecutor = new DropIndexExecutor();
+        $this->dropIndexExecutor->setQuery($this->query);
     }
 
     /**
