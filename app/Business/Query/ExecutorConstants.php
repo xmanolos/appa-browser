@@ -55,6 +55,7 @@ class ExecutorConstants
     public const KEYWORD_CREATE_INDEX = 'CREATE INDEX';
 
     /**
+
      * Keyword of create unique index queries identification.
      */
     public const KEYWORD_CREATE_UNIQUE_INDEX = 'CREATE UNIQUE INDEX';

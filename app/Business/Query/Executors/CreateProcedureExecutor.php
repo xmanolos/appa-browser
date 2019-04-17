@@ -13,7 +13,6 @@ class CreateProcedureExecutor extends BaseCreateExecutor
 {
     /**
     * Gets the keyword of the type of the Query of the Executor.
-    *
     * @return string
     */
     public function getTypeKeywords()
