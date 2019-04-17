@@ -45,7 +45,7 @@ class SuccessResponse
     /**
      * Defines the value of the type of query that was be executed.
      *
-     * @param string $queryType
+     * @param mixed $queryType
      */
     public function setQueryType($queryType)
     {

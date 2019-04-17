@@ -30,9 +30,34 @@ class ExecutorConstants
     public const KEYWORD_DELETE = 'DELETE';
 
     /**
-     * Keyword of create queries identification.
+     * Keyword of create table queries identification.
      */
-    public const KEYWORD_CREATE = 'CREATE';
+    public const KEYWORD_CREATE_TABLE = 'CREATE TABLE';
+
+    /**
+     * Keyword of create view queries identification.
+     */
+    public const KEYWORD_CREATE_VIEW = 'CREATE VIEW';
+
+    /**
+     * Keyword of create table queries identification.
+     */
+    public const KEYWORD_CREATE_PROCEDURE = 'CREATE PROCEDURE';
+
+    /**
+     * Keyword of create function queries identification.
+     */
+    public const KEYWORD_CREATE_FUNCTION = 'CREATE FUNCTION';
+
+    /**
+     * Keyword of create index queries identification.
+     */
+    public const KEYWORD_CREATE_INDEX = 'CREATE INDEX';
+
+    /**
+     * Keyword of create index queries identification.
+     */
+    public const KEYWORD_CREATE_UNIQUE_INDEX = 'CREATE UNIQUE INDEX';
 
     /**
      * Keyword of procedure queries identification.

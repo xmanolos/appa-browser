@@ -4,7 +4,6 @@ namespace App\Business\Query\Executors;
 
 use App\Business\Query\QueryExecutor;
 use App\Business\Query\ExecutorConstants;
-use Exception;
 
 /**
 * Executor for Queries of delete type.
@@ -18,7 +17,7 @@ class DeleteExecutor extends QueryExecutor
     *
     * @return string
     */
-    public function getTypeKeyword()
+    public function getTypeKeywords()
     {
         return ExecutorConstants::KEYWORD_DELETE;
     }

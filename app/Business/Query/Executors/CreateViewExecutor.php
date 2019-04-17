@@ -5,11 +5,11 @@ namespace App\Business\Query\Executors;
 use App\Business\Query\ExecutorConstants;
 
 /**
-* Executor for Queries of unknown type.
+* Executor for Queries of create view type.
 *
 * @package App\Business\Query\Executors
 */
-class AnyExecutor extends BaseSelectExecutor
+class CreateViewExecutor extends BaseCreateExecutor
 {
     /**
     * Gets the keyword of the type of the Query of the Executor.
@@ -18,6 +18,11 @@ class AnyExecutor extends BaseSelectExecutor
     */
     public function getTypeKeywords()
     {
-        return ExecutorConstants::KEYWORD_ANY;
+        return ExecutorConstants::KEYWORD_CREATE_VIEW;
+    }
+
+    protected function getResponseMessage()
+    {
+        return 'View created successfully!';
     }
 }

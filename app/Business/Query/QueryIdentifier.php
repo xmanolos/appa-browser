@@ -3,7 +3,11 @@
 namespace App\Business\Query;
 
 use App\Business\Query\Executors\AnyExecutor;
-use App\Business\Query\Executors\CreateExecutor;
+use App\Business\Query\Executors\CreateFunctionExecutor;
+use App\Business\Query\Executors\CreateIndexExecutor;
+use App\Business\Query\Executors\CreateProcedureExecutor;
+use App\Business\Query\Executors\CreateTableExecutor;
+use App\Business\Query\Executors\CreateViewExecutor;
 use App\Business\Query\Executors\DeleteExecutor;
 use App\Business\Query\Executors\InsertExecutor;
 use App\Business\Query\Executors\ProcedureExecutor;
@@ -43,9 +47,29 @@ class QueryIdentifier
     private $deleteExecutor;
 
     /**
-     * @var CreateExecutor An Create Executor to the query.
+     * @var CreateTableExecutor An Create Table Executor to the query.
      */
-    private $createExecutor;
+    private $createTableExecutor;
+
+    /**
+     * @var CreateViewExecutor An Create View Executor to the query.
+     */
+    private $createViewExecutor;
+
+    /**
+     * @var CreateProcedureExecutor An Create Procedure Executor to the query.
+     */
+    private $createProcedureExecutor;
+
+    /**
+     * @var CreateFunctionExecutor An Create Function Executor to the query.
+     */
+    private $createFunctionExecutor;
+
+    /**
+     * @var CreateIndexExecutor An Create Index Executor to the query.
+     */
+    private $createIndexExecutor;
 
     /**
      * @var ProcedureExecutor An Procedure Executor to the query.
@@ -78,7 +102,11 @@ class QueryIdentifier
         $this->loadInsertExecutor();
         $this->loadUpdateExecutor();
         $this->loadDeleteExecutor();
-        $this->loadCreateExecutor();
+        $this->loadCreateTableExecutor();
+        $this->loadCreateViewExecutor();
+        $this->loadCreateProcedureExecutor();
+        $this->loadCreateFunctionExecutor();
+        $this->loadCreateIndexExecutor();
         $this->loadProcedureExecutor();
         $this->loadAnyExecutor();
 
@@ -94,8 +122,20 @@ class QueryIdentifier
         if ($this->deleteExecutor->queryMatch())
             return $this->deleteExecutor;
 
-        if ($this->createExecutor->queryMatch())
-            return $this->createExecutor;
+        if ($this->createTableExecutor->queryMatch())
+            return $this->createTableExecutor;
+
+        if ($this->createViewExecutor->queryMatch())
+            return $this->createViewExecutor;
+
+        if ($this->createProcedureExecutor->queryMatch())
+            return $this->createProcedureExecutor;
+
+        if ($this->createFunctionExecutor->queryMatch())
+            return $this->createFunctionExecutor;
+
+        if ($this->createIndexExecutor->queryMatch())
+            return $this->createIndexExecutor;
 
         if ($this->procedureExecutor->queryMatch())
             return $this->procedureExecutor;
@@ -140,12 +180,48 @@ class QueryIdentifier
     }
 
     /**
-     * Loads a Create Executor to the query.
+     * Loads a Create Table Executor to the query.
      */
-    private function loadCreateExecutor()
+    private function loadCreateTableExecutor()
     {
-        $this->createExecutor = new CreateExecutor();
-        $this->createExecutor->setQuery($this->query);
+        $this->createTableExecutor = new CreateTableExecutor();
+        $this->createTableExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Create View Executor to the query.
+     */
+    private function loadCreateViewExecutor()
+    {
+        $this->createViewExecutor = new CreateViewExecutor();
+        $this->createViewExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Create Procedure Executor to the query.
+     */
+    private function loadCreateProcedureExecutor()
+    {
+        $this->createProcedureExecutor = new CreateProcedureExecutor();
+        $this->createProcedureExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Create Function Executor to the query.
+     */
+    private function loadCreateFunctionExecutor()
+    {
+        $this->createFunctionExecutor = new CreateFunctionExecutor();
+        $this->createFunctionExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Create Index Executor to the query.
+     */
+    private function loadCreateIndexExecutor()
+    {
+        $this->createIndexExecutor = new CreateIndexExecutor();
+        $this->createIndexExecutor->setQuery($this->query);
     }
 
     /**
