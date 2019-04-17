@@ -5,11 +5,11 @@ namespace App\Business\Query\Executors;
 use App\Business\Query\ExecutorConstants;
 
 /**
-* Executor for Queries of create procedure type.
+* Executor for Queries of drop view type.
 *
 * @package App\Business\Query\Executors
 */
-class CreateProcedureExecutor extends BaseCreateExecutor
+class DropViewExecutor extends BaseCreateExecutor
 {
     /**
     * Gets the keyword of the type of the Query of the Executor.
@@ -18,11 +18,11 @@ class CreateProcedureExecutor extends BaseCreateExecutor
     */
     public function getTypeKeywords()
     {
-        return ExecutorConstants::KEYWORD_CREATE_PROCEDURE;
+        return ExecutorConstants::KEYWORD_DROP_VIEW;
     }
 
     protected function getResponseMessage()
     {
-        return 'Procedure created successfully!';
+        return 'View dropped successfully!';
     }
 }
