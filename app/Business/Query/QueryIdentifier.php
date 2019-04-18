@@ -7,6 +7,7 @@ use App\Business\Query\Executors\CreateFunctionExecutor;
 use App\Business\Query\Executors\CreateIndexExecutor;
 use App\Business\Query\Executors\CreateProcedureExecutor;
 use App\Business\Query\Executors\CreateTableExecutor;
+use App\Business\Query\Executors\CreateTriggerExecutor;
 use App\Business\Query\Executors\CreateViewExecutor;
 use App\Business\Query\Executors\DeleteExecutor;
 use App\Business\Query\Executors\DropFunctionExecutor;
@@ -70,6 +71,11 @@ class QueryIdentifier
      * @var CreateFunctionExecutor An Create Function Executor to the query.
      */
     private $createFunctionExecutor;
+
+    /**
+     * @var CreateTriggerExecutor An Create Trigger Executor to the query.
+     */
+    private $createTriggerExecutor;
 
     /**
      * @var CreateIndexExecutor An Create Index Executor to the query.
@@ -137,6 +143,7 @@ class QueryIdentifier
         $this->loadCreateViewExecutor();
         $this->loadCreateProcedureExecutor();
         $this->loadCreateFunctionExecutor();
+        $this->loadCreateTriggerExecutor();
         $this->loadCreateIndexExecutor();
 
         $this->loadDropTableExecutor();
@@ -171,6 +178,9 @@ class QueryIdentifier
 
         if ($this->createFunctionExecutor->queryMatch())
             return $this->createFunctionExecutor;
+
+        if ($this->createTriggerExecutor->queryMatch())
+            return $this->createTriggerExecutor;
 
         if ($this->createIndexExecutor->queryMatch())
             return $this->createIndexExecutor;
@@ -266,6 +276,15 @@ class QueryIdentifier
     {
         $this->createFunctionExecutor = new CreateFunctionExecutor();
         $this->createFunctionExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Create Trigger Executor to the query.
+     */
+    private function loadCreateTriggerExecutor()
+    {
+        $this->createTriggerExecutor = new CreateTriggerExecutor();
+        $this->createTriggerExecutor->setQuery($this->query);
     }
 
     /**

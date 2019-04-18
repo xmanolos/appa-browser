@@ -50,6 +50,11 @@ class ExecutorConstants
     public const KEYWORD_CREATE_FUNCTION = 'CREATE FUNCTION';
 
     /**
+     * Keyword of create trigger queries identification.
+     */
+    public const KEYWORD_CREATE_TRIGGER = 'CREATE TRIGGER';
+
+    /**
      * Keyword of create index queries identification.
      */
     public const KEYWORD_CREATE_INDEX = 'CREATE INDEX';
