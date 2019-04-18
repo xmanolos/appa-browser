@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Business\DatabaseStructure;
+namespace App\Business\DatabaseData\DataStructures;
 
 /**
  * A table of the database.
  *
- * @package App\Business\DatabaseStructure
+ * @package App\Business\DatabaseData\DataStructures
  */
 class StructureConstraint
 {

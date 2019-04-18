@@ -2,7 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Business\DatabaseData;
+use App\Business\DatabaseData\DatabaseColumns;
+use App\Business\DatabaseData\DatabaseConstraints;
+use App\Business\DatabaseData\DatabaseRoutines;
+use App\Business\DatabaseData\DatabaseSchemas;
+use App\Business\DatabaseData\DatabaseTables;
+use App\Business\DatabaseData\DatabaseTriggers;
+use App\Business\DatabaseData\DatabaseViews;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -12,10 +18,10 @@ class DatabaseDataController extends Controller
     {
         try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseSchemas();
             $databaseData->setRequest($request);
 
-            $schemas = $databaseData->getSchemas();
+            $schemas = $databaseData->get();
 
             return response(json_encode($schemas), 200);
         }
@@ -27,12 +33,14 @@ class DatabaseDataController extends Controller
 
     public function getTables(Request $request)
     {
+        $schema = $request->input('schema');
+
         try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseTables();
             $databaseData->setRequest($request);
 
-            $tables = $databaseData->getTables();
+            $tables = $databaseData->get($schema);
 
             return response(json_encode($tables), 200);
         }
@@ -44,12 +52,15 @@ class DatabaseDataController extends Controller
 
     public function getViews(Request $request)
     {
+
+        $schema = $request->input('schema');
+
         try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseViews();
             $databaseData->setRequest($request);
 
-            $views = $databaseData->getViews();
+            $views = $databaseData->get($schema);
 
             return response(json_encode($views), 200);
         }
@@ -61,12 +72,14 @@ class DatabaseDataController extends Controller
 
     public function getRoutines(Request $request)
     {
+        $schema = $request->input('schema');
+
         try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseRoutines();
             $databaseData->setRequest($request);
 
-            $functions = $databaseData->getRoutines();
+            $functions = $databaseData->get($schema);
 
             return response(json_encode($functions), 200);
         }
@@ -78,12 +91,15 @@ class DatabaseDataController extends Controller
 
     public function getTableColumns(Request $request)
     {
+        $schema = $request->input('schema');
+        $table = $request->input('table');
+
         try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseColumns();
             $databaseData->setRequest($request);
 
-            $tableColumns = $databaseData->getTableColumns();
+            $tableColumns = $databaseData->getFromTable($schema, $table);
 
             return response(json_encode($tableColumns), 200);
         }
@@ -95,12 +111,15 @@ class DatabaseDataController extends Controller
 
     public function getTableConstraints(Request $request)
     {
+        $schema = $request->input('schema');
+        $table = $request->input('table');
+
         try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseConstraints();
             $databaseData->setRequest($request);
 
-            $tableConstraints = $databaseData->getTableConstraints();
+            $tableConstraints = $databaseData->get($schema, $table);
 
             return response(json_encode($tableConstraints), 200);
         }
@@ -110,14 +129,37 @@ class DatabaseDataController extends Controller
         }
     }
 
-    public function getViewColumns(Request $request)
+    public function getTableTriggers(Request $request)
     {
-    	try
+        $schema = $request->input('schema');
+        $table = $request->input('table');
+
+        try
         {
-            $databaseData = new DatabaseData();
+            $databaseData = new DatabaseTriggers();
             $databaseData->setRequest($request);
 
-            $viewColumns = $databaseData->getViewColumns();
+            $tableColumns = $databaseData->get($schema, $table);
+
+            return response(json_encode($tableColumns), 200);
+        }
+        catch (Exception $error)
+        {
+            return response($error->getMessage(), 500);
+        }
+    }
+
+    public function getViewColumns(Request $request)
+    {
+        $schema = $request->input('schema');
+        $table = $request->input('table');
+
+        try
+        {
+            $databaseData = new DatabaseColumns();
+            $databaseData->setRequest($request);
+
+            $viewColumns = $databaseData->getFromView($schema, $table);
 
             return response(json_encode($viewColumns), 200);
         }
