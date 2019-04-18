@@ -14,6 +14,7 @@ use App\Business\Query\Executors\DropFunctionExecutor;
 use App\Business\Query\Executors\DropIndexExecutor;
 use App\Business\Query\Executors\DropProcedureExecutor;
 use App\Business\Query\Executors\DropTableExecutor;
+use App\Business\Query\Executors\DropTriggerExecutor;
 use App\Business\Query\Executors\DropViewExecutor;
 use App\Business\Query\Executors\InsertExecutor;
 use App\Business\Query\Executors\ProcedureExecutor;
@@ -103,6 +104,11 @@ class QueryIdentifier
     private $dropFunctionExecutor;
 
     /**
+     * @var DropTriggerExecutor An Drop Trigger Executor to the query.
+     */
+    private $dropTriggerExecutor;
+
+    /**
      * @var DropIndexExecutor An Drop Index Executor to the query.
      */
     private $dropIndexExecutor;
@@ -150,6 +156,7 @@ class QueryIdentifier
         $this->loadDropViewExecutor();
         $this->loadDropProcedureExecutor();
         $this->loadDropFunctionExecutor();
+        $this->loadDropTriggerExecutor();
         $this->loadDropIndexExecutor();
 
         $this->loadProcedureExecutor();
@@ -197,6 +204,9 @@ class QueryIdentifier
         if ($this->dropFunctionExecutor->queryMatch())
             return $this->dropFunctionExecutor;
 
+        if ($this->dropTriggerExecutor->queryMatch())
+            return $this->dropTriggerExecutor;
+        
         if ($this->dropIndexExecutor->queryMatch())
             return $this->dropIndexExecutor;
 
@@ -330,6 +340,15 @@ class QueryIdentifier
     {
         $this->dropFunctionExecutor = new DropFunctionExecutor();
         $this->dropFunctionExecutor->setQuery($this->query);
+    }
+
+    /**
+     * Loads a Drop Trigger Executor to the query.
+     */
+    private function loadDropTriggerExecutor()
+    {
+        $this->dropTriggerExecutor = new DropTriggerExecutor();
+        $this->dropTriggerExecutor->setQuery($this->query);
     }
 
     /**

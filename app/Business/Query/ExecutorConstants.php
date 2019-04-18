@@ -86,6 +86,11 @@ class ExecutorConstants
     public const KEYWORD_DROP_FUNCTION = 'DROP FUNCTION';
 
     /**
+     * Keyword of drop trigger queries identification.
+     */
+    public const KEYWORD_DROP_TRIGGER = 'DROP TRIGGER';
+
+    /**
      * Keyword of drop index queries identification.
      */
     public const KEYWORD_DROP_INDEX = 'DROP INDEX';
