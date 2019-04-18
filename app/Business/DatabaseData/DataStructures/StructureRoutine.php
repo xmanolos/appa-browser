@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Business\DatabaseStructure;
+namespace App\Business\DatabaseData\DataStructures;
 
 /**
- * A view of the database.
+ * A routine of the database.
  *
- * @package App\Business\DatabaseStructure
+ * @package App\Business\DatabaseData\DataStructures
  */
-class StructureView
+class StructureRoutine
 {
 	/**
-	 * The view name.
+	 * The routine name.
 	 */
     public $name;
 

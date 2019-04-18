@@ -38,7 +38,7 @@ class DatabaseData {
 						id: nodeId,
 						text: schema.name,
 						icon: "la la-database",
-						value: schema.name
+						schema: schema.name
 					};
 
 					treeView.addNode(node, "node-schemas");
@@ -61,7 +61,7 @@ class DatabaseData {
 
 	onSchemaSelected(event, bind) {
 		let treeView = bind.treeView;
-		let schema = bind.treeView.getNodeValue(event.nodeId);
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
 
 		bind.treeView.clearNode(event.nodeId);
 
@@ -73,21 +73,21 @@ class DatabaseData {
 			id: nodeTablesId,
 			text: "Tables",
 			icon: "la la-ellipsis-h",
-			value: schema
+			schema: schema
 		}, event.nodeId);
 
 		bind.treeView.addNode({
 			id: nodeViewsId,
 			text: "Views",
 			icon: "la la-ellipsis-h",
-			value: schema
+			schema: schema
 		}, event.nodeId);
 
 		bind.treeView.addNode({
 			id: nodeRoutinesId,
 			text: "Routines",
 			icon: "la la-ellipsis-h",
-			value: schema
+			schema: schema
 		}, event.nodeId);
 
 		treeView.stopLoadingNode(event.nodeId);
@@ -99,6 +99,8 @@ class DatabaseData {
 	}
 
 	onTablesOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+
 		let errorCallback = function(response) {
 			let dialog = new Dialog();
 			dialog.useMessage(response.responseText);
@@ -120,7 +122,8 @@ class DatabaseData {
 						id: nodeId,
 						text: table.name,
 						icon: "la la-th-large",
-						value: table.name
+						schema: schema,
+						table: table.name
 					};
 
 					treeView.addNode(node, event.nodeId);
@@ -134,8 +137,6 @@ class DatabaseData {
 			treeView.openNode(event.nodeId);
 		};
 
-		let schema = bind.treeView.getNodeValue(event.nodeId);
-
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": schema });
@@ -145,6 +146,8 @@ class DatabaseData {
 	}
 
 	onViewsOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+
 		let errorCallback = function(response) {
 			let dialog = new Dialog();
 			dialog.useMessage(response.responseText);
@@ -166,7 +169,8 @@ class DatabaseData {
 						id: nodeId,
 						text: view.name,
 						icon: "la la-th-large",
-						value: view.name
+						schema: schema,
+						view: view.name
 					};
 
 					treeView.addNode(node, event.nodeId);
@@ -180,8 +184,6 @@ class DatabaseData {
 			treeView.openNode(event.nodeId);
 		};
 
-		let schema = bind.treeView.getNodeValue(event.nodeId);
-
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": schema });
@@ -191,6 +193,8 @@ class DatabaseData {
 	}
 
 	onRoutinesOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+
 		let errorCallback = function(response) {
 			let dialog = new Dialog();
 			dialog.useMessage(response.responseText);
@@ -212,7 +216,8 @@ class DatabaseData {
 						id: nodeId,
 						text: routine.name,
 						icon: "la la-flash",
-						value: routine.name
+						schema: schema,
+						routine: routine.name
 					};
 
 					treeView.addNode(node, event.nodeId);
@@ -225,8 +230,6 @@ class DatabaseData {
 			treeView.openNode(event.nodeId);
 		};
 
-		let schema = bind.treeView.getNodeValue(event.nodeId);
-
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
 		apiRequest.setData({ "schema": schema });
@@ -236,26 +239,38 @@ class DatabaseData {
 	}
 
 	onTableSelected(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+		let table = bind.treeView.getNodeProperty("table", event.nodeId);
 		let treeView = bind.treeView;
-		let table = bind.treeView.getNodeValue(event.nodeId);
 
 		bind.treeView.clearNode(event.nodeId);
 
 		let nodeColumnsId = event.nodeId + "-columns";
 		let nodeConstraintsId = event.nodeId + "-constraints";
+		let nodeTriggersId = event.nodeId + "-triggers";
 
 		bind.treeView.addNode({
 			id: nodeColumnsId,
 			text: "Columns",
 			icon: "la la-ellipsis-h",
-			value: table
+			schema: schema,
+			table: table
 		}, event.nodeId);
 
 		bind.treeView.addNode({
 			id: nodeConstraintsId,
 			text: "Constraints",
 			icon: "la la-ellipsis-h",
-			value: table
+			schema: schema,
+			table: table
+		}, event.nodeId);
+
+		bind.treeView.addNode({
+			id: nodeTriggersId,
+			text: "Triggers",
+			icon: "la la-ellipsis-h",
+			schema: schema,
+			table: table
 		}, event.nodeId);
 
 		treeView.stopLoadingNode(event.nodeId);
@@ -263,11 +278,13 @@ class DatabaseData {
 
 		bind.treeView.addOnNodeSelectedAction(nodeColumnsId, bind.onTableColumnsOpen, bind);
 		bind.treeView.addOnNodeSelectedAction(nodeConstraintsId, bind.onTableConstraintsOpen, bind);
+		bind.treeView.addOnNodeSelectedAction(nodeTriggersId, bind.onTableTriggersOpen, bind);
 	}
 
 	onViewSelected(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+		let view = bind.treeView.getNodeProperty("view", event.nodeId);
 		let treeView = bind.treeView;
-		let view = bind.treeView.getNodeValue(event.nodeId);
 
 		bind.treeView.clearNode(event.nodeId);
 
@@ -277,7 +294,8 @@ class DatabaseData {
 			id: nodeColumnsId,
 			text: "Columns",
 			icon: "la la-ellipsis-h",
-			value: view
+			schema: schema,
+			view: view
 		}, event.nodeId);
 
 		treeView.stopLoadingNode(event.nodeId);
@@ -287,6 +305,9 @@ class DatabaseData {
 	}
 
 	onTableColumnsOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+		let table = bind.treeView.getNodeProperty("table", event.nodeId);
+
 		let errorCallback = function(response) {
 			let dialog = new Dialog();
 			dialog.useMessage(response.responseText);
@@ -310,7 +331,8 @@ class DatabaseData {
 						id: nodeId,
 						text: nodeText,
 						icon: "la la-columns",
-						value: column.name
+						schema: schema,
+						table: table
 					};
 
 					treeView.addNode(node, event.nodeId);
@@ -323,17 +345,18 @@ class DatabaseData {
 			treeView.openNode(event.nodeId);
 		};
 
-		let table = bind.treeView.getNodeValue(event.nodeId);
-
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
-		apiRequest.setData({ "schema": bind.schema, "table": table });
+		apiRequest.setData({ "schema": schema, "table": table });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.table.columns.get");
 	}
 
 	onTableConstraintsOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+		let table = bind.treeView.getNodeProperty("table", event.nodeId);
+
 		let errorCallback = function(response) {
 			let dialog = new Dialog();
 			dialog.useMessage(response.responseText);
@@ -357,7 +380,8 @@ class DatabaseData {
 						id: nodeId,
 						text: nodeText,
 						icon: "la la-key",
-						value: constraint.name
+						schema: schema,
+						table: table
 					};
 
 					treeView.addNode(node, event.nodeId);
@@ -370,17 +394,67 @@ class DatabaseData {
 			treeView.openNode(event.nodeId);
 		};
 
-		let table = bind.treeView.getNodeValue(event.nodeId);
-
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
-		apiRequest.setData({ "schema": bind.schema, "table": table });
+		apiRequest.setData({ "schema": schema, "table": table });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.table.constraints.get");
 	}
 
+	onTableTriggersOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+		let table = bind.treeView.getNodeProperty("table", event.nodeId);
+
+		let errorCallback = function(response) {
+			let dialog = new Dialog();
+			dialog.useMessage(response.responseText);
+			dialog.showError();
+		};
+
+		let successCallback = function(response, bind) {
+			let treeView = bind.treeView;
+			let triggers = response;
+
+			bind.treeView.clearNode(event.nodeId);
+
+			if (triggers && triggers.length) {
+				let nodeTriggerId = event.nodeId + "-trigger-";
+
+				$.each(triggers, function(index, trigger) {
+					let nodeId = nodeTriggerId + index;
+					let nodeText = trigger.name;
+
+					let node = {
+						id: nodeId,
+						text: nodeText,
+						icon: "la la-plug",
+						schema: schema,
+						table: table
+					};
+
+					treeView.addNode(node, event.nodeId);
+				});
+			} else {
+				treeView.addNodeNoData(event.nodeId);
+			}
+
+			treeView.stopLoadingNode(event.nodeId);
+			treeView.openNode(event.nodeId);
+		};
+
+		let apiRequest = new ApiRequest(bind);
+		apiRequest.disableLoading();
+		apiRequest.setData({ "schema": schema, "table": table });
+		apiRequest.setErrorCallback(errorCallback);
+		apiRequest.setSuccessCallback(successCallback);
+		apiRequest.getToRoute("api.database-data.table.triggers.get");
+	}
+
 	onViewColumnsOpen(event, bind) {
+		let schema = bind.treeView.getNodeProperty("schema", event.nodeId);
+		let view = bind.treeView.getNodeProperty("view", event.nodeId);
+
 		let errorCallback = function(response) {
 			let dialog = new Dialog();
 			dialog.useMessage(response.responseText);
@@ -404,7 +478,8 @@ class DatabaseData {
 						id: nodeId,
 						text: nodeText,
 						icon: "la la-columns",
-						value: column.name
+						schema: schema,
+						view: view,
 					};
 
 					treeView.addNode(node, event.nodeId);
@@ -417,11 +492,9 @@ class DatabaseData {
 			treeView.openNode(event.nodeId);
 		};
 
-		let view = bind.treeView.getNodeValue(event.nodeId);
-
 		let apiRequest = new ApiRequest(bind);
 		apiRequest.disableLoading();
-		apiRequest.setData({ "schema": bind.schema, "view": view });
+		apiRequest.setData({ "schema": schema, "view": view });
 		apiRequest.setErrorCallback(errorCallback);
 		apiRequest.setSuccessCallback(successCallback);
 		apiRequest.getToRoute("api.database-data.view.columns.get");

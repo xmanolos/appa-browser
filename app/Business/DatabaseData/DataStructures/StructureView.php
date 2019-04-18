@@ -1,21 +1,21 @@
 <?php
 
-namespace App\Business\DatabaseStructure;
+namespace App\Business\DatabaseData\DataStructures;
 
 /**
- * A table of the database.
+ * A view of the database.
  *
- * @package App\Business\DatabaseStructure
+ * @package App\Business\DatabaseData\DataStructures
  */
-class StructureTable
+class StructureView
 {
 	/**
-	 * The table name.
+	 * The view name.
 	 */
     public $name;
 
     /**
-     * Gets the table name.
+     * Gets the view name.
      *
      * @return string
      */
@@ -25,7 +25,7 @@ class StructureTable
     }
 
     /**
-     * Defines the value of the table name.
+     * Defines the value of the view name.
      *
      * @param string $name
      */

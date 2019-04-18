@@ -1,11 +1,11 @@
 <?php
 
-namespace App\Business\DatabaseStructure;
+namespace App\Business\DatabaseData\DataStructures;
 
 /**
  * A column of a table or view of the database.
  *
- * @package App\Business\DatabaseStructure
+ * @package App\Business\DatabaseData\DataStructures
  */
 class StructureColumn
 {

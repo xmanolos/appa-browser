@@ -85,8 +85,8 @@ class TreeView {
 		return $(this.containerId).jstree().get_node(nodeId).text;
 	}
 
-	getNodeValue(nodeId) {
-		return $(this.containerId).jstree().get_node(nodeId).original.value;
+	getNodeProperty(property, nodeId) {
+		return $(this.containerId).jstree().get_node(nodeId).original[property];
 	}
 
 	clearNode(nodeId) {
