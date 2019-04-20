@@ -15,10 +15,10 @@ class SelectResult {
         dataGrid.setColumns(columns);
         dataGrid.setRows(rows);
 
+        dataGrid.clear();
+
         if (this.hasData()) {
             dataGrid.build();
-        } else {
-            dataGrid.clear();
         }
     }
 
