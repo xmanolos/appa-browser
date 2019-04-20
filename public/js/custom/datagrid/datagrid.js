@@ -15,7 +15,7 @@ class DataGrid {
         $(this.container).append("<div class=\"data-grid\" style=\"display: block;\"></div>");
 
         $(".data-grid").jsGrid({
-            height: "100%",
+            height: "auto",
             width: "100%",
             heading: true,
             paging: true,
