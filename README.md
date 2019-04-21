@@ -15,7 +15,7 @@ Appa Browser is an administration and development tool for the most popular data
 1. Download the installation ZIP in the [Releases](https://github.com/xmanolos/appa-browser/releases).
 2. Unzip the file.
 3. Access the unpack directory.
-3. Bring up the application with Docker Compose: `docker-compose up -d`
+3. Bring up the application with Docker Compose: `docker-compose -f docker/application.yml up -d`
 
 ### Usage
 Access the Appa Browser on [172.28.0.7](http://172.28.0.7).
