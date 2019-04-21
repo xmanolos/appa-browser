@@ -13,11 +13,11 @@ Appa Browser is an open source administration and development tool for the most 
 1. Download the installation ZIP in the [Releases](https://github.com/xdanif/appa-browser/releases/latest).
 2. Unzip the file.
 3. Access the unpack directory.
-3. Bring up the application with Docker Compose: `docker-compose up -d`
+3. Bring up the application with Docker Compose: `docker-compose -f docker/application.yml up -d`
 
 ### Usage
-Access the Appa Browser on your [localhost](http://127.0.0.1).
-
+Access the Appa Browser on your [localhost](http://172.28.0.7).
+    
 ## Contributing
 
 Please read through our [contributing guidelines](.github/CONTRIBUTING.md).
