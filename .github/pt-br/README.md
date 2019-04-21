@@ -19,4 +19,4 @@ O Appa Browser é uma ferramenta de administração e desenvolvimento para os ba
 Acesse o Appa Browser em [172.28.0.7](http://172.28.0.7).
 
 ## Contributing
-Por favor, leia nossas [diretrizes de contribuição](.github/CONTRIBUTING.md).
+Por favor, leia nossas [diretrizes de contribuição](CONTRIBUTING.md).

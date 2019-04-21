@@ -1,9 +1,9 @@
 # Appa Browser
 
+_Read this document in other languages: [Português do Brasil](.github/pt-br/README.md)._
+
 [![Build Status](https://travis-ci.org/xmanolos/appa-browser.png?branch=master)](https://travis-ci.org/xmanolos/appa-browser)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/c76156a4297d47c19b57e69fff9ad688)](https://app.codacy.com/app/xmanolos/appa-browser?utm_source=github.com&utm_medium=referral&utm_content=xmanolos/appa-browser&utm_campaign=Badge_Grade_Settings)
-
-_Read this document in other languages: [Português do Brasil](.github/README.pt-br.md)_
 
 🚧 **Note:** Appa Browser is a work-in-progress and in active development! 🚧
 
@@ -21,4 +21,4 @@ Appa Browser is an administration and development tool for the most popular data
 Access the Appa Browser on [172.28.0.7](http://172.28.0.7).
 
 ## Contributing
-Please read through our [contributing guidelines](.github/CONTRIBUTING.md).
+Please read through our [contributing guidelines](CONTRIBUTING.md).

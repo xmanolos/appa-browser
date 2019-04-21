@@ -1,4 +1,7 @@
 # Contributing to Appa Browser.
+
+_Read this document in other languages: [Português do Brasil](.github/pt-br/CONTRIBUTING.md)._
+
 1. [Setting up the application.](#setting-up-the-application)
 2. [Running the application.](#running-the-application)
 3. [Generating test data.](#generating-test-data)
@@ -62,7 +65,7 @@ We want to fix all the issues as soon as possible, but before fixing a bug we ne
 
 Before you submit your Pull Request (PR) consider the following guidelines:
 
-1. Search [GitHub](https://github.com/xmanolos/appa-browser) for an open or closed PR that relates to your submission. You don't want to duplicate effort.
+1. Search in this repository for an PR (open or closed) that relates to your submission. You don't want to duplicate effort.
 2. Fork this repository.
 3. Create a branch for your changes, so we'll be easier to merge:
 
