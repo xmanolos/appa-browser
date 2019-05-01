@@ -15,7 +15,7 @@ class DatabaseData {
 			icon: "la la-ellipsis-h"
 		});
 
-		this.treeView.addOnNodeSelectedAction("node-schemas", this.onSchemasOpen, this);
+		this.treeView.addOnNodeOpenedAction("node-schemas", this.onSchemasOpen, this);
 	}
 
 	onSchemasOpen(event, bind) {
@@ -42,7 +42,7 @@ class DatabaseData {
 					};
 
 					treeView.addNode(node, "node-schemas");
-					treeView.addOnNodeSelectedAction(nodeId, bind.onSchemaSelected, bind);
+					treeView.addOnNodeOpenedAction(nodeId, bind.onSchemaSelected, bind);
 				});
 			} else {
 				treeView.addNodeNoData(event.nodeId);
@@ -93,9 +93,9 @@ class DatabaseData {
 		treeView.stopLoadingNode(event.nodeId);
 		treeView.openNode(event.nodeId);
 
-		bind.treeView.addOnNodeSelectedAction(nodeTablesId, bind.onTablesOpen, bind);
-		bind.treeView.addOnNodeSelectedAction(nodeViewsId, bind.onViewsOpen, bind);
-		bind.treeView.addOnNodeSelectedAction(nodeRoutinesId, bind.onRoutinesOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeTablesId, bind.onTablesOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeViewsId, bind.onViewsOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeRoutinesId, bind.onRoutinesOpen, bind);
 	}
 
 	onTablesOpen(event, bind) {
@@ -127,7 +127,7 @@ class DatabaseData {
 					};
 
 					treeView.addNode(node, event.nodeId);
-					treeView.addOnNodeSelectedAction(nodeId, bind.onTableSelected, bind);
+					treeView.addOnNodeOpenedAction(nodeId, bind.onTableSelected, bind);
 				});
 			} else {
 				treeView.addNodeNoData(event.nodeId);
@@ -174,7 +174,7 @@ class DatabaseData {
 					};
 
 					treeView.addNode(node, event.nodeId);
-					treeView.addOnNodeSelectedAction(nodeId, bind.onViewSelected, bind);
+					treeView.addOnNodeOpenedAction(nodeId, bind.onViewSelected, bind);
 				});
 			} else {
 				treeView.addNodeNoData(event.nodeId);
@@ -276,9 +276,9 @@ class DatabaseData {
 		treeView.stopLoadingNode(event.nodeId);
 		treeView.openNode(event.nodeId);
 
-		bind.treeView.addOnNodeSelectedAction(nodeColumnsId, bind.onTableColumnsOpen, bind);
-		bind.treeView.addOnNodeSelectedAction(nodeConstraintsId, bind.onTableConstraintsOpen, bind);
-		bind.treeView.addOnNodeSelectedAction(nodeTriggersId, bind.onTableTriggersOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeColumnsId, bind.onTableColumnsOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeConstraintsId, bind.onTableConstraintsOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeTriggersId, bind.onTableTriggersOpen, bind);
 	}
 
 	onViewSelected(event, bind) {
@@ -301,7 +301,7 @@ class DatabaseData {
 		treeView.stopLoadingNode(event.nodeId);
 		treeView.openNode(event.nodeId);
 
-		bind.treeView.addOnNodeSelectedAction(nodeColumnsId, bind.onViewColumnsOpen, bind);
+		bind.treeView.addOnNodeOpenedAction(nodeColumnsId, bind.onViewColumnsOpen, bind);
 	}
 
 	onTableColumnsOpen(event, bind) {

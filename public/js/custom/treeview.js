@@ -1,10 +1,10 @@
-var treeViewOnSelectedEvents;
+var onNodeOpenedAction;
 
 class TreeView {
 	constructor(containerId) {
 		this.containerId = "#" + containerId;
 		
-		treeViewOnSelectedEvents = [];
+		onNodeOpenedAction = [];
 	}
 
 	init() {
@@ -28,7 +28,7 @@ class TreeView {
 							let treeView = $.jstree.reference(data.reference);
 							let selectedNode = treeView.get_node(data.reference).id;
 
-							$.each(treeViewOnSelectedEvents, function(index, event) {
+							$.each(onNodeOpenedAction, function(index, event) {
 								if (event.nodeId === selectedNode) {
 									startLoading(event.nodeId);
 
@@ -41,18 +41,24 @@ class TreeView {
 			}
   		});
 
+		let containerId = this.containerId;
 		let startLoading = this.startLoadingNode;
 
-  		$(this.containerId).on("select_node.jstree", function (e, data) {
+		$(this.containerId).on("select_node.jstree", function (e, data) {
 			let selectedNode = data.selected[0];
+			let selectedNodeContent = $(containerId).jstree().get_node(selectedNode);
 
-    		$.each(treeViewOnSelectedEvents, function(index, event) {
-				if (event.nodeId === selectedNode) {
-					startLoading(event.nodeId);
+			if (selectedNodeContent.state.opened) {
+				return;
+			}
 
-					event.action(event, event.bind);
+			$.each(onNodeOpenedAction, function(index, action) {
+				if (action.nodeId === selectedNode) {
+					startLoading(action.nodeId);
+
+					action.action(action, action.bind);
 				}
-    		});
+			});
   		});
 	}
 
@@ -107,9 +113,9 @@ class TreeView {
 		$("i", nodeAnchor).removeClass("la-spinner");
 	}
 
-	addOnNodeSelectedAction(nodeId, action, bind) {
-		if (treeViewOnSelectedEvents.some(x => x.nodeId === nodeId)) {
-			treeViewOnSelectedEvents.filter(x => x.nodeId === nodeId).action = action;
+	addOnNodeOpenedAction(nodeId, action, bind) {
+		if (onNodeOpenedAction.some((x) => x.nodeId === nodeId)) {
+			onNodeOpenedAction.filter((x) => x.nodeId === nodeId).action = action;
 		} else {
 			let event = {
 				nodeId: nodeId,
@@ -117,7 +123,7 @@ class TreeView {
 				bind: bind
 			};
 
-			treeViewOnSelectedEvents.push(event);
+			onNodeOpenedAction.push(event);
 		}
 	}
 }
