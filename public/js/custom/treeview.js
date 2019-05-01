@@ -30,6 +30,7 @@ class TreeView {
 
 							$.each(onNodeOpenedAction, function(index, event) {
 								if (event.nodeId === selectedNode) {
+									treeView.close_node(selectedNode);
 									startLoading(event.nodeId);
 
 									event.action(event, event.bind);
@@ -81,6 +82,10 @@ class TreeView {
 
 	openNode(nodeId) {
 		$(this.containerId).jstree().open_node(nodeId);
+	}
+
+	closeNode(nodeId) {
+		$(this.containerId).jstree().close_node(nodeId);
 	}
 
 	getNode(nodeId) {
