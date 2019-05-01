@@ -44,7 +44,7 @@ class TreeView {
 		let containerId = this.containerId;
 		let startLoading = this.startLoadingNode;
 
-  		$(this.containerId).on("select_node.jstree", function (e, data) {
+		$(this.containerId).on("select_node.jstree", function (e, data) {
 			let selectedNode = data.selected[0];
 			let selectedNodeContent = $(containerId).jstree().get_node(selectedNode);
 
@@ -52,13 +52,13 @@ class TreeView {
 				return;
 			}
 
-    		$.each(onNodeOpenedAction, function(index, action) {
+			$.each(onNodeOpenedAction, function(index, action) {
 				if (action.nodeId === selectedNode) {
 					startLoading(action.nodeId);
 
 					action.action(action, action.bind);
 				}
-    		});
+			});
   		});
 	}
 
@@ -114,8 +114,8 @@ class TreeView {
 	}
 
 	addOnNodeOpenedAction(nodeId, action, bind) {
-		if (onNodeOpenedAction.some(x => x.nodeId === nodeId)) {
-			onNodeOpenedAction.filter(x => x.nodeId === nodeId).action = action;
+		if (onNodeOpenedAction.some((x) => x.nodeId === nodeId)) {
+			onNodeOpenedAction.filter((x) => x.nodeId === nodeId).action = action;
 		} else {
 			let event = {
 				nodeId: nodeId,
