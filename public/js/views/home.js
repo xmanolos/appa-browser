@@ -5,6 +5,7 @@ $(document).ready(function() {
     showDatabaseData();
 
     initializeQueryEditor();
+    initializeQueryEditorShortcuts();
 
     registerEvents();
 
@@ -14,6 +15,11 @@ $(document).ready(function() {
 function initializeQueryEditor() {
     queryEditor = new QueryEditor("editorTextQuery");
     queryEditor.initialize();
+}
+
+function initializeQueryEditorShortcuts() {
+    let queryEditorShortcuts = new QueryEditorShortcuts(queryEditor, callRunQuery);
+    queryEditorShortcuts.register();
 }
 
 function registerEvents() {

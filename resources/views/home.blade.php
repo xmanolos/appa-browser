@@ -66,4 +66,5 @@
     <script type="text/javascript" src="{{ asset('js/custom/query/select-result.js') }}"></script>
 
     <script type="text/javascript" src="{{ asset('js/custom/query/editor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/query/editor-shortcuts.js') }}"></script>
 @stop

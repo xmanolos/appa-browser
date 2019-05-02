@@ -15,6 +15,10 @@ class QueryEditor {
         return (this.getAllText() == null) || (this.getAllText() === "");
     }
 
+    isFocused() {
+        return this.editor.isFocused();
+    }
+
     getQuery() {
         let selectedText = this.getSelectedText();
 
