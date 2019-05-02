@@ -28,25 +28,6 @@
         </div>
         <div class="panel-fill">
             <div class="panel-query">
-                <div class="btn-change-style-query">
-                    <i class="la la-gears"></i>
-                    <div class="style-query-editor">
-                        <div class="col tfd panel-field" style="width: 100%;">
-                            <select id="styleQueryEditor" name="styleQueryEditor" required="true">
-                                <option value="xcode">X-Code</option>
-                                <option value="textmate">Textmate</option>
-                                <option selected value="sqlserver">SQL Server</option>
-                                <option value="eclipse">Eclipse</option>
-                                <option value="github">Github</option>
-                                <option value="terminal">Terminal</option>
-                                <option value="tomorrow">Tomorrow</option>
-                                <option value="tomorrow_night">Tomorrow Night</option>
-                                <option value="vibrant_ink">Vibrant</option>
-                            </select>
-                            <span>Editor style</span>
-                        </div>
-                    </div>
-                </div>
                 <div id="editorTextQuery" class="text-query"></div>
 
                 <!-- Actions -->
@@ -83,4 +64,7 @@
     <script type="text/javascript" src="{{ asset('js/custom/query-runner.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/datagrid/datagrid.js') }}"></script>
     <script type="text/javascript" src="{{ asset('js/custom/query/select-result.js') }}"></script>
+
+    <script type="text/javascript" src="{{ asset('js/custom/query/editor.js') }}"></script>
+    <script type="text/javascript" src="{{ asset('js/custom/query/editor-shortcuts.js') }}"></script>
 @stop
